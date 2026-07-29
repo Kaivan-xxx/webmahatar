@@ -7,6 +7,9 @@
     <title>Web Mahatar</title>
 </head>
 <body>
+<<<<<<< HEAD
      <h1>Hello world</h1>
+=======
+>>>>>>> e9481659f3297e3f0bc10b39bca6e25b138df871
 </body>
 </html>
