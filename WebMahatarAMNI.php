@@ -7,6 +7,5 @@
     <title>Web Mahatar</title>
 </head>
 <body>
-    
 </body>
 </html>
