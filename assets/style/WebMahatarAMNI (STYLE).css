@@ -1,0 +1,14 @@
+/* Atur section utama menjadi Flexbox */
+.home {
+  display: flex;
+  justify-content: center; /* Meratakan horizontal (kiri-kanan) */
+  align-items: center;     /* Meratakan vertikal (atas-bawah) */
+  min-height: calc(100vh - 56px); /* Membuat tinggi section seukuran layar */
+  text-align: center;      /* Membuat teks berada di tengah */
+}
+
+/* Membatasi lebar teks agar rapi dan enak dibaca */
+.beranda {
+  max-width: 600px;
+  padding: 0 20px;
+}
