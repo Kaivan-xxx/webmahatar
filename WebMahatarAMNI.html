@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="WebMahatarAMNI (STYLE).css" />
+    <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
     <title>Kemahataran AMNI</title>
     <!-- Font Awesome -->
     <link
@@ -20,14 +20,14 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
       <div class="container-fluid">
-        <img
-          src="assets/image/AMNI.png"
-          alt="AMNILogo"
-          width="30"
-          height="30"
-          class="d-inline-block align-text-top imagenav"
-        />
-        <a class="navbar-brand" href="#">KEMAHATARAN UNIMAR AMNI</a>
+        <a class="navbar-brand" href="#"
+          ><img
+            src="assets/image/LogoMahatarAMNI.png"
+            alt="AMNILogo"
+            width="150"
+            height="30"
+            class="d-inline-block align-text-top imagenav"
+        /></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -41,15 +41,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <!-- Menu Home -->
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
+
+            <!-- Menu Profil -->
             <li class="nav-item">
               <a class="nav-link" href="#">Profil</a>
             </li>
+
+            <!-- Menu Team -->
             <li class="nav-item">
-              <a class="nav-link" href="#">Tm</a>
+              <a class="nav-link" href="#">Team</a>
             </li>
+
+            <!-- Menu Dropdown: Kegiatan Mahasiswa -->
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -58,33 +65,30 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Dropdown
+                Kegiatan Mahasiswa
               </a>
               <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">BEM Mahatar</a></li>
+                <li><a class="dropdown-item" href="#">Drum Corps</a></li>
+                <li><a class="dropdown-item" href="#">Pedang Pora</a></li>
+                <li><a class="dropdown-item" href="#">Zenkyokushin</a></li>
+                <li><a class="dropdown-item" href="#">PKM</a></li>
+                <li><a class="dropdown-item" href="#">Rebana</a></li>
+                <li><a class="dropdown-item" href="#">Pencak Silat</a></li>
                 <li>
-                  <a class="dropdown-item" href="#">Action</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Another action</a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Penanaman Mangrove</a>
                 </li>
               </ul>
             </li>
+
+            <!-- Menu Pengumuman dan Berita -->
             <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              <a class="nav-link" href="#">Pengumuman dan Berita</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <section class="pt-5 mt-4 fixed-top">
-      <marquee behavior="scroll" direction="right" scrollamount="5">Universitas Maritim AMNI Semarang Jalan Soekarno-Hatta No. 180 Gedung Rektorat Lt. 3 Semarang 50199, Jawa Tengah, Indonesia</marquee>
-    </section>
 
     <section
       id="home"
@@ -99,5 +103,10 @@
         </p>
       </div>
     </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

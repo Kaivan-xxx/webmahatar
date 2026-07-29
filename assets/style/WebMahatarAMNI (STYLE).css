@@ -12,3 +12,19 @@
   max-width: 600px;
   padding: 0 20px;
 }
+.navbar{
+  background-color: #02064b;
+}
+
+/* Efek hover untuk seluruh link di navbar */
+.navbar-nav .nav-link:hover {
+  color: #a0a0a0 !important; /* Warna abu-abu saat di-hover */
+  cursor: pointer;           /* Tanda bahwa elemen bisa diklik */
+}
+
+/* Efek hover khusus item dropdown */
+.dropdown-menu .dropdown-item:hover {
+  background-color: #e9ecef; /* Background abu-abu terang */
+  color: #1a1a1a;
+  cursor: pointer;
+}
