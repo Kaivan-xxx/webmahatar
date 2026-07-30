@@ -1,30 +1,87 @@
-/* Atur section utama menjadi Flexbox */
-.home {
+/* ==========================================
+   1. RESET & GLOBAL STYLES
+   ========================================== */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding-top: 80px; /* Mencegah konten tertutup Navbar fixed-top */
+  background-color: #f8f9fa;
+  color: #212529;
+}
+/* ==========================================
+   2. NAVBAR CUSTOM STYLING
+   ========================================== */
+.navbar-brand img {
+  object-fit: contain;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 600;
+}
+
+.dropdown-menu {
+  border-radius: 0.5rem;
+}
+
+/* ==========================================
+   3. HALAMAN HOME (INDEX) STYLES
+   ========================================== */
+/* Khusus Halaman Home: Hapus padding bawaan body */
+body.home-page {
+  padding-top: 0 !important;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Styling Hero Section Fullscreen Tanpa Celah */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+              url('../image/profile.jpg') center/cover no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  
+  /* Gunakan Flexbox untuk memposisikan konten */
   display: flex;
-  justify-content: center; /* Meratakan horizontal (kiri-kanan) */
-  align-items: center;     /* Meratakan vertikal (atas-bawah) */
-  min-height: calc(100vh - 56px); /* Membuat tinggi section seukuran layar */
-  text-align: center;      /* Membuat teks berada di tengah */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  /* Padding top secukupnya agar teks tidak tertutup navbar */
+  padding-top: 80px; 
+  padding-bottom: 20px;
+  box-sizing: border-box; /* Memastikan padding tidak menambah total tinggi elemen */
 }
 
-/* Membatasi lebar teks agar rapi dan enak dibaca */
-.beranda {
-  max-width: 600px;
-  padding: 0 20px;
-}
-.navbar{
-  background-color: #02064b;
+.opacity-90 {
+  opacity: 0.9;
 }
 
-/* Efek hover untuk seluruh link di navbar */
-.navbar-nav .nav-link:hover {
-  color: #a0a0a0 !important; /* Warna abu-abu saat di-hover */
-  cursor: pointer;           /* Tanda bahwa elemen bisa diklik */
+/* ==========================================
+   4. HALAMAN PROFIL STYLES
+   ========================================== */
+.profile-header-img {
+  max-height: 400px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 12px;
 }
 
-/* Efek hover khusus item dropdown */
-.dropdown-menu .dropdown-item:hover {
-  background-color: #e9ecef; /* Background abu-abu terang */
-  color: #1a1a1a;
-  cursor: pointer;
+/* ==========================================
+   5. HALAMAN TEAM MAKO STYLES
+   ========================================== */
+.team-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #ffffff;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.team-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.team-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 2px;
 }
