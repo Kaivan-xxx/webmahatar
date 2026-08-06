@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -16,21 +16,21 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
       <div class="navbar-container">
-        <a class="navbar-brand" href="index.html">
-          <img
-            src="assets/image/LogoMahatarAMNI.png"
-            alt="Logo AMNI"
-          />
+        <a class="navbar-brand" href="home.html">
+          <img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" />
         </a>
         <ul class="nav-menu">
           <li><a class="nav-link" href="home.html">Home</a></li>
-          <li><a class="nav-link active" href="profile.html">Profil</a></li>
+          <li><a class="nav-link" href="profile.html">Profil</a></li>
           <li><a class="nav-link" href="team.html">Team</a></li>
           <li class="dropdown">
-            <a class="nav-link" href="#">
-              Kegiatan Mahasiswa <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            <!-- Tambahkan id="dropdownBtn" -->
+            <a class="nav-link" href="#" id="dropdownBtn">
+              Kegiatan Mahasiswa
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem"></i>
             </a>
-            <ul class="dropdown-menu">
+            <!-- Tambahkan id="dropdownMenu" -->
+            <ul class="dropdown-menu" id="dropdownMenu">
               <li><a class="dropdown-item" href="#">BEM Mahatar</a></li>
               <li><a class="dropdown-item" href="#">Drum Corps</a></li>
               <li><a class="dropdown-item" href="#">Pedang Pora</a></li>
@@ -41,7 +41,7 @@
               <li><a class="dropdown-item" href="#">Penanaman Mangrove</a></li>
             </ul>
           </li>
-          <li><a class="nav-link" href="pengumuman-berita.html">Pengumuman & Berita</a></li>
+          <li><a class="nav-link" href="#">Pengumuman & Berita</a></li>
         </ul>
       </div>
     </nav>
@@ -69,78 +69,71 @@
       <!-- Article Content Section -->
       <article class="profile-card">
         <p class="lead-text">
-          Di lingkungan Universitas Maritim AMNI Semarang, mahasiswa dan
-          kaum muda aktif terlibat dalam berbagai kegiatan yang menarik dan
-          beragam. Dari berbagai program yang tersedia, beberapa organisasi
-          dan kegiatan mahasiswa telah berhasil menarik perhatian dan
-          mendapatkan apresiasi di tingkat universitas maupun di luar
-          kampus.
+          Di lingkungan Universitas Maritim AMNI Semarang, mahasiswa dan kaum
+          muda aktif terlibat dalam berbagai kegiatan yang menarik dan beragam.
+          Dari berbagai program yang tersedia, beberapa organisasi dan kegiatan
+          mahasiswa telah berhasil menarik perhatian dan mendapatkan apresiasi
+          di tingkat universitas maupun di luar kampus.
         </p>
 
-        <h2 class="section-heading">
-          Organisasi & Seni Pertunjukan
-        </h2>
+        <h2 class="section-heading">Organisasi & Seni Pertunjukan</h2>
         <p>
           Salah satu organisasi yang menjadi sorotan adalah
-          <strong>BEM Mahatar</strong> (Badan Eksekutif Mahasiswa
-          Transportasi). BEM Mahatar berperan sebagai wadah untuk
-          mengeksplorasi potensi kepemimpinan, memperkuat hubungan antar
-          mahasiswa, dan memperjuangkan kepentingan mahasiswa dalam program
-          studi Transportasi. Organisasi ini aktif dalam menyelenggarakan
-          seminar, diskusi, dan kegiatan sosial yang berkaitan dengan
-          transportasi.
+          <strong>BEM Mahatar</strong> (Badan Eksekutif Mahasiswa Transportasi).
+          BEM Mahatar berperan sebagai wadah untuk mengeksplorasi potensi
+          kepemimpinan, memperkuat hubungan antar mahasiswa, dan memperjuangkan
+          kepentingan mahasiswa dalam program studi Transportasi. Organisasi ini
+          aktif dalam menyelenggarakan seminar, diskusi, dan kegiatan sosial
+          yang berkaitan dengan transportasi.
         </p>
         <p>
           Selain itu,
           <strong>Korps Drum Universitas Maritim AMNI Semarang</strong> juga
-          merupakan daya tarik tersendiri. Dengan kegigihan dan kekompakan
-          para anggotanya, Korps Drum AMNI mampu menghibur dan memukau
-          penonton dengan atraksi dan penampilan musik mereka di berbagai
-          acara di dalam maupun di luar kampus.
+          merupakan daya tarik tersendiri. Dengan kegigihan dan kekompakan para
+          anggotanya, Korps Drum AMNI mampu menghibur dan memukau penonton
+          dengan atraksi dan penampilan musik mereka di berbagai acara di dalam
+          maupun di luar kampus.
         </p>
 
         <h2 class="section-heading">Olahraga & Bela Diri</h2>
         <p>
-          Di bidang olahraga, terdapat beberapa klub dan kegiatan yang
-          menarik minat siswa. <strong>Zen Kyokushin</strong>, sebuah klub
-          bela diri Jepang yang mengajarkan disiplin dan teknik bertarung,
-          telah berhasil menarik banyak anggota. Selain itu,
-          <strong>Pencak Silat</strong> juga merupakan kegiatan yang
-          diminati oleh siswa yang tertarik pada bela diri dan membela
-          warisan budaya Indonesia.
+          Di bidang olahraga, terdapat beberapa klub dan kegiatan yang menarik
+          minat siswa. <strong>Zen Kyokushin</strong>, sebuah klub bela diri
+          Jepang yang mengajarkan disiplin dan teknik bertarung, telah berhasil
+          menarik banyak anggota. Selain itu, <strong>Pencak Silat</strong> juga
+          merupakan kegiatan yang diminati oleh siswa yang tertarik pada bela
+          diri dan membela warisan budaya Indonesia.
         </p>
 
-        <h2 class="section-heading">
-          Lingkungan & Akademik
-        </h2>
+        <h2 class="section-heading">Lingkungan & Akademik</h2>
         <p>
-          Universitas Maritim AMNI juga memperhatikan lingkungan dan
-          konservasi melalui kegiatan <strong>penanaman mangrove</strong>.
-          Melalui program ini, mahasiswa AMNI diajak untuk aktif terlibat
-          dalam menjaga keberlanjutan lingkungan dan mempelajari pentingnya
-          ekosistem mangrove dalam konservasi pesisir.
+          Universitas Maritim AMNI juga memperhatikan lingkungan dan konservasi
+          melalui kegiatan <strong>penanaman mangrove</strong>. Melalui program
+          ini, mahasiswa AMNI diajak untuk aktif terlibat dalam menjaga
+          keberlanjutan lingkungan dan mempelajari pentingnya ekosistem mangrove
+          dalam konservasi pesisir.
         </p>
         <p>
-          <strong>PKM (Program Kreativitas Mahasiswa)</strong> juga
-          merupakan bagian penting dalam mengembangkan potensi mahasiswa di
-          Universitas Maritim AMNI. Melalui PKM, mahasiswa didorong untuk
-          mengembangkan proyek penelitian, inovasi, atau karya kreatif di
-          berbagai bidang, seperti teknologi, kewirausahaan, dan sosial.
+          <strong>PKM (Program Kreativitas Mahasiswa)</strong> juga merupakan
+          bagian penting dalam mengembangkan potensi mahasiswa di Universitas
+          Maritim AMNI. Melalui PKM, mahasiswa didorong untuk mengembangkan
+          proyek penelitian, inovasi, atau karya kreatif di berbagai bidang,
+          seperti teknologi, kewirausahaan, dan sosial.
         </p>
 
         <h2 class="section-heading">Seni Budaya</h2>
         <p>
-          Tak ketinggalan, <strong>Rebana AMNI</strong> juga merupakan
-          kegiatan yang diminati beberapa mahasiswa. Dengan suara musik
-          tradisional yang menghentak dan semangat yang bergejolak, grup
-          Rebana AMNI sering tampil di berbagai acara keagamaan dan budaya
-          di dalam maupun di luar kampus.
+          Tak ketinggalan, <strong>Rebana AMNI</strong> juga merupakan kegiatan
+          yang diminati beberapa mahasiswa. Dengan suara musik tradisional yang
+          menghentak dan semangat yang bergejolak, grup Rebana AMNI sering
+          tampil di berbagai acara keagamaan dan budaya di dalam maupun di luar
+          kampus.
         </p>
 
         <div class="custom-alert">
           <p>
-            Melalui berbagai kegiatan ini, mahasiswa dan peserta pelatihan
-            di Universitas Maritim AMNI Semarang memiliki kesempatan untuk
+            Melalui berbagai kegiatan ini, mahasiswa dan peserta pelatihan di
+            Universitas Maritim AMNI Semarang memiliki kesempatan untuk
             mengembangkan keterampilan, memperluas jaringan sosial, dan
             menerapkan pengetahuan yang diperoleh di kelas.
           </p>
@@ -150,7 +143,30 @@
 
     <!-- Footer Sederhana -->
     <footer>
-      <small>&copy; 2026 Universitas Maritim AMNI Semarang. All rights reserved.</small>
+      <small
+        >&copy; 2026 Universitas Maritim AMNI Semarang. All rights
+        reserved.</small
+      >
     </footer>
   </body>
+  <script>
+    const dropdownBtn = document.getElementById("dropdownBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    // Toggle muncul/sembunyi saat tombol diklik
+    dropdownBtn.addEventListener("click", function (event) {
+      event.preventDefault(); // Mencegah halaman reload/pindah ke atas
+      dropdownMenu.classList.toggle("active");
+    });
+
+    // Otomatis menutup dropdown jika pengguna mengklik area di luar menu
+    window.addEventListener("click", function (event) {
+      if (
+        !dropdownBtn.contains(event.target) &&
+        !dropdownMenu.contains(event.target)
+      ) {
+        dropdownMenu.classList.remove("active");
+      }
+    });
+  </script>
 </html>

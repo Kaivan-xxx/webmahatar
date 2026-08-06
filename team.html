@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -17,20 +17,20 @@
     <nav class="navbar">
       <div class="navbar-container">
         <a class="navbar-brand" href="home.html">
-          <img
-            src="assets/image/LogoMahatarAMNI.png"
-            alt="AMNI Logo"
-          />
+          <img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" />
         </a>
         <ul class="nav-menu">
           <li><a class="nav-link" href="home.html">Home</a></li>
           <li><a class="nav-link" href="profile.html">Profil</a></li>
-          <li><a class="nav-link active" href="team.html">Team</a></li>
+          <li><a class="nav-link" href="team.html">Team</a></li>
           <li class="dropdown">
-            <a class="nav-link" href="#">
-              Kegiatan Mahasiswa <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            <!-- Tambahkan id="dropdownBtn" -->
+            <a class="nav-link" href="#" id="dropdownBtn">
+              Kegiatan Mahasiswa
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem"></i>
             </a>
-            <ul class="dropdown-menu">
+            <!-- Tambahkan id="dropdownMenu" -->
+            <ul class="dropdown-menu" id="dropdownMenu">
               <li><a class="dropdown-item" href="#">BEM Mahatar</a></li>
               <li><a class="dropdown-item" href="#">Drum Corps</a></li>
               <li><a class="dropdown-item" href="#">Pedang Pora</a></li>
@@ -48,7 +48,7 @@
 
     <!-- Main Content -->
     <main class="main-container">
-      <h2 class="page-title">Team Mako</h2>
+      <h2 class="page-title" style="text-align: center;">Team Mako</h2>
 
       <div class="team-grid">
         <!-- Anggota 1 -->
@@ -94,7 +94,30 @@
 
     <!-- Footer -->
     <footer>
-      <small>&copy; 2026 Universitas Maritim AMNI Semarang. All rights reserved.</small>
+      <small
+        >&copy; 2026 Universitas Maritim AMNI Semarang. All rights
+        reserved.</small
+      >
     </footer>
   </body>
+  <script>
+    const dropdownBtn = document.getElementById("dropdownBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    // Toggle muncul/sembunyi saat tombol diklik
+    dropdownBtn.addEventListener("click", function (event) {
+      event.preventDefault(); // Mencegah halaman reload/pindah ke atas
+      dropdownMenu.classList.toggle("active");
+    });
+
+    // Otomatis menutup dropdown jika pengguna mengklik area di luar menu
+    window.addEventListener("click", function (event) {
+      if (
+        !dropdownBtn.contains(event.target) &&
+        !dropdownMenu.contains(event.target)
+      ) {
+        dropdownMenu.classList.remove("active");
+      }
+    });
+  </script>
 </html>

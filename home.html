@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -17,20 +17,20 @@
     <nav class="navbar">
       <div class="navbar-container">
         <a class="navbar-brand" href="home.html">
-          <img
-            src="assets/image/LogoMahatarAMNI.png"
-            alt="Logo AMNI"
-          />
+          <img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" />
         </a>
         <ul class="nav-menu">
-          <li><a class="nav-link active" href="home.html">Home</a></li>
+          <li><a class="nav-link" href="home.html">Home</a></li>
           <li><a class="nav-link" href="profile.html">Profil</a></li>
           <li><a class="nav-link" href="team.html">Team</a></li>
           <li class="dropdown">
-            <a class="nav-link" href="#">
-              Kegiatan Mahasiswa <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            <!-- Tambahkan id="dropdownBtn" -->
+            <a class="nav-link" href="#" id="dropdownBtn">
+              Kegiatan Mahasiswa
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem"></i>
             </a>
-            <ul class="dropdown-menu">
+            <!-- Tambahkan id="dropdownMenu" -->
+            <ul class="dropdown-menu" id="dropdownMenu">
               <li><a class="dropdown-item" href="#">BEM Mahatar</a></li>
               <li><a class="dropdown-item" href="#">Drum Corps</a></li>
               <li><a class="dropdown-item" href="#">Pedang Pora</a></li>
@@ -51,10 +51,12 @@
       <div class="hero-content">
         <h1 class="hero-title">Selamat Datang di Kemahataran AMNI</h1>
         <p class="hero-subtitle">
-          Wadah pengembangan karakter, kedisiplinan, dan kepemimpinan taruna/tarunani Universitas Maritim AMNI Semarang.
+          Wadah pengembangan karakter, kedisiplinan, dan kepemimpinan
+          taruna/tarunani Universitas Maritim AMNI Semarang.
         </p>
         <a href="profile.html" class="btn btn-primary">
-          Eksplorasi Profil <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+          Eksplorasi Profil
+          <i class="fa-solid fa-arrow-right" style="margin-left: 8px"></i>
         </a>
       </div>
     </header>
@@ -66,26 +68,133 @@
         <div class="feature-card">
           <i class="fa-solid fa-graduation-cap feature-icon"></i>
           <h3>Kedisiplinan & Karakter</h3>
-          <p>Membentuk pribadi yang tangguh, berintegritas, dan siap menjadi pemimpin di bidang maritim dan transportasi.</p>
+          <p>
+            Membentuk pribadi yang tangguh, berintegritas, dan siap menjadi
+            pemimpin di bidang maritim dan transportasi.
+          </p>
         </div>
 
         <div class="feature-card">
           <i class="fa-solid fa-users feature-icon"></i>
           <h3>Kegiatan Mahasiswa</h3>
-          <p>Berbagai organisasi, seni pertunjukan, hingga olahraga bela diri untuk mengasah potensi non-akademik.</p>
+          <p>
+            Berbagai organisasi, seni pertunjukan, hingga olahraga bela diri
+            untuk mengasah potensi non-akademik.
+          </p>
         </div>
 
         <div class="feature-card">
           <i class="fa-solid fa-bullhorn feature-icon"></i>
           <h3>Informasi Terkini</h3>
-          <p>Dapatkan akses langsung ke pengumuman resmi dan berita seputar kampus Universitas Maritim AMNI.</p>
+          <p>
+            Dapatkan akses langsung ke pengumuman resmi dan berita seputar
+            kampus Universitas Maritim AMNI.
+          </p>
         </div>
       </div>
+      <!-- ==========================================
+     CONTACT SECTION
+     ========================================== -->
+      <section class="contact-section">
+        <h2 class="section-title">Hubungi Kami</h2>
+
+        <div class="contact-grid">
+          <!-- Info Kontak -->
+          <div class="contact-info-card">
+            <h3>Informasi Kontak</h3>
+            <p>
+              Punya pertanyaan seputar Kemahataran AMNI? Silakan hubungi kami
+              melalui saluran berikut.
+            </p>
+
+            <div class="contact-detail-item">
+              <i class="fa-solid fa-location-dot contact-icon"></i>
+              <div>
+                <strong>Alamat</strong>
+                <p>Jl. Soekarno-Hatta No. 180, Semarang</p>
+              </div>
+            </div>
+
+            <div class="contact-detail-item">
+              <i class="fa-solid fa-envelope contact-icon"></i>
+              <div>
+                <strong>Email</strong>
+                <p>info@mahataramni.ac.id</p>
+              </div>
+            </div>
+
+            <div class="contact-detail-item">
+              <i class="fa-solid fa-phone contact-icon"></i>
+              <div>
+                <strong>Telepon / WhatsApp</strong>
+                <p>+62 812-3456-7890</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulir Pesan -->
+          <div class="contact-form-card">
+            <form class="contact-form" action="#" method="POST">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Nama Lengkap"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-input"
+                  placeholder="Alamat Email"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  class="form-input form-textarea"
+                  placeholder="Tuliskan pesan atau pertanyaan Anda..."
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-submit">
+                Kirim Pesan
+                <i class="fa-solid fa-paper-plane" style="margin-left: 8px"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
     <footer>
-      <small>&copy; 2026 Universitas Maritim AMNI Semarang. All rights reserved.</small>
+      <small
+        >&copy; 2026 Universitas Maritim AMNI Semarang. All rights
+        reserved.</small
+      >
     </footer>
   </body>
+  <script>
+    const dropdownBtn = document.getElementById("dropdownBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    // Toggle muncul/sembunyi saat tombol diklik
+    dropdownBtn.addEventListener("click", function (event) {
+      event.preventDefault(); // Mencegah halaman reload/pindah ke atas
+      dropdownMenu.classList.toggle("active");
+    });
+
+    // Otomatis menutup dropdown jika pengguna mengklik area di luar menu
+    window.addEventListener("click", function (event) {
+      if (
+        !dropdownBtn.contains(event.target) &&
+        !dropdownMenu.contains(event.target)
+      ) {
+        dropdownMenu.classList.remove("active");
+      }
+    });
+  </script>
 </html>
