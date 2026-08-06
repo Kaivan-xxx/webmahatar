@@ -1,87 +1,435 @@
 /* ==========================================
-   1. RESET & GLOBAL STYLES
+   1. RESET & BASIC STYLES
    ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  padding-top: 80px; /* Mencegah konten tertutup Navbar fixed-top */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: #f8f9fa;
   color: #212529;
 }
-/* ==========================================
-   2. NAVBAR CUSTOM STYLING
-   ========================================== */
-.navbar-brand img {
-  object-fit: contain;
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.navbar-nav .nav-link {
+/* ==========================================
+   2. NAVIGATION BAR & DROPDOWN
+   ========================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(33, 37, 41, 0.95);
+  backdrop-filter: blur(5px);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+}
+
+.navbar-brand img {
+  height: 35px;
+  display: block;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.75);
   font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff;
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
 }
 
 .dropdown-menu {
-  border-radius: 0.5rem;
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 8px 0;
+  list-style: none;
+  z-index: 1001;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 8px 16px;
+  color: #212529;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f3f5;
 }
 
 /* ==========================================
-   3. HALAMAN HOME (INDEX) STYLES
+   3. HOME PAGE STYLES
    ========================================== */
-/* Khusus Halaman Home: Hapus padding bawaan body */
-body.home-page {
-  padding-top: 0 !important;
-  margin: 0;
-  overflow-x: hidden;
+/* Hero Section */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url('../image/profile.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* Styling Hero Section Fullscreen Tanpa Celah */
-.hero-section {
-  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
-              url('../image/profile.jpg') center/cover no-repeat;
-  min-height: 100vh;
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 28px;
+  color: #e9ecef;
+  line-height: 1.6;
+}
+
+/* Button Global */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-2px);
+}
+
+/* Home Features Grid */
+.features-section {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #212529;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: #0d6efd;
+  margin-bottom: 16px;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: #6c757d;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ==========================================
+   4. PROFILE PAGE STYLES
+   ========================================== */
+.main-container {
+  max-width: 1000px;
   width: 100%;
-  
-  /* Gunakan Flexbox untuk memposisikan konten */
+  margin: 100px auto 40px auto;
+  padding: 0 20px;
+  flex-grow: 1;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.header-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0d6efd;
+  margin-bottom: 8px;
+}
+
+.header-subtitle {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+.divider {
+  width: 100px;
+  height: 3px;
+  background-color: #0d6efd;
+  border: none;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.hero-image-wrapper {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.profile-header-img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.profile-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.lead-text {
+  font-size: 1.15rem;
+  color: #495057;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.section-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #212529;
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.profile-card p {
+  font-size: 1rem;
+  color: #333333;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.custom-alert {
+  background-color: #f8f9fa;
+  border-left: 4px solid #0d6efd;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 32px;
+}
+
+.custom-alert p {
+  margin-bottom: 0;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+/* ==========================================
+   5. TEAM PAGE STYLES
+   ========================================== */
+.team-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 90px auto 40px auto;
+  padding: 0 20px;
+  flex-grow: 1;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #212529;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.team-card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  
-  /* Padding top secukupnya agar teks tidak tertutup navbar */
-  padding-top: 80px; 
-  padding-bottom: 20px;
-  box-sizing: border-box; /* Memastikan padding tidak menambah total tinggi elemen */
-}
-
-.opacity-90 {
-  opacity: 0.9;
-}
-
-/* ==========================================
-   4. HALAMAN PROFIL STYLES
-   ========================================== */
-.profile-header-img {
-  max-height: 400px;
-  object-fit: cover;
-  width: 100%;
-  border-radius: 12px;
-}
-
-/* ==========================================
-   5. HALAMAN TEAM MAKO STYLES
-   ========================================== */
-.team-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  background-color: #ffffff;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .team-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .team-img {
   width: 100%;
-  height: 320px;
+  height: 280px;
   object-fit: cover;
-  border-radius: 2px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.card-body {
+  width: 100%;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #212529;
+}
+
+.card-text {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+/* ==========================================
+   6. FOOTER
+   ========================================== */
+footer {
+  background-color: #212529;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+  font-size: 0.85rem;
+}
+
+/* ==========================================
+   7. RESPONSIVE MEDIA QUERIES
+   ========================================== */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .dropdown-menu {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .header-title {
+    font-size: 2rem;
+  }
+
+  .profile-card {
+    padding: 24px;
+  }
+
+  .page-title {
+    text-align: center;
+  }
 }

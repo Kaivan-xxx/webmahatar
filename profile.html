@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
@@ -10,208 +10,147 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
   </head>
   <body>
     <!-- Navigation Bar -->
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm"
-    >
-      <div class="container">
+    <nav class="navbar">
+      <div class="navbar-container">
         <a class="navbar-brand" href="index.html">
           <img
             src="assets/image/LogoMahatarAMNI.png"
             alt="Logo AMNI"
-            height="35"
-            class="d-inline-block align-text-top"
           />
         </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="profile.html"
-                >Profil</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="team.html">Team</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Kegiatan Mahasiswa
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">BEM Mahatar</a></li>
-                <li><a class="dropdown-item" href="#">Drum Corps</a></li>
-                <li><a class="dropdown-item" href="#">Pedang Pora</a></li>
-                <li><a class="dropdown-item" href="#">Zenkyokushin</a></li>
-                <li><a class="dropdown-item" href="#">PKM</a></li>
-                <li><a class="dropdown-item" href="#">Rebana</a></li>
-                <li><a class="dropdown-item" href="#">Pencak Silat</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Penanaman Mangrove</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pengumuman-berita.html"
-                >Pengumuman & Berita</a
-              >
-            </li>
-          </ul>
-        </div>
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="home.html">Home</a></li>
+          <li><a class="nav-link active" href="profile.html">Profil</a></li>
+          <li><a class="nav-link" href="team.html">Team</a></li>
+          <li class="dropdown">
+            <a class="nav-link" href="#">
+              Kegiatan Mahasiswa <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">BEM Mahatar</a></li>
+              <li><a class="dropdown-item" href="#">Drum Corps</a></li>
+              <li><a class="dropdown-item" href="#">Pedang Pora</a></li>
+              <li><a class="dropdown-item" href="#">Zenkyokushin</a></li>
+              <li><a class="dropdown-item" href="#">PKM</a></li>
+              <li><a class="dropdown-item" href="#">Rebana</a></li>
+              <li><a class="dropdown-item" href="#">Pencak Silat</a></li>
+              <li><a class="dropdown-item" href="#">Penanaman Mangrove</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link" href="pengumuman-berita.html">Pengumuman & Berita</a></li>
+        </ul>
       </div>
     </nav>
 
     <!-- Main Content Container -->
-    <main class="container my-5">
+    <main class="main-container">
       <!-- Title Section -->
-      <div class="row mb-4">
-        <div class="col-12 text-center">
-          <h1 class="fw-bold display-5 text-primary">Profil Publik</h1>
-          <p class="text-muted">
-            Kemahataran AMNI Universitas Maritim AMNI Semarang.
-          </p>
-          <hr class="w-25 mx-auto border-primary border-2 opacity-100" />
-        </div>
+      <div class="header-section">
+        <h1 class="header-title">Profil Publik</h1>
+        <p class="header-subtitle">
+          Kemahataran AMNI Universitas Maritim AMNI Semarang.
+        </p>
+        <hr class="divider" />
       </div>
 
       <!-- Hero Image -->
-      <div class="row mb-5 justify-content-center">
-        <div class="col-lg-10">
-          <img
-            src="assets/image/profile.jpg"
-            alt="Profil Kegiatan AMNI"
-            class="img-fluid profile-header-img shadow-sm"
-          />
-        </div>
+      <div class="hero-image-wrapper">
+        <img
+          src="assets/image/profile.jpg"
+          alt="Profil Kegiatan AMNI"
+          class="profile-header-img"
+        />
       </div>
 
       <!-- Article Content Section -->
-      <div class="row justify-content-center">
-        <div class="col-lg-10">
-          <div class="card border-0 shadow-sm p-4 p-md-5 bg-white rounded-4">
-            <p class="lead text-secondary mb-4">
-              Di lingkungan Universitas Maritim AMNI Semarang, mahasiswa dan
-              kaum muda aktif terlibat dalam berbagai kegiatan yang menarik dan
-              beragam. Dari berbagai program yang tersedia, beberapa organisasi
-              dan kegiatan mahasiswa telah berhasil menarik perhatian dan
-              mendapatkan apresiasi di tingkat universitas maupun di luar
-              kampus.
-            </p>
+      <article class="profile-card">
+        <p class="lead-text">
+          Di lingkungan Universitas Maritim AMNI Semarang, mahasiswa dan
+          kaum muda aktif terlibat dalam berbagai kegiatan yang menarik dan
+          beragam. Dari berbagai program yang tersedia, beberapa organisasi
+          dan kegiatan mahasiswa telah berhasil menarik perhatian dan
+          mendapatkan apresiasi di tingkat universitas maupun di luar
+          kampus.
+        </p>
 
-            <h3 class="h4 fw-bold mt-3 mb-3 text-dark">
-              Organisasi & Seni Pertunjukan
-            </h3>
-            <p>
-              Salah satu organisasi yang menjadi sorotan adalah
-              <strong>BEM Mahatar</strong> (Badan Eksekutif Mahasiswa
-              Transportasi). BEM Mahatar berperan sebagai wadah untuk
-              mengeksplorasi potensi kepemimpinan, memperkuat hubungan antar
-              mahasiswa, dan memperjuangkan kepentingan mahasiswa dalam program
-              studi Transportasi. Organisasi ini aktif dalam menyelenggarakan
-              seminar, diskusi, dan kegiatan sosial yang berkaitan dengan
-              transportasi.
-            </p>
-            <p>
-              Selain itu,
-              <strong>Korps Drum Universitas Maritim AMNI Semarang</strong> juga
-              merupakan daya tarik tersendiri. Dengan kegigihan dan kekompakan
-              para anggotanya, Korps Drum AMNI mampu menghibur dan memukau
-              penonton dengan atraksi dan penampilan musik mereka di berbagai
-              acara di dalam maupun di luar kampus.
-            </p>
+        <h2 class="section-heading">
+          Organisasi & Seni Pertunjukan
+        </h2>
+        <p>
+          Salah satu organisasi yang menjadi sorotan adalah
+          <strong>BEM Mahatar</strong> (Badan Eksekutif Mahasiswa
+          Transportasi). BEM Mahatar berperan sebagai wadah untuk
+          mengeksplorasi potensi kepemimpinan, memperkuat hubungan antar
+          mahasiswa, dan memperjuangkan kepentingan mahasiswa dalam program
+          studi Transportasi. Organisasi ini aktif dalam menyelenggarakan
+          seminar, diskusi, dan kegiatan sosial yang berkaitan dengan
+          transportasi.
+        </p>
+        <p>
+          Selain itu,
+          <strong>Korps Drum Universitas Maritim AMNI Semarang</strong> juga
+          merupakan daya tarik tersendiri. Dengan kegigihan dan kekompakan
+          para anggotanya, Korps Drum AMNI mampu menghibur dan memukau
+          penonton dengan atraksi dan penampilan musik mereka di berbagai
+          acara di dalam maupun di luar kampus.
+        </p>
 
-            <h3 class="h4 fw-bold mt-4 mb-3 text-dark">Olahraga & Bela Diri</h3>
-            <p>
-              Di bidang olahraga, terdapat beberapa klub dan kegiatan yang
-              menarik minat siswa. <strong>Zen Kyokushin</strong>, sebuah klub
-              bela diri Jepang yang mengajarkan disiplin dan teknik bertarung,
-              telah berhasil menarik banyak anggota. Selain itu,
-              <strong>Pencak Silat</strong> juga merupakan kegiatan yang
-              diminati oleh siswa yang tertarik pada bela diri dan membela
-              warisan budaya Indonesia.
-            </p>
+        <h2 class="section-heading">Olahraga & Bela Diri</h2>
+        <p>
+          Di bidang olahraga, terdapat beberapa klub dan kegiatan yang
+          menarik minat siswa. <strong>Zen Kyokushin</strong>, sebuah klub
+          bela diri Jepang yang mengajarkan disiplin dan teknik bertarung,
+          telah berhasil menarik banyak anggota. Selain itu,
+          <strong>Pencak Silat</strong> juga merupakan kegiatan yang
+          diminati oleh siswa yang tertarik pada bela diri dan membela
+          warisan budaya Indonesia.
+        </p>
 
-            <h3 class="h4 fw-bold mt-4 mb-3 text-dark">
-              Lingkungan & Akademik
-            </h3>
-            <p>
-              Universitas Maritim AMNI juga memperhatikan lingkungan dan
-              konservasi melalui kegiatan <strong>penanaman mangrove</strong>.
-              Melalui program ini, mahasiswa AMNI diajak untuk aktif terlibat
-              dalam menjaga keberlanjutan lingkungan dan mempelajari pentingnya
-              ekosistem mangrove dalam konservasi pesisir.
-            </p>
-            <p>
-              <strong>PKM (Program Kreativitas Mahasiswa)</strong> juga
-              merupakan bagian penting dalam mengembangkan potensi mahasiswa di
-              Universitas Maritim AMNI. Melalui PKM, mahasiswa didorong untuk
-              mengembangkan proyek penelitian, inovasi, atau karya kreatif di
-              berbagai bidang, seperti teknologi, kewirausahaan, dan sosial.
-            </p>
+        <h2 class="section-heading">
+          Lingkungan & Akademik
+        </h2>
+        <p>
+          Universitas Maritim AMNI juga memperhatikan lingkungan dan
+          konservasi melalui kegiatan <strong>penanaman mangrove</strong>.
+          Melalui program ini, mahasiswa AMNI diajak untuk aktif terlibat
+          dalam menjaga keberlanjutan lingkungan dan mempelajari pentingnya
+          ekosistem mangrove dalam konservasi pesisir.
+        </p>
+        <p>
+          <strong>PKM (Program Kreativitas Mahasiswa)</strong> juga
+          merupakan bagian penting dalam mengembangkan potensi mahasiswa di
+          Universitas Maritim AMNI. Melalui PKM, mahasiswa didorong untuk
+          mengembangkan proyek penelitian, inovasi, atau karya kreatif di
+          berbagai bidang, seperti teknologi, kewirausahaan, dan sosial.
+        </p>
 
-            <h3 class="h4 fw-bold mt-4 mb-3 text-dark">Seni Budaya</h3>
-            <p>
-              Tak ketinggalan, <strong>Rebana AMNI</strong> juga merupakan
-              kegiatan yang diminati beberapa mahasiswa. Dengan suara musik
-              tradisional yang menghentak dan semangat yang bergejolak, grup
-              Rebana AMNI sering tampil di berbagai acara keagamaan dan budaya
-              di dalam maupun di luar kampus.
-            </p>
+        <h2 class="section-heading">Seni Budaya</h2>
+        <p>
+          Tak ketinggalan, <strong>Rebana AMNI</strong> juga merupakan
+          kegiatan yang diminati beberapa mahasiswa. Dengan suara musik
+          tradisional yang menghentak dan semangat yang bergejolak, grup
+          Rebana AMNI sering tampil di berbagai acara keagamaan dan budaya
+          di dalam maupun di luar kampus.
+        </p>
 
-            <div
-              class="alert alert-light border-start border-primary border-4 mt-4"
-              role="alert"
-            >
-              <p class="mb-0 text-muted">
-                Melalui berbagai kegiatan ini, mahasiswa dan peserta pelatihan
-                di Universitas Maritim AMNI Semarang memiliki kesempatan untuk
-                mengembangkan keterampilan, memperluas jaringan sosial, dan
-                menerapkan pengetahuan yang diperoleh di kelas.
-              </p>
-            </div>
-          </div>
+        <div class="custom-alert">
+          <p>
+            Melalui berbagai kegiatan ini, mahasiswa dan peserta pelatihan
+            di Universitas Maritim AMNI Semarang memiliki kesempatan untuk
+            mengembangkan keterampilan, memperluas jaringan sosial, dan
+            menerapkan pengetahuan yang diperoleh di kelas.
+          </p>
         </div>
-      </div>
+      </article>
     </main>
 
     <!-- Footer Sederhana -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-      <div class="container">
-        <small
-          >&copy; 2026 Universitas Maritim AMNI Semarang. All rights
-          reserved.</small
-        >
-      </div>
+    <footer>
+      <small>&copy; 2026 Universitas Maritim AMNI Semarang. All rights reserved.</small>
     </footer>
-
-    <!-- Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
