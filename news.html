@@ -1,1 +1,229 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengumuman & Berita - Kemahataran AMNI</title>
 
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <!-- File CSS Utama -->
+    <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a class="navbar-brand" href="home.html">
+          <img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" />
+        </a>
+        <ul class="nav-menu">
+          <li><a class="nav-link" href="home.html">Home</a></li>
+          <li><a class="nav-link" href="profile.html">Profil</a></li>
+          <li><a class="nav-link" href="team.html">Team</a></li>
+          <li class="dropdown">
+            <!-- Tambahkan id="dropdownBtn" -->
+            <a class="nav-link" href="#" id="dropdownBtn">
+              Kegiatan Mahasiswa
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem"></i>
+            </a>
+            <!-- Tambahkan id="dropdownMenu" -->
+            <ul class="dropdown-menu" id="dropdownMenu">
+              <li><a class="dropdown-item" href="#">BEM Mahatar</a></li>
+              <li><a class="dropdown-item" href="#">Drum Corps</a></li>
+              <li><a class="dropdown-item" href="#">Pedang Pora</a></li>
+              <li><a class="dropdown-item" href="#">Zenkyokushin</a></li>
+              <li><a class="dropdown-item" href="#">PKM</a></li>
+              <li><a class="dropdown-item" href="#">Rebana</a></li>
+              <li><a class="dropdown-item" href="#">Pencak Silat</a></li>
+              <li><a class="dropdown-item" href="#">Penanaman Mangrove</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link" href="news.html">Pengumuman & Berita</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT SECTION -->
+    <main class="news-container">
+      <div class="header-section">
+        <h1 class="header-title">Pengumuman & Berita</h1>
+        <p class="header-subtitle">
+          Informasi akademik, kegiatan taruna, dan pengumuman terbaru
+          Kemahataran AMNI
+        </p>
+        <hr class="divider" />
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="news-filter-wrapper">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="pengumuman">Pengumuman</button>
+        <button class="filter-btn" data-filter="berita">Berita Utama</button>
+        <button class="filter-btn" data-filter="kegiatan">Kegiatan</button>
+      </div>
+
+      <!-- Grid Berita & Pengumuman (Area Kosong) -->
+      <div class="news-grid" id="newsGrid">
+        <!-- TEMPLATE KARTU BERITA KOSONG (Silakan duplikasi & isi saat menambah berita baru) -->
+        <!-- 
+      <article class="news-card" data-category="pengumuman">
+        <div class="news-thumb-wrapper">
+          <img src="assets/image/nama_gambar.jpg" alt="Judul" class="news-thumb-img" />
+          <div class="news-badge badge-warning">Pengumuman</div>
+        </div>
+        <div class="news-content">
+          <div class="news-meta">
+            <span><i class="fa-regular fa-calendar"></i> DD Bulan YYYY</span>
+            <span><i class="fa-regular fa-user"></i> Penulis</span>
+          </div>
+          <h3 class="news-title">Judul Berita</h3>
+          <p class="news-excerpt">Ringkasan singkat berita...</p>
+
+          <div class="news-full-body" style="display:none;">
+            <p>Isi lengkap berita paragraf 1...</p>
+            <p>Isi lengkap berita paragraf 2...</p>
+          </div>
+
+          <button class="news-read-more-btn">
+            Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </article>
+      -->
+
+        <!-- Tampilan Status Saat Berita Kosong -->
+        <div class="news-empty-state">
+          <i class="fa-regular fa-newspaper empty-icon"></i>
+          <h3>Belum Ada Berita</h3>
+          <p>
+            Belum ada pengumuman atau berita terbaru yang dipublikasikan untuk
+            saat ini.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- MODAL DIALOG UNTUK DETAIL BERITA -->
+    <div class="news-modal" id="newsModal">
+      <div class="news-modal-content">
+        <button class="news-modal-close" id="modalCloseBtn">&times;</button>
+        <div class="news-modal-body">
+          <div class="news-badge" id="modalBadge"></div>
+          <h2
+            class="news-title"
+            id="modalTitle"
+            style="margin-top: 10px; font-size: 1.6rem"
+          ></h2>
+          <div class="news-meta" id="modalMeta" style="margin: 15px 0"></div>
+          <div class="modal-img-wrapper" style="margin-bottom: 20px">
+            <img
+              id="modalImg"
+              src=""
+              alt=""
+              style="
+                width: 100%;
+                max-height: 350px;
+                object-fit: cover;
+                border-radius: var(--radius-md);
+              "
+            />
+          </div>
+          <div
+            id="modalBodyText"
+            style="color: var(--text-secondary); line-height: 1.8"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>&copy; 2026 Kemahataran AMNI Semarang. All rights reserved.</p>
+    </footer>
+
+    <!-- JAVASCRIPT SCRIPT -->
+    <script>
+      // 1. Dropdown Navbar
+      const dropdownBtn = document.getElementById("dropdownBtn");
+      const dropdownMenu = document.getElementById("dropdownMenu");
+
+      dropdownBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        dropdownMenu.classList.toggle("active");
+      });
+
+      window.addEventListener("click", function (e) {
+        if (
+          !dropdownBtn.contains(e.target) &&
+          !dropdownMenu.contains(e.target)
+        ) {
+          dropdownMenu.classList.remove("active");
+        }
+      });
+
+      // 2. Filter Kategori
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const newsCards = document.querySelectorAll(".news-card");
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          const filterValue = btn.getAttribute("data-filter");
+
+          newsCards.forEach((card) => {
+            if (
+              filterValue === "all" ||
+              card.getAttribute("data-category") === filterValue
+            ) {
+              card.style.display = "flex";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // 3. Modal Baca Selengkapnya
+      const newsModal = document.getElementById("newsModal");
+      const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+      document.querySelectorAll(".news-read-more-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const card = this.closest(".news-card");
+
+          const badge = card.querySelector(".news-badge").cloneNode(true);
+          const title = card.querySelector(".news-title").innerText;
+          const meta = card.querySelector(".news-meta").innerHTML;
+          const imgSrc = card.querySelector(".news-thumb-img").src;
+          const bodyContent = card.querySelector(".news-full-body").innerHTML;
+
+          document.getElementById("modalBadge").innerHTML = "";
+          document.getElementById("modalBadge").appendChild(badge);
+          document.getElementById("modalTitle").innerText = title;
+          document.getElementById("modalMeta").innerHTML = meta;
+          document.getElementById("modalImg").src = imgSrc;
+          document.getElementById("modalBodyText").innerHTML = bodyContent;
+
+          newsModal.classList.add("active");
+        });
+      });
+
+      modalCloseBtn.addEventListener("click", () => {
+        newsModal.classList.remove("active");
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target === newsModal) {
+          newsModal.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
