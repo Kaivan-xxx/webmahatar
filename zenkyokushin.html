@@ -3,30 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BEM Mahatar - Kemahataran AMNI</title>
-
-  <!-- Font Awesome Icons -->
+  <title>Zenkyokushin - Kemahataran AMNI</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-
-  <!-- File CSS Utama -->
   <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="home.html" class="navbar-brand">
-        <img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" />
-      </a>
+      <a href="home.html" class="navbar-brand"><img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" /></a>
       <ul class="nav-menu">
         <li><a class="nav-link" href="home.html">Home</a></li>
         <li><a class="nav-link" href="profile.html">Profil</a></li>
         <li><a class="nav-link" href="team.html">Team</a></li>
         <li class="dropdown">
-          <a class="nav-link active" href="#" id="dropdownBtn">
-            Kegiatan Mahasiswa <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
-          </a>
+          <a class="nav-link active" href="#" id="dropdownBtn">Kegiatan Mahasiswa <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
           <ul class="dropdown-menu" id="dropdownMenu">
             <li><a class="dropdown-item" href="bem.html">BEM Mahatar</a></li>
             <li><a class="dropdown-item" href="drum-corps.html">Drum Corps</a></li>
@@ -43,72 +34,36 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT SECTION (GANTI BAGIAN INI SESUAI HALAMAN) -->
   <main class="news-container">
     <div class="header-section">
-      <h1 class="header-title">Drum Corps Gita Swara AMNI</h1>
-      <p class="header-subtitle">Wadah aspirasi, kepemimpinan, dan penggerak utama kegiatan kemahasiswaan Kemahataran AMNI</p>
+      <h1 class="header-title">Karate Zenkyokushin AMNI</h1>
+      <p class="header-subtitle">Seni beladiri kontak penuh untuk membentuk fisik tangguh dan mentalitas baja</p>
       <hr class="divider" />
     </div>
 
-    <!-- DETAIL INFORMASI & DESKRIPSI -->
     <div class="profile-card" style="margin-bottom: 30px;">
       <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-        <img src="assets/image/profile.jpg" alt="BEM Mahatar" style="width: 100%; max-width: 350px; border-radius: var(--radius-md); object-fit: cover;" />
+        <img src="assets/image/profile.jpg" alt="Karate AMNI" style="width: 100%; max-width: 350px; border-radius: var(--radius-md); object-fit: cover;" />
         <div style="flex: 1; min-width: 280px;">
-          <h3 style="font-size: 1.4rem; color: var(--accent-blue); margin-bottom: 12px;">Tentang BEM Mahatar</h3>
+          <h3 style="font-size: 1.4rem; color: var(--accent-blue); margin-bottom: 12px;">Tentang Zenkyokushin</h3>
           <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 15px;">
-            BEM Kemahataran AMNI merupakan lembaga eksekutif tertinggi di tingkat mahasiswa yang bertugas mengintegrasikan seluruh kegiatan ekstrakurikuler, menyalurkan aspirasi taruna/i, serta mengabdi kepada masyarakat.
+            Aliran karate kontak penuh (full contact) yang melatih ketahanan stamina, pertahanan diri praktis, serta kerendahan hati. Menjadi modal berharga bagi calon perwira yang berlayar di samudra.
           </p>
           <ul style="list-style: none; padding: 0; color: var(--text-primary);">
-            <li style="margin-bottom: 8px;"><i class="fa-solid fa-user-tie" style="color: var(--accent-cyan); width: 25px;"></i> <strong>Pembina:</strong> Tim Pengasuh Kemahataran</li>
-            <li style="margin-bottom: 8px;"><i class="fa-solid fa-calendar-check" style="color: var(--accent-cyan); width: 25px;"></i> <strong>Jadwal Rutin:</strong> Rapat Mingguan & Evaluasi Bulanan</li>
-            <li style="margin-bottom: 8px;"><i class="fa-solid fa-location-dot" style="color: var(--accent-cyan); width: 25px;"></i> <strong>Lokasi Sekretariat:</strong> Gedung Kemahataran AMNI</li>
+            <li style="margin-bottom: 8px;"><i class="fa-solid fa-hand-fist" style="color: var(--accent-cyan); width: 25px;"></i> <strong>Fokus Pembinaan:</strong> Kata, Kumite, & Conditioning Fisik</li>
+            <li style="margin-bottom: 8px;"><i class="fa-solid fa-calendar-check" style="color: var(--accent-cyan); width: 25px;"></i> <strong>Jadwal Latihan:</strong> Senin & Jumat (16.00 WIB)</li>
+            <li style="margin-bottom: 8px;"><i class="fa-solid fa-location-dot" style="color: var(--accent-cyan); width: 25px;"></i> <strong>Lokasi Latihan:</strong> Dojo Kemahataran AMNI</li>
           </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROGRAM KERJA / KEGIATAN UTAMA -->
-    <div class="profile-card">
-      <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fa-solid fa-list-check" style="color: var(--accent-blue);"></i> Program Kerja Utama</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
-        <div style="padding: 15px; border: var(--border-glass); border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
-          <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">1. Latihan Kepemimpinan Taruna</h4>
-          <p style="font-size: 0.88rem; color: var(--text-secondary);">Pelatihan kedisiplinan dan manajemen keorganisasian untuk calon pengurus baru.</p>
-        </div>
-        <div style="padding: 15px; border: var(--border-glass); border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
-          <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">2. Pengabdian Masyarakat</h4>
-          <p style="font-size: 0.88rem; color: var(--text-secondary);">Aksi sosial berkala di wilayah pesisir Semarang dan sekitarnya.</p>
-        </div>
-        <div style="padding: 15px; border: var(--border-glass); border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
-          <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">3. Pekan Olahraga & Seni</h4>
-          <p style="font-size: 0.88rem; color: var(--text-secondary);">Kompetisi internal antar kompi untuk menjaring bakat dan mempererat solidaritas.</p>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2026 Kemahataran AMNI Semarang. All rights reserved.</p>
-  </footer>
-
-  <!-- JAVASCRIPT DROPDOWN NAVBAR -->
+  <footer><p>&copy; 2026 Kemahataran AMNI Semarang. All rights reserved.</p></footer>
   <script>
     const dropdownBtn = document.getElementById('dropdownBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
-    dropdownBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      dropdownMenu.classList.toggle('active');
-    });
-
-    window.addEventListener('click', (e) => {
-      if (!dropdownBtn?.contains(e.target) && !dropdownMenu?.contains(e.target)) {
-        dropdownMenu?.classList.remove('active');
-      }
-    });
+    dropdownBtn?.addEventListener('click', (e) => { e.preventDefault(); dropdownMenu.classList.toggle('active'); });
   </script>
 </body>
 </html>
-
