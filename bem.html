@@ -4,11 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BEM Mahatar - Kemahataran AMNI</title>
-
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-
-  <!-- File CSS Utama -->
   <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
 </head>
 <body>
@@ -16,17 +12,13 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="home.html" class="navbar-brand">
-        <img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" />
-      </a>
+      <a href="home.html" class="navbar-brand"><img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" /></a>
       <ul class="nav-menu">
         <li><a class="nav-link" href="home.html">Home</a></li>
         <li><a class="nav-link" href="profile.html">Profil</a></li>
         <li><a class="nav-link" href="team.html">Team</a></li>
         <li class="dropdown">
-          <a class="nav-link active" href="#" id="dropdownBtn">
-            Kegiatan Mahasiswa <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
-          </a>
+          <a class="nav-link active" href="#" id="dropdownBtn">Kegiatan Mahasiswa <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
           <ul class="dropdown-menu" id="dropdownMenu">
             <li><a class="dropdown-item" href="bem.html">BEM Mahatar</a></li>
             <li><a class="dropdown-item" href="drum-corps.html">Drum Corps</a></li>
@@ -43,7 +35,7 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT SECTION (GANTI BAGIAN INI SESUAI HALAMAN) -->
+  <!-- MAIN CONTENT -->
   <main class="news-container">
     <div class="header-section">
       <h1 class="header-title">Badan Eksekutif Mahasiswa (BEM) Mahatar</h1>
@@ -51,7 +43,7 @@
       <hr class="divider" />
     </div>
 
-    <!-- DETAIL INFORMASI & DESKRIPSI -->
+    <!-- INFORMASI UTAMA -->
     <div class="profile-card" style="margin-bottom: 30px;">
       <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
         <img src="assets/image/profile.jpg" alt="BEM Mahatar" style="width: 100%; max-width: 350px; border-radius: var(--radius-md); object-fit: cover;" />
@@ -69,8 +61,8 @@
       </div>
     </div>
 
-    <!-- PROGRAM KERJA / KEGIATAN UTAMA -->
-    <div class="profile-card">
+    <!-- PROGRAM KERJA -->
+    <div class="profile-card" style="margin-bottom: 30px;">
       <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fa-solid fa-list-check" style="color: var(--accent-blue);"></i> Program Kerja Utama</h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
         <div style="padding: 15px; border: var(--border-glass); border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
@@ -81,33 +73,49 @@
           <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">2. Pengabdian Masyarakat</h4>
           <p style="font-size: 0.88rem; color: var(--text-secondary);">Aksi sosial berkala di wilayah pesisir Semarang dan sekitarnya.</p>
         </div>
+      </div>
+    </div>
+
+    <!-- STRUKTUR TIM BEM -->
+    <div class="profile-card" style="margin-bottom: 30px;">
+      <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fa-solid fa-users-gear" style="color: var(--accent-blue);"></i> Pengurus BEM Mahatar</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; text-align: center;">
         <div style="padding: 15px; border: var(--border-glass); border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
-          <h4 style="color: var(--accent-cyan); margin-bottom: 8px;">3. Pekan Olahraga & Seni</h4>
-          <p style="font-size: 0.88rem; color: var(--text-secondary);">Kompetisi internal antar kompi untuk menjaring bakat dan mempererat solidaritas.</p>
+          <h4 style="color: var(--accent-cyan); margin-bottom: 5px;">Komandan BEM</h4>
+          <p style="color: var(--text-primary); font-weight: bold; margin: 0;">M. Rizky Pratama</p>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">NPT. 21010045</span>
+        </div>
+        <div style="padding: 15px; border: var(--border-glass); border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
+          <h4 style="color: var(--accent-cyan); margin-bottom: 5px;">Wakil Komandan</h4>
+          <p style="color: var(--text-primary); font-weight: bold; margin: 0;">Ahmad Fauzi</p>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">NPT. 21010088</span>
+        </div>
+        <div style="padding: 15px; border: var(--border-glass); border-radius: var(--radius-sm); background: rgba(255,255,255,0.02);">
+          <h4 style="color: var(--accent-cyan); margin-bottom: 5px;">Sekretaris Umum</h4>
+          <p style="color: var(--text-primary); font-weight: bold; margin: 0;">Siti Nurhaliza</p>
+          <span style="font-size: 0.8rem; color: var(--text-secondary);">NPT. 21010112</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BERITA & AGENDA BEM -->
+    <div class="profile-card">
+      <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fa-solid fa-newspaper" style="color: var(--accent-blue);"></i> Berita & Kegiatan BEM</h3>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="padding: 12px; border-left: 3px solid var(--accent-cyan); background: rgba(255,255,255,0.01);">
+          <span style="font-size: 0.8rem; color: var(--accent-cyan);"><i class="fa-solid fa-calendar"></i> 10 Agustus 2026</span>
+          <h4 style="margin: 5px 0; color: var(--text-primary);">Pelantikan Pengurus BEM Mahatar Periode 2026/2027</h4>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Pelantikan resmi pengurus BEM baru dipimpin langsung oleh Wakil Direktur III Kemahataran AMNI.</p>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2026 Kemahataran AMNI Semarang. All rights reserved.</p>
-  </footer>
-
-  <!-- JAVASCRIPT DROPDOWN NAVBAR -->
+  <footer><p>&copy; 2026 Kemahataran AMNI Semarang. All rights reserved.</p></footer>
   <script>
     const dropdownBtn = document.getElementById('dropdownBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
-    dropdownBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      dropdownMenu.classList.toggle('active');
-    });
-
-    window.addEventListener('click', (e) => {
-      if (!dropdownBtn?.contains(e.target) && !dropdownMenu?.contains(e.target)) {
-        dropdownMenu?.classList.remove('active');
-      }
-    });
+    dropdownBtn?.addEventListener('click', (e) => { e.preventDefault(); dropdownMenu.classList.toggle('active'); });
   </script>
 </body>
 </html>
