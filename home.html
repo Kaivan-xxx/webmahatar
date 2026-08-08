@@ -19,7 +19,18 @@
         <a href="home.html" class="navbar-brand">
           <img src="assets/image/LogoMahatarAMNI.png" alt="Logo AMNI" />
         </a>
-        <ul class="nav-menu">
+        <!-- TAMBAHKAN TOMBOL INI -->
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle Navigation"
+          data-bs-target="#navMenu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
           <li><a class="nav-link" href="home.html">Home</a></li>
           <li><a class="nav-link" href="profile.html">Profil</a></li>
           <li><a class="nav-link" href="team.html">Team</a></li>
@@ -171,6 +182,48 @@
       ) {
         dropdownMenu.classList.remove("active");
       }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+      const dropdowns = document.querySelectorAll(".dropdown");
+
+      // 1. Toggle Menu Utama (Hamburger)
+      if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", (e) => {
+          e.stopPropagation();
+          navMenu.classList.toggle("active");
+        });
+      }
+
+      // 2. Toggle Submenu Dropdown saat Di-klik (Khusus Layar HP / Mobile)
+      dropdowns.forEach((dropdown) => {
+        const dropdownLink = dropdown.querySelector(".nav-link");
+        const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+
+        if (dropdownLink && dropdownMenu) {
+          dropdownLink.addEventListener("click", (e) => {
+            // Jalankan click toggle hanya di tampilan mobile (< 768px)
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              e.stopPropagation();
+              dropdownMenu.classList.toggle("active");
+            }
+          });
+        }
+      });
+
+      // 3. Otomatis Tutup Menu saat Mengklik Area Luar Navbar
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".navbar")) {
+          if (navMenu) navMenu.classList.remove("active");
+          dropdowns.forEach((dropdown) => {
+            const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+            if (dropdownMenu) dropdownMenu.classList.remove("active");
+          });
+        }
+      });
     });
   </script>
 </html>

@@ -79,7 +79,7 @@ a {
 }
 
 /* ==========================================
-   3. MODERN FLOATING NAVBAR
+   3. MODERN FLOATING NAVBAR & HAMBURGER
    ========================================== */
 .navbar {
   position: fixed;
@@ -131,6 +131,28 @@ a {
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* Tombol Hamburger (Bawaan tersembunyi di Desktop) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-primary);
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
 /* Dropdown Floating Glass Card */
 .dropdown {
   position: relative;
@@ -154,7 +176,8 @@ a {
   transition: var(--transition-smooth);
 }
 
-.dropdown-menu.active {
+.dropdown-menu.active,
+.dropdown:hover .dropdown-menu {
   display: block;
   opacity: 1;
   transform: translateY(0);
@@ -494,7 +517,7 @@ a {
 }
 
 /* ==========================================
-   8. TEAM PAGE STYLES (DESKTOP / PC = FLEX)
+   8. TEAM PAGE STYLES (PC/LAPTOP = FLEX)
    ========================================== */
 .team-container {
   max-width: 1200px;
@@ -510,7 +533,6 @@ a {
   color: var(--text-primary);
 }
 
-/* PC Default: Flexbox */
 .team-grid {
   display: flex !important;
   flex-wrap: wrap !important;
@@ -536,7 +558,6 @@ a {
   transform: translateY(-8px);
 }
 
-/* Foto Profil Proporsional (Tidak Gepeng/Melar) */
 .team-img,
 .team-card img {
   width: 100% !important;
@@ -848,10 +869,10 @@ footer {
 }
 
 /* ==========================================
-   10. RESPONSIVE DESIGN (MOBILE = GRID)
+   10. RESPONSIVE DESIGN MOBILE (HAMBURGER & GRID)
    ========================================== */
 @media (max-width: 768px) {
-  /* Fix Navbar Mobile */
+  /* Dynamic Mobile Floating Bar */
   .navbar {
     width: calc(100% - 24px);
     top: 12px;
@@ -859,133 +880,69 @@ footer {
   }
 
   .navbar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-  }
-
-  .nav-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    padding: 0;
-    margin-top: 6px;
-    list-style: none;
-  }
-
-  .nav-link {
-    font-size: 0.82rem;
-    padding: 5px 10px;
-    white-space: nowrap;
-  }
-
-  .dropdown-menu {
-    right: 50%;
-    transform: translateX(50%);
-  }
-
-  .profile-card,
-  .contact-info-card,
-  .contact-form-card {
-    padding: 24px;
-  }
-
-  .main-container,
-  .team-container,
-  .news-container {
-    margin-top: 180px;
-  }
-
-  /* UBAH DISPLAY TIM PC (FLEX) MENJADI MOBILE (GRID) */
-  .team-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
-    gap: 16px !important;
-  }
-
-  .team-card {
-    flex: none !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  .team-img,
-  .team-card img {
-    height: 260px !important;
-  }
-}
-/* ==========================================
-   10. RESPONSIVE DESIGN (FIXED DROPDOWN MOBILE)
-   ========================================== */
-@media (max-width: 768px) {
-  /* Fix Container Navbar */
-  .navbar {
-    width: calc(100% - 24px);
-    top: 12px;
-    border-radius: 20px;
-  }
-
-  .navbar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 15px;
-  }
-
-  .nav-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    padding: 0;
-    margin-top: 4px;
-    list-style: none;
-    width: 100%;
-  }
-
-  .nav-link {
-    font-size: 0.82rem;
-    padding: 6px 10px;
-    white-space: nowrap;
-  }
-
-  /* FIX DROPDOWN BIAR GAK KELUAR LAYAR HP */
-  .dropdown {
-    position: relative;
-  }
-
-  .dropdown-menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-    min-width: 200px;
-    max-width: 90vw;
-    background: rgba(15, 23, 42, 0.95) !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-    z-index: 2000 !important;
-  }
-
-  .dropdown-menu.active {
     display: flex !important;
-    flex-direction: column;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 20px !important;
+  }
+
+  /* Tampilkan Tombol Hamburger di HP */
+  .menu-toggle {
+    display: flex !important;
+  }
+
+  /* Sembunyikan Nav Menu di HP & Buka saat di-Toggle */
+  .nav-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 100%;
+    background: rgba(9, 13, 22, 0.95);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: var(--border-glass);
+    border-radius: var(--radius-md);
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 16px !important;
+    gap: 8px !important;
+    display: none !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Tampilkan menu saat JavaScript memberikan class active */
+  .nav-menu.active {
+    display: flex !important;
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Submenu Dropdown dalam Hamburger */
+  .dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    box-shadow: none !important;
+    margin-top: 6px;
+    padding-left: 12px !important;
     opacity: 1 !important;
   }
 
+  /* Margin Top Konten Utama */
   .main-container,
   .team-container,
   .news-container {
-    margin-top: 180px;
+    margin-top: 120px;
   }
 
-  /* Team Mobile Layout (Grid) */
+  /* Tim berubah ke GRID di HP */
   .team-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
