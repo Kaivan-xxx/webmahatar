@@ -237,30 +237,6 @@ a {
   margin-right: auto;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 32px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border-radius: 100px;
-  border: none;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.btn-primary {
-  background: var(--gradient-accent);
-  color: #ffffff;
-  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(56, 189, 248, 0.45);
-}
-
 /* ==========================================
    5. BENTO GRID SYSTEM
    ========================================== */
@@ -284,6 +260,7 @@ a {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
+  margin-bottom:100px;
 }
 
 .feature-card {
@@ -335,8 +312,7 @@ a {
   gap: 30px;
 }
 
-.contact-info-card,
-.contact-form-card {
+.contact-info-card {
   background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
@@ -388,41 +364,8 @@ a {
   margin: 0;
 }
 
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
 
-.form-input {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: var(--border-glass);
-  border-radius: var(--radius-sm);
-  padding: 14px 18px;
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  outline: none;
-  transition: var(--transition-smooth);
-}
 
-.form-input::placeholder {
-  color: var(--text-muted);
-}
-
-.form-input:focus {
-  border: var(--border-active);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-}
-
-.form-textarea {
-  resize: vertical;
-}
-
-.btn-submit {
-  width: 100%;
-}
 
 /* ==========================================
    7. PROFILE PAGE STYLES
