@@ -13,7 +13,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_num_rows($result) > 0) {
 
-        echo "Username ditemukan!";
+        $user = mysqli_fetch_assoc($result);
+
+        if (password_verify($password, $user['password'])) {
+
+            echo "Login berhasil!";
+
+        } else {
+
+            echo "Password salah!";
+
+        }
 
     } else {
 
