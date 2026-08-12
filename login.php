@@ -2,6 +2,8 @@
 
 include "config/koneksi.php";
 
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $username = $_POST['username'];
@@ -17,7 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($password, $user['password'])) {
 
-            echo "Login berhasil!";
+            $_SESSION['id_user'] = $user['id_user'];
+            $_SESSION['username'] = $user['username'];
+
+            header("Location: admin/dashboard.php");
+            exit;
 
         } else {
 
