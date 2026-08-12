@@ -26,9 +26,10 @@
 
     <p>
         Selamat datang,
-        <?php echo $_SESSION['username']; ?>
+        Di Dashboard Admin Mahatar, Anda dapat mengelola konten dan data di sini.<br><br>
+        INGAT, SELALU LOGOUT SETELAH MENGGUNAKAN DASHBOARD ADMIN UNTUK MENGHINDARI AKSES YANG TIDAK DIINGINKAN.
     </p>
-
+    <button><a href="logout.php">Logout</a></button>
 </body>
 
 </html>

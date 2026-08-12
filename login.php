@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             header("Location: admin/dashboard.php");
             exit;
-
+            
         } else {
 
             echo "Password salah!";
