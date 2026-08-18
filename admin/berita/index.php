@@ -7,8 +7,6 @@ if (!isset($_SESSION['id_user'])) {
     exit;
 }
 
-include '../../config/koneksi.php';
-
 include "../../config/koneksi.php";
 
 $query = "SELECT * FROM berita ORDER BY tanggal DESC";
