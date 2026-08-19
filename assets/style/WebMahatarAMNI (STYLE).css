@@ -236,7 +236,13 @@ a {
   margin-left: auto;
   margin-right: auto;
 }
-
+.hero-logo {
+  max-width: 250px; /* Atur lebar maksimal logo */
+  height: auto;
+  margin-bottom: ; /* Jarak antara logo dan teks judul */
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3)); /* Efek bayangan halus */
+  transition: var(--transition-smooth);
+}
 /* ==========================================
    5. BENTO GRID SYSTEM
    ========================================== */
@@ -887,9 +893,14 @@ footer {
   border-top: var(--border-glass);
   color: var(--text-muted);
   text-align: center;
-  padding: 30px 20px;
+  padding: 20px 20px;
   margin-top: auto;
-  font-size: 0.88rem;
+  font-size: 15px;
+}
+footer .footer-brand {
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
 /* ==========================================
@@ -957,6 +968,10 @@ footer {
     margin-top: 6px;
     padding-left: 12px !important;
     opacity: 1 !important;
+  }
+  .hero-logo {
+    max-width: 200px;
+    margin-bottom: 16px;
   }
 
   /* Margin Top Konten Utama */
