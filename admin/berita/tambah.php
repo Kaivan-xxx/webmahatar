@@ -19,6 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isi = $_POST['isi'];
     $id_kategori = $_POST['id_kategori'];
 
+    echo "<pre>";
+    print_r($_FILES['gambar']);
+    echo "</pre>";
+
     $stmt = mysqli_prepare(
         $conn,
         "INSERT INTO berita (judul, isi, id_kategori, tanggal)
@@ -35,8 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_stmt_execute($stmt)) {
 
-         header("Location: index.php");
-        exit;
+         echo "Berita berhasil ditambahkan!";
 
     } else {
 
@@ -66,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <h1>Tambah Berita</h1>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
 
         <label>Judul Berita</label>
         <br>
@@ -110,6 +113,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <br><br>
 
+<label>Foto Berita</label>
+<br>
+
+<input
+    type="file"
+    name="gambar"
+    accept="image/*"
+>
+
+<br><br>
 
         <button type="submit">
             Simpan Berita
