@@ -15,31 +15,84 @@ $result_kategori = mysqli_query($conn, $query_kategori);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // =========================
+    // AMBIL DATA DARI FORM
+    // =========================
+
     $judul = $_POST['judul'];
     $isi = $_POST['isi'];
     $id_kategori = $_POST['id_kategori'];
 
-    echo "<pre>";
-    print_r($_FILES['gambar']);
-    echo "</pre>";
+
+    // =========================
+    // AMBIL DATA GAMBAR
+    // =========================
+
+    $nama_asli = $_FILES['gambar']['name'];
+    $tmp_gambar = $_FILES['gambar']['tmp_name'];
+    $error_gambar = $_FILES['gambar']['error'];
+
+    $ekstensi = strtolower(
+        pathinfo($nama_asli, PATHINFO_EXTENSION)
+    );
+
+    $ukuran_gambar = $_FILES['gambar']['size'];
+
+
+    // =========================
+    // BUAT NAMA GAMBAR BARU
+    // =========================
+
+    $nama_gambar = uniqid() . "." . $ekstensi;
+
+
+    // =========================
+    // TENTUKAN LOKASI GAMBAR
+    // =========================
+
+    $tujuan = "../../uploads/" . $nama_gambar;
+
+
+    // =========================
+    // SIMPAN GAMBAR
+    // =========================
+
+    if (!move_uploaded_file($tmp_gambar, $tujuan)) {
+
+        die("Foto gagal disimpan.");
+
+    }
+
+
+    // =========================
+    // SIMPAN DATA BERITA
+    // =========================
 
     $stmt = mysqli_prepare(
         $conn,
-        "INSERT INTO berita (judul, isi, id_kategori, tanggal)
-         VALUES (?, ?, ?, NOW())"
+        "INSERT INTO berita
+        (judul, isi, id_kategori, gambar, tanggal)
+        VALUES (?, ?, ?, ?, NOW())"
     );
+
 
     mysqli_stmt_bind_param(
         $stmt,
-        "sss",
+        "ssis",
         $judul,
         $isi,
-        $id_kategori
+        $id_kategori,
+        $nama_gambar
     );
+
+
+    // =========================
+    // JALANKAN QUERY
+    // =========================
 
     if (mysqli_stmt_execute($stmt)) {
 
-         echo "Berita berhasil ditambahkan!";
+        echo "Berita berhasil ditambahkan!";
 
     } else {
 
