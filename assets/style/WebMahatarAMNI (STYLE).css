@@ -131,7 +131,6 @@ a {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Tombol Hamburger (Bawaan tersembunyi di Desktop) */
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -153,7 +152,6 @@ a {
   transition: var(--transition-smooth);
 }
 
-/* Dropdown Floating Glass Card */
 .dropdown {
   position: relative;
 }
@@ -236,19 +234,13 @@ a {
   margin-left: auto;
   margin-right: auto;
 }
-.hero-logo {
-  max-width: 250px; /* Atur lebar maksimal logo */
-  height: auto;
-  margin-bottom: ; /* Jarak antara logo dan teks judul */
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3)); /* Efek bayangan halus */
-  transition: var(--transition-smooth);
-}
+
 /* ==========================================
    5. BENTO GRID SYSTEM
    ========================================== */
 .features-section {
   max-width: 1200px;
-  margin: 40px auto 80px;
+  margin: 40px auto 40px;
   padding: 0 20px;
 }
 
@@ -266,7 +258,7 @@ a {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-  margin-bottom: 100px;
+  margin-bottom: 0;
 }
 
 .feature-card {
@@ -308,7 +300,7 @@ a {
    ========================================== */
 .contact-section {
   max-width: 1200px;
-  margin: 0 auto 100px;
+  margin: 40px auto;
   padding: 0 20px;
 }
 
@@ -460,7 +452,7 @@ a {
 }
 
 /* ==========================================
-   8. TEAM PAGE STYLES (PC/LAPTOP = FLEX)
+   8. TEAM PAGE STYLES
    ========================================== */
 .team-container {
   max-width: 1200px;
@@ -645,21 +637,6 @@ a {
   flex-grow: 1;
 }
 
-.news-link {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--accent-blue);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: var(--transition-smooth);
-}
-
-.news-link:hover {
-  color: var(--accent-cyan);
-  transform: translateX(4px);
-}
-
 .news-thumb-wrapper {
   position: relative;
   width: 100%;
@@ -713,7 +690,6 @@ a {
   transform: translateX(4px);
 }
 
-/* Modal Popup Glassmorphism */
 .news-modal {
   display: none;
   position: fixed;
@@ -765,7 +741,6 @@ a {
   color: var(--text-primary);
 }
 
-/* Empty State */
 .news-empty-state {
   grid-column: 1 / -1;
   text-align: center;
@@ -798,20 +773,23 @@ a {
 }
 
 /* ==========================================
-   10. LOGIN PAGE STYLES
+   10. ADMIN & LOGIN MODULE
    ========================================== */
-.login-container {
+.login-container,
+.dashboard-container {
   width: 100%;
-  max-width: 400px;
-  margin: auto;
   background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
   border-radius: var(--radius-lg);
-  padding: 40px 32px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  transition: var(--transition-smooth);
+  margin: auto;
+}
+
+.login-container {
+  max-width: 400px;
+  padding: 40px 32px;
 }
 
 .login-header {
@@ -884,6 +862,135 @@ a {
   box-shadow: 0 15px 35px rgba(56, 189, 248, 0.45);
 }
 
+.dashboard-container {
+  width: 100%;
+  max-width: 900px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.dashboard-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+.dashboard-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: var(--border-glass);
+  padding-top: 24px;
+  margin-top: 10px;
+  background: transparent !important; /* Menghapus background hitam */
+  box-shadow: none !important;
+}
+
+.alert-banner {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+/* Bento Grid Menu */
+.admin-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  list-style: none;
+  margin-bottom: 36px;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: var(--border-glass);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: var(--transition-smooth);
+}
+
+.menu-card i {
+  font-size: 2rem;
+  color: var(--accent-blue);
+  transition: var(--transition-smooth);
+}
+
+.menu-card:hover {
+  background: var(--bg-card-hover);
+  border: var(--border-active);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+}
+
+.menu-card:hover i {
+  transform: scale(1.1);
+}
+
+.dashboard-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: var(--border-glass);
+  padding-top: 24px;
+}
+
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  text-decoration: none;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-logout:hover {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+  transform: translateY(-2px);
+}
+
 /* ==========================================
    11. FOOTER
    ========================================== */
@@ -893,21 +1000,16 @@ footer {
   border-top: var(--border-glass);
   color: var(--text-muted);
   text-align: center;
-  padding: 20px 20px;
-  margin-top: auto;
-  font-size: 15px;
-}
-footer .footer-brand {
-  height: 30px;
-  vertical-align: middle;
-  margin-right: 8px;
+  padding: 24px 20px;
+  margin-top: 20px;
+  font-size: 0.88rem;
 }
 
 /* ==========================================
-   12. RESPONSIVE DESIGN MOBILE (HAMBURGER & GRID)
+   12. RESPONSIVE DESIGN (MOBILE)
    ========================================== */
 @media (max-width: 768px) {
-  /* Dynamic Mobile Floating Bar */
+
   .navbar {
     width: calc(100% - 24px);
     top: 12px;
@@ -922,12 +1024,10 @@ footer .footer-brand {
     padding: 12px 20px !important;
   }
 
-  /* Tampilkan Tombol Hamburger di HP */
   .menu-toggle {
     display: flex !important;
   }
 
-  /* Sembunyikan Nav Menu di HP & Buka saat di-Toggle */
   .nav-menu {
     position: absolute;
     top: calc(100% + 12px);
@@ -946,7 +1046,6 @@ footer .footer-brand {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   }
 
-  /* Tampilkan menu saat JavaScript memberikan class active */
   .nav-menu.active {
     display: flex !important;
   }
@@ -959,7 +1058,6 @@ footer .footer-brand {
     border-radius: var(--radius-sm);
   }
 
-  /* Submenu Dropdown dalam Hamburger */
   .dropdown-menu {
     position: static !important;
     transform: none !important;
@@ -969,19 +1067,13 @@ footer .footer-brand {
     padding-left: 12px !important;
     opacity: 1 !important;
   }
-  .hero-logo {
-    max-width: 200px;
-    margin-bottom: 16px;
-  }
 
-  /* Margin Top Konten Utama */
   .main-container,
   .team-container,
   .news-container {
     margin-top: 120px;
   }
 
-  /* Tim berubah ke GRID di HP */
   .team-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
@@ -999,9 +1091,25 @@ footer .footer-brand {
     height: 260px !important;
   }
 
-  /* Penyesuaian Login di Mobile */
-  .login-container {
-    padding: 30px 20px;
-    border-radius: var(--radius-md);
+  .dashboard-container {
+    padding: 24px;
+  }
+
+  .dashboard-title {
+    font-size: 1.75rem;
+  }
+
+  .alert-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dashboard-footer {
+    justify-content: center;
+  }
+
+  .btn-logout {
+    width: 100%;
+    justify-content: center;
   }
 }
