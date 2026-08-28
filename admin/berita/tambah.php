@@ -123,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
+    <link rel="stylesheet" href="admin/assets-admin/admin-style.css" />
   </head>
   <body>
     <main class="form-container">
