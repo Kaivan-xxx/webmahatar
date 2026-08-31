@@ -221,6 +221,36 @@
         box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
         transform: translateY(-2px);
       }
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--text-primary);
+      }
+
+      @media (max-width: 576px) {
+        .dashboard-container {
+          padding: 24px;
+        }
+
+        .dashboard-title {
+          font-size: 1.75rem;
+        }
+
+        .alert-banner {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .dashboard-footer {
+          justify-content: center;
+        }
+
+        .btn-logout {
+          width: 100%;
+          justify-content: center;
+        }
+      }
     </style>
   </head>
   <body>
