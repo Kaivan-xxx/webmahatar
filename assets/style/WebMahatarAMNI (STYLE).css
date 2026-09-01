@@ -2,39 +2,27 @@
    1. VARIABLES & SYSTEM CONFIG
    ========================================== */
 :root {
-  /* Dynamic Palette */
-  --bg-main: #090d16;
-  --bg-surface: rgba(255, 255, 255, 0.03);
-  --bg-card: rgba(255, 255, 255, 0.04);
-  --bg-card-hover: rgba(255, 255, 255, 0.08);
-
-  --text-primary: #f8fafc;
+  /* Background Utama: Biru Laut Dalam (Ocean Deep Blue) */
+  --bg-dark: #071325;
+  --bg-card: rgba(13, 30, 56, 0.75);
+  --glass-backdrop: blur(16px);
+  --border-glass: 1px solid rgba(56, 189, 248, 0.2);
+  
+  /* Tipografi */
+  --text-primary: #f0f6ff;
   --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-
-  /* Accent Gradients */
-  --accent-blue: #38bdf8;
-  --accent-cyan: #22d3ee;
-  --gradient-accent: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-
-  /* Background Gradient Utama */
-  --custom-mesh-bg:
-    radial-gradient(
-      circle at 50% 35%,
-      rgba(56, 189, 248, 0.25) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(129, 140, 248, 0.15) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(34, 211, 238, 0.15) 0%,
-      transparent 40%
-    ),
-    linear-gradient(180deg, #090d16 0%, #0f172a 100%);
+  
+  /* Aksen Bahari & Emas Logo UNIMAR AMNI */
+  --accent-blue: #0284c7;           /* Biru Laut */
+  --accent-cyan: #38bdf8;           /* Biru Cerah / Cyan Logo */
+  --accent-gold: #f59e0b;           /* Kuning Emas Logo */
+  
+  /* Gradasi Khas */
+  --gradient-accent: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #f59e0b 100%);
+  
+  /* Glowing Effect di Background */
+  --bg-radial-1: rgba(2, 132, 199, 0.25);
+  --bg-radial-2: rgba(245, 158, 11, 0.12);
 
   /* UI Tokens */
   --border-glass: 1px solid rgba(255, 255, 255, 0.08);
@@ -45,6 +33,40 @@
   --radius-sm: 12px;
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* ==========================================
+   TEMA UNIMAR AMNI SEMARANG (LIGHT MODE)
+========================================== */
+[data-theme="light"] {
+  /* Background Utama: Muted Grayish Blue (Kalem & Tidak Silau) */
+  --bg-dark: #b8c5d6;
+  
+  /* Kartu & Container: Off-White Gelap (Tidak Putih Ngejreng) */
+  --bg-card: rgba(226, 232, 240, 0.85);
+  --glass-backdrop: blur(16px);
+  --border-glass: 1px solid rgba(100, 116, 139, 0.25);
+  
+  /* Tipografi */
+  --text-primary: #1e293b;          /* Dark Charcoal */
+  --text-secondary: #475569;        /* Slate Gray */
+  
+  /* Aksen Warna Kemaritiman yang Soft */
+  --accent-blue: #1e40af;           /* Deep Navy (Kalem) */
+  --accent-cyan: #0284c7;           /* Muted Cyan */
+  --accent-gold: #b45309;           /* Muted Amber/Gold */
+  
+  /* Gradasi Tombol & Header (Lebih Gelap & Teduh) */
+  --gradient-accent: linear-gradient(135deg, #1e40af 0%, #0369a1 100%);
+  
+  /* Matikan Pendaran Background yang Menyilaukan */
+  --bg-radial-1: rgba(30, 64, 175, 0.05);
+  --bg-radial-2: rgba(180, 83, 9, 0.03);
+}
+
+/* ==========================================
+   PENERAPAN PADA BODY & TAMPILAN
+========================================== */
+
 
 /* ==========================================
    2. RESET & GLOBAL STYLES
@@ -61,16 +83,13 @@
     Roboto,
     sans-serif;
 }
-
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: var(--custom-mesh-bg);
-  background-attachment: fixed;
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 10% 10%, var(--bg-radial-1) 0%, transparent 45%),
+    radial-gradient(circle at 90% 90%, var(--bg-radial-2) 0%, transparent 45%);
   color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 a {
@@ -79,7 +98,7 @@ a {
 }
 
 /* ==========================================
-   3. MODERN FLOATING NAVBAR & HAMBURGER
+   NAVBAR & NAVIGATION SYSTEM
    ========================================== */
 .navbar {
   position: fixed;
@@ -88,13 +107,15 @@ a {
   transform: translateX(-50%);
   width: calc(100% - 40px);
   max-width: 1200px;
-  background: rgba(9, 13, 22, 0.65);
+  /* Menggunakan variabel dinamis agar menyesuaikan Light/Dark Mode */
+  background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
   border-radius: 100px;
   z-index: 1000;
   transition: var(--transition-smooth);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-container {
@@ -106,7 +127,8 @@ a {
 
 .navbar-brand img {
   height: 32px;
-  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+  transition: var(--transition-smooth);
 }
 
 .nav-menu {
@@ -123,12 +145,15 @@ a {
   padding: 8px 16px;
   border-radius: 100px;
   transition: var(--transition-smooth);
+  text-decoration: none;
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.1);
+  /* Efek sorot transparan mengikuti warna aksen cyan bahari */
+  background: var(--bg-radial-1);
+  border: var(--border-glass);
 }
 
 /* Tombol Hamburger (Bawaan tersembunyi di Desktop) */
@@ -153,7 +178,9 @@ a {
   transition: var(--transition-smooth);
 }
 
-/* Dropdown Floating Glass Card */
+/* ==========================================
+   DROPDOWN MENU (FLOATING GLASS CARD)
+   ========================================== */
 .dropdown {
   position: relative;
 }
@@ -163,14 +190,16 @@ a {
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
-  background: rgba(9, 13, 22, 0.85);
+  /* Dinamis mengikuti warna latar kartu tema */
+  background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
   min-width: 220px;
   border-radius: var(--radius-md);
   padding: 10px;
   list-style: none;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
   opacity: 0;
   transform: translateY(10px);
   transition: var(--transition-smooth);
@@ -190,16 +219,38 @@ a {
   font-size: 0.88rem;
   border-radius: var(--radius-sm);
   transition: var(--transition-smooth);
+  text-decoration: none;
 }
 
 .dropdown-item:hover {
-  background: rgba(56, 189, 248, 0.15);
-  color: var(--accent-blue);
+  background: var(--bg-radial-1);
+  color: var(--accent-cyan);
   transform: translateX(4px);
 }
+.btn-theme-toggle {
+  background: var(--bg-card);
+  border: var(--border-glass);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  backdrop-filter: var(--glass-backdrop);
+  transition: var(--transition-smooth, all 0.3s ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
 
+.btn-theme-toggle:hover {
+  transform: scale(1.05);
+  border-color: var(--accent-blue);
+}
 /* ==========================================
    4. HERO SECTION
+   ========================================== */
+/* ==========================================
+   1. HERO SECTION
    ========================================== */
 .hero-section {
   position: relative;
@@ -223,7 +274,8 @@ a {
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin-bottom: 20px;
-  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+  /* Menggunakan variabel dinamis agar teks jelas di Light & Dark Mode */
+  background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -252,21 +304,21 @@ a {
 
 .btn-primary {
   background: var(--gradient-accent);
-  color: #ffffff;
-  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+  color: #ffffff; /* Tetap putih agar selalu kontras di atas gradasi tombol */
+  box-shadow: 0 10px 25px rgba(2, 132, 199, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 15px 35px rgba(56, 189, 248, 0.45);
+  box-shadow: 0 15px 35px rgba(2, 132, 199, 0.45);
 }
 
 /* ==========================================
-   5. BENTO GRID SYSTEM
+   2. BENTO GRID SYSTEM / FEATURES
    ========================================== */
 .features-section {
   max-width: 1200px;
-  margin: 40px auto 40px; /* Diubah dari 80px ke 40px */
+  margin: 40px auto 40px;
   padding: 0 20px;
 }
 
@@ -275,7 +327,8 @@ a {
   font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 48px;
-  background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+  /* Menggunakan variabel dinamis untuk gradasi judul */
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -284,12 +337,13 @@ a {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
-  margin-bottom: 0; /* Diubah dari 100px ke 0 (mengatur jarak lewat .contact-section) */
+  margin-bottom: 0;
 }
 
 .feature-card {
   background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
   padding: 36px;
   border-radius: var(--radius-lg);
@@ -297,15 +351,15 @@ a {
 }
 
 .feature-card:hover {
-  background: var(--bg-card-hover);
-  border: var(--border-active);
+  background: var(--bg-card);
+  border-color: var(--accent-blue);
   transform: translateY(-6px);
-  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.15);
 }
 
 .feature-icon {
   font-size: 2rem;
-  color: var(--accent-blue);
+  color: var(--accent-cyan);
   margin-bottom: 20px;
   display: inline-block;
 }
@@ -322,12 +376,23 @@ a {
 }
 
 /* ==========================================
-   6. CONTACT SECTION
+   3. CONTACT SECTION
    ========================================== */
 .contact-section {
   max-width: 1200px;
   margin: 0 auto 100px;
   padding: 0 20px;
+}
+
+.contact-section h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 48px;
+  margin-top: 48px;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .contact-grid {
@@ -340,6 +405,7 @@ a {
 .contact-form-card {
   background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
   padding: 40px;
   border-radius: var(--radius-lg);
@@ -371,10 +437,11 @@ a {
 
 .contact-icon {
   font-size: 1.25rem;
-  color: var(--accent-blue);
-  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent-cyan);
+  background: var(--bg-radial-1);
   padding: 12px;
   border-radius: var(--radius-sm);
+  border: var(--border-glass);
 }
 
 .contact-detail-item strong {
@@ -388,43 +455,6 @@ a {
   font-size: 0.9rem;
   margin: 0;
 }
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form-input {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: var(--border-glass);
-  border-radius: var(--radius-sm);
-  padding: 14px 18px;
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  outline: none;
-  transition: var(--transition-smooth);
-}
-
-.form-input::placeholder {
-  color: var(--text-muted);
-}
-
-.form-input:focus {
-  border: var(--border-active);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-}
-
-.form-textarea {
-  resize: vertical;
-}
-
-.btn-submit {
-  width: 100%;
-}
-
 /* ==========================================
    7. PROFILE PAGE STYLES
    ========================================== */
@@ -443,6 +473,7 @@ a {
 .header-title {
   font-size: 3rem;
   font-weight: 800;
+  /* Gradasi Emas & Biru Bahari UNIMAR AMNI */
   background: var(--gradient-accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -468,6 +499,7 @@ a {
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: var(--border-glass);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .profile-header-img {
@@ -480,9 +512,11 @@ a {
 .profile-card {
   background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
   border-radius: var(--radius-lg);
   padding: 48px;
+  transition: var(--transition-smooth);
 }
 
 .lead-text {
@@ -495,7 +529,7 @@ a {
 .section-heading {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--accent-blue);
+  color: var(--accent-cyan);
   margin: 36px 0 16px;
 }
 
@@ -505,11 +539,15 @@ a {
 }
 
 .custom-alert {
-  background: rgba(56, 189, 248, 0.05);
+  /* Menggunakan variabel pendaran background agar dinamis */
+  background: var(--bg-radial-1);
   border-left: 4px solid var(--accent-blue);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-radius: 0 var(--radius-sm, 8px) var(--radius-sm, 8px) 0;
   padding: 20px;
   margin-top: 40px;
+  border-top: var(--border-glass);
+  border-right: var(--border-glass);
+  border-bottom: var(--border-glass);
 }
 
 .custom-alert p {
@@ -518,7 +556,7 @@ a {
 }
 
 /* ==========================================
-   8. TEAM PAGE STYLES (PC/LAPTOP = FLEX)
+   2. TEAM SECTION
    ========================================== */
 .team-container {
   max-width: 1200px;
@@ -532,6 +570,7 @@ a {
   font-weight: 800;
   margin-bottom: 40px;
   color: var(--text-primary);
+  text-align: center;
 }
 
 .team-grid {
@@ -547,6 +586,7 @@ a {
   max-width: 320px;
   background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
   border-radius: var(--radius-lg);
   padding: 20px;
@@ -554,9 +594,10 @@ a {
 }
 
 .team-card:hover {
-  background: var(--bg-card-hover);
-  border: var(--border-active);
+  background: var(--bg-card);
+  border-color: var(--accent-blue);
   transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(2, 132, 199, 0.2);
 }
 
 .team-img,
@@ -565,8 +606,9 @@ a {
   height: 300px !important;
   object-fit: cover !important;
   object-position: top center !important;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-md, 12px);
   margin-bottom: 20px;
+  border: var(--border-glass);
 }
 
 .card-title {
@@ -579,281 +621,9 @@ a {
 .card-text {
   font-size: 0.9rem;
   color: var(--accent-cyan);
+  font-weight: 500;
 }
 
-/* ==========================================
-   PENGUMUMAN & BERITA PAGE STYLES
-   ========================================== */
-.news-container {
-  max-width: 1200px;
-  margin: 140px auto 80px;
-  padding: 0 20px;
-  flex-grow: 1;
-}
-
-.news-filter-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  background: var(--bg-card);
-  backdrop-filter: var(--glass-backdrop);
-  border: var(--border-glass);
-  color: var(--text-secondary);
-  padding: 10px 24px;
-  border-radius: 100px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  background: var(--gradient-accent);
-  color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25);
-}
-
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 28px;
-}
-
-.news-card {
-  background: var(--bg-card);
-  backdrop-filter: var(--glass-backdrop);
-  border: var(--border-glass);
-  border-radius: var(--radius-lg);
-  padding: 0 !important;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: var(--transition-smooth);
-  position: relative;
-}
-
-.news-card:hover {
-  background: var(--bg-card-hover);
-  border: var(--border-active);
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-}
-
-.news-badge {
-  align-self: flex-start;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 100px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.badge-warning {
-  background: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-.badge-primary {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
-}
-
-.badge-success {
-  background: rgba(34, 197, 94, 0.15);
-  color: #4ade80;
-  border: 1px solid rgba(34, 197, 94, 0.3);
-}
-
-.news-meta {
-  display: flex;
-  gap: 16px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-.news-meta i {
-  margin-right: 4px;
-}
-
-.news-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-
-.news-excerpt {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 24px;
-  flex-grow: 1;
-}
-
-.news-link {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--accent-blue);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: var(--transition-smooth);
-}
-
-.news-link:hover {
-  color: var(--accent-cyan);
-  transform: translateX(4px);
-}
-
-.news-thumb-wrapper {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
-
-.news-thumb-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition-smooth);
-}
-
-.news-card:hover .news-thumb-img {
-  transform: scale(1.05);
-}
-
-.news-thumb-wrapper .news-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  z-index: 2;
-  margin-bottom: 0;
-}
-
-.news-content {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.news-read-more-btn {
-  background: none;
-  border: none;
-  color: var(--accent-blue);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0;
-  margin-top: auto;
-  transition: var(--transition-smooth);
-}
-
-.news-read-more-btn:hover {
-  color: var(--accent-cyan);
-  transform: translateX(4px);
-}
-
-/* Modal Popup Glassmorphism */
-.news-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(9, 13, 22, 0.8);
-  backdrop-filter: blur(12px);
-  z-index: 2000;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  transition: var(--transition-smooth);
-}
-
-.news-modal.active {
-  display: flex;
-  opacity: 1;
-}
-
-.news-modal-content {
-  background: rgba(15, 23, 42, 0.95);
-  border: var(--border-glass);
-  border-radius: var(--radius-lg);
-  max-width: 700px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  position: relative;
-  padding: 32px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-}
-
-.news-modal-close {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 2rem;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.news-modal-close:hover {
-  color: var(--text-primary);
-}
-
-/* Empty State */
-.news-empty-state {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px 20px;
-  background: var(--bg-card);
-  backdrop-filter: var(--glass-backdrop);
-  border: var(--border-glass);
-  border-radius: var(--radius-lg);
-}
-
-.news-grid:has(.news-card) .news-empty-state {
-  display: none;
-}
-
-.empty-icon {
-  font-size: 3.5rem;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-}
-
-.news-empty-state h3 {
-  font-size: 1.4rem;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-
-.news-empty-state p {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-}
 
 .login-container {
       width: 100%;
@@ -865,7 +635,7 @@ a {
       border-radius: var(--radius-lg);
       padding: 40px 32px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      align-self: center;
+      align-item: center;
       
     }
 
@@ -943,14 +713,16 @@ a {
    9. FOOTER
    ========================================== */
 footer {
-  background: rgba(9, 13, 22, 0.85);
+  background: var(--bg-card); /* Menyesuaikan secara otomatis dengan mode aktif */
   backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
   border-top: var(--border-glass);
-  color: var(--text-muted);
+  color: var(--text-secondary); /* Menggunakan variabel teks sekunder agar lebih terbaca */
   text-align: center;
   padding: 30px 20px;
   margin-top: auto;
   font-size: 0.88rem;
+  transition: var(--transition-smooth);
 }
 
 /* ==========================================
