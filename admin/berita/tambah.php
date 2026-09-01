@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div class="form-group">
-          <label for="gambar" class="form-label">Foto Berita</label>
+          <label for="gambar" class="form-label">Tambah Gambar</label>
           <div class="file-input-wrapper">
             <input
               type="file"
