@@ -454,7 +454,7 @@ input[type="file"]::file-selector-button:hover {
         </div>
 
         <div class="form-group">
-          <label for="gambar" class="form-label">Foto Berita</label>
+          <label for="gambar" class="form-label">Tambah Gambar</label>
           <div class="file-input-wrapper">
             <input
               type="file"

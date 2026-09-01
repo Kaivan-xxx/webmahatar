@@ -287,12 +287,6 @@
           </a>
         </li>
 
-        <li>
-          <a href="prestasi/index.php" class="menu-card">
-            <i class="fa-solid fa-trophy"></i>
-            <span>Kelola Prestasi</span>
-          </a>
-        </li>
       </ul>
 
       <div class="dashboard-footer">
