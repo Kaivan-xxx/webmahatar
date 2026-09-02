@@ -276,7 +276,7 @@
         <li>
           <a href="berita/index.php" class="menu-card">
             <i class="fa-solid fa-newspaper"></i>
-            <span>Kelola Berita</span>
+            <span>Kelola Berita Dan Prestasi</span>
           </a>
         </li>
 
