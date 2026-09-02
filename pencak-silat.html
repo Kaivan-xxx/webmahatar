@@ -23,7 +23,8 @@
           id="menuToggle"
           aria-label="Toggle Navigation"
           data-bs-target="#navMenu"
-        ><span></span>
+        >
+          <span></span>
           <span></span>
           <span></span>
         </button>
@@ -32,7 +33,7 @@
           <li><a class="nav-link" href="profile.html">Profil</a></li>
           <li><a class="nav-link" href="team.html">Team</a></li>
           <li class="dropdown">
-            <a class="nav-link active" href="#" id="dropdownBtn">
+            <a class="nav-link" href="#" id="dropdownBtn">
               Kegiatan Mahasiswa
               <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem"></i>
             </a>
@@ -63,7 +64,16 @@
               </li>
             </ul>
           </li>
-          <li><a class="nav-link" href="news.html">Pengumuman & Berita</a></li>
+          <li><a class="nav-link" href="news.php">Pengumuman & Berita</a></li>
+          <li>
+            <button
+              id="theme-toggle"
+              class="btn-theme-toggle"
+              aria-label="Toggle Theme"
+            >
+              <i id="theme-icon" class="fa-solid fa-moon"></i>
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
@@ -288,6 +298,35 @@
             });
           }
         });
+      });
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
+
+      // 1. Cek pilihan tema sebelumnya dari localStorage
+      const currentTheme = localStorage.getItem("theme") || "dark";
+
+      // Apply tema saat halaman pertama kali dimuat
+      if (currentTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+        themeIcon.classList.replace("fa-moon", "fa-sun");
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        themeIcon.classList.replace("fa-sun", "fa-moon");
+      }
+
+      // 2. Event listener untuk mengubah tema saat tombol diklik
+      themeToggleBtn.addEventListener("click", () => {
+        let theme = document.documentElement.getAttribute("data-theme");
+
+        if (theme === "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+          themeIcon.classList.replace("fa-sun", "fa-moon");
+        } else {
+          document.documentElement.setAttribute("data-theme", "light");
+          localStorage.setItem("theme", "light");
+          themeIcon.classList.replace("fa-moon", "fa-sun");
+        }
       });
     </script>
   </body>

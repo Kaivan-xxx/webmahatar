@@ -18,7 +18,7 @@
   --accent-gold: #f59e0b;           /* Kuning Emas Logo */
   
   /* Gradasi Khas */
-  --gradient-accent: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #f59e0b 100%);
+  --gradient-accent: linear-gradient(135deg, #e7eaf1 0%, #e7eaf1 100%);
   
   /* Glowing Effect di Background */
   --bg-radial-1: rgba(2, 132, 199, 0.25);
@@ -48,7 +48,7 @@
   
   /* Tipografi */
   --text-primary: #1e293b;          /* Dark Charcoal */
-  --text-secondary: #475569;        /* Slate Gray */
+  --text-secondary: #212122;        /* Slate Gray */
   
   /* Aksen Warna Kemaritiman yang Soft */
   --accent-blue: #1e40af;           /* Deep Navy (Kalem) */
@@ -623,6 +623,291 @@ a {
   color: var(--accent-cyan);
   font-weight: 500;
 }
+
+.news-container {
+        max-width: 1200px;
+        /* 180px margin-top memberi ruang aman dari navbar */
+        margin: 180px auto 80px;
+        padding: 0 20px;
+        flex-grow: 1;
+      }
+
+      .news-filter-wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .filter-btn {
+        background: var(--bg-card);
+        backdrop-filter: var(--glass-backdrop);
+        -webkit-backdrop-filter: var(--glass-backdrop);
+        border: var(--border-glass);
+        color: var(--text-secondary);
+        padding: 10px 24px;
+        border-radius: 100px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--gradient-accent);
+        color: #ffffff; /* Kontras di atas gradasi */
+        border-color: transparent;
+        box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
+      }
+
+      /* ==========================================
+   2. NEWS GRID & CARDS
+   ========================================== */
+      .news-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 24px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .news-card {
+        background: var(--bg-card);
+        backdrop-filter: var(--glass-backdrop);
+        -webkit-backdrop-filter: var(--glass-backdrop);
+        border: var(--border-glass);
+        border-radius: var(--radius-lg);
+        padding: 0 !important;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: var(--transition-smooth);
+        position: relative;
+        flex: 0 0 calc(50% - 12px);
+        max-width: calc(50% - 12px);
+        text-align: left;
+        align-items: flex-start;
+      }
+
+      .news-card:hover {
+        background: var(--bg-card);
+        border-color: var(--accent-cyan);
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .news-badge {
+        align-self: flex-start;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 100px;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .badge-warning {
+        background: rgba(245, 158, 11, 0.15);
+        color: var(--accent-gold);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+
+      .badge-primary {
+        background: var(--bg-radial-1);
+        color: var(--accent-cyan);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+      }
+
+      .badge-success {
+        background: rgba(34, 197, 94, 0.15);
+        color: #4ade80;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+      }
+
+      .news-meta {
+        display: flex;
+        gap: 16px;
+        font-size: 0.82rem;
+        color: var(--text-secondary);
+        margin-bottom: 14px;
+      }
+
+      .news-meta i {
+        margin-right: 4px;
+      }
+
+      .news-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.4;
+        margin-bottom: 12px;
+      }
+
+      .news-excerpt {
+        font-size: 0.92rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 24px;
+        flex-grow: 1;
+      }
+
+      .news-link,
+      .news-read-more-btn {
+        background: none;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--accent-blue);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+        margin-top: auto;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+      }
+
+      .news-link:hover,
+      .news-read-more-btn:hover {
+        color: var(--accent-cyan);
+        transform: translateX(4px);
+      }
+
+      .news-thumb-wrapper {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .news-thumb-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition-smooth);
+      }
+
+      .news-card:hover .news-thumb-img {
+        transform: scale(1.05);
+      }
+
+      .news-thumb-wrapper .news-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 2;
+        margin-bottom: 0;
+      }
+
+      .news-content {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 100%;
+        box-sizing: border-radius;
+      }
+
+      /* ==========================================
+   3. MODAL POPUP (DARK & LIGHT DYNAMIC)
+   ========================================== */
+      .news-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Latar belakang transparan dinamis */
+        background: rgba(7, 19, 37, 0.75);
+        backdrop-filter: var(--glass-backdrop);
+        -webkit-backdrop-filter: var(--glass-backdrop);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transition: var(--transition-smooth);
+      }
+
+      .news-modal.active {
+        display: flex !important;
+        opacity: 1 !important;
+      }
+
+      .news-modal-content {
+        /* Berubah terang di Light Mode, gelap di Dark Mode */
+        background: var(--bg-card);
+        backdrop-filter: var(--glass-backdrop);
+        -webkit-backdrop-filter: var(--glass-backdrop);
+        border: var(--border-glass);
+        border-radius: var(--radius-lg);
+        max-width: 700px;
+        width: 100%;
+        max-height: 85vh;
+        overflow-y: auto;
+        position: relative;
+        padding: 32px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      }
+
+      .news-modal-close {
+        position: absolute;
+        top: 20px;
+        right: 24px;
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 2rem;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+      }
+
+      .news-modal-close:hover {
+        color: var(--text-primary);
+        transform: scale(1.1);
+      }
+
+      /* ==========================================
+   4. EMPTY STATE (OPTIMIZED FOR FLEXBOX)
+   ========================================== */
+      .news-empty-state {
+        width: 100%; /* Menyelaraskan Flexbox pengganti grid-column */
+        text-align: center;
+        padding: 60px 20px;
+        background: var(--bg-card);
+        backdrop-filter: var(--glass-backdrop);
+        -webkit-backdrop-filter: var(--glass-backdrop);
+        border: var(--border-glass);
+        border-radius: var(--radius-lg);
+        box-sizing: border-box;
+      }
+
+      .news-grid:has(.news-card) .news-empty-state {
+        display: none;
+      }
+
+      .empty-icon {
+        font-size: 3.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 16px;
+      }
+
+      .news-empty-state h3 {
+        font-size: 1.4rem;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+      }
+
+      .news-empty-state p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+      }
 
 
 .login-container {
