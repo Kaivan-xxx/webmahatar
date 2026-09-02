@@ -2,7 +2,13 @@
 
 include "config/koneksi.php";
 
-$query = "SELECT * FROM berita ORDER BY tanggal DESC";
+$query = "
+    SELECT berita.*, kategori_berita.nama_kategori
+    FROM berita
+    JOIN kategori_berita
+        ON berita.id_kategori = kategori_berita.id_kategori
+    ORDER BY berita.tanggal DESC
+";
 
 $result = mysqli_query($conn, $query);
 
@@ -452,8 +458,13 @@ a {
      
 
     <div class="news-filter-wrapper">
-        <button class="filter-btn " data-filter="all">Semua</button>
-        <button class="filter-btn" data-filter="pengumuman">Pengumuman</button>
+       <button class="filter-btn active" data-filter="berita">
+    Berita
+</button>
+
+<button class="filter-btn" data-filter="prestasi">
+    Prestasi
+</button>
     </div>
 
 
@@ -463,17 +474,24 @@ a {
       <div class="news-grid" id="newsGrid">
         <!-- TEMPLATE KARTU BERITA KOSONG (Silakan duplikasi & isi saat menambah berita baru) -->
       <?php while ($berita = mysqli_fetch_assoc($result)) { ?>
-      <article class="news-card" data-category="pengumuman">
-        <div class="news-thumb-wrapper">
-          <img 
-            src="uploads/<?php echo $berita['gambar']; ?>"
-            width="300"
-           class="news-thumb-img" />
-        </div>
+      <article  class="news-card"
+          data-category="<?php echo strtolower($berita['nama_kategori']); ?>">
+       <div class="news-thumb-wrapper">
+
+      <span class="news-badge badge-primary">
+        <?php echo $berita['nama_kategori']; ?>
+      </span>
+
+    <img 
+        src="uploads/<?php echo $berita['gambar']; ?>"
+        class="news-thumb-img"
+        alt="<?php echo $berita['judul']; ?>"
+     >
+
+</div>
         <div class="news-content">
           <div class="news-meta">
             <span><i class="fa-regular fa-calendar"></i> <?php echo $berita['tanggal']; ?></span>
-            <span><i class="fa-regular fa-user"></i> Penulis</span>
           </div>
           <h3 class="news-title"> <?php echo $berita['judul']; ?></h3>
 
@@ -493,9 +511,9 @@ a {
         <!-- Tampilan Status Saat Berita Kosong -->
         <div class="news-empty-state">
           <i class="fa-regular fa-newspaper empty-icon"></i>
-          <h3>Belum Ada Berita</h3>
+          <h3>Belum Ada Berita Atau Prestasi</h3>
           <p>
-            Belum ada pengumuman atau berita terbaru yang dipublikasikan untuk
+            Belum ada Prestasi atau Berita terbaru yang dipublikasikan untuk
             saat ini.
           </p>
         </div>
@@ -582,6 +600,16 @@ a {
             }
           });
         });
+      });
+
+            const defaultFilter = "berita";
+
+      newsCards.forEach((card) => {
+        if (card.getAttribute("data-category") === defaultFilter) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
       });
 
       // 3. Modal Baca Selengkapnya
