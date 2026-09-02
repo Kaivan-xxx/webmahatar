@@ -7,19 +7,19 @@
   --bg-card: rgba(13, 30, 56, 0.75);
   --glass-backdrop: blur(16px);
   --border-glass: 1px solid rgba(56, 189, 248, 0.2);
-  
+
   /* Tipografi */
   --text-primary: #f0f6ff;
   --text-secondary: #94a3b8;
-  
+
   /* Aksen Bahari & Emas Logo UNIMAR AMNI */
-  --accent-blue: #0284c7;           /* Biru Laut */
-  --accent-cyan: #38bdf8;           /* Biru Cerah / Cyan Logo */
-  --accent-gold: #f59e0b;           /* Kuning Emas Logo */
-  
+  --accent-blue: #0284c7; /* Biru Laut */
+  --accent-cyan: #38bdf8; /* Biru Cerah / Cyan Logo */
+  --accent-gold: #f59e0b; /* Kuning Emas Logo */
+
   /* Gradasi Khas */
   --gradient-accent: linear-gradient(135deg, #e7eaf1 0%, #e7eaf1 100%);
-  
+
   /* Glowing Effect di Background */
   --bg-radial-1: rgba(2, 132, 199, 0.25);
   --bg-radial-2: rgba(245, 158, 11, 0.12);
@@ -40,24 +40,24 @@
 [data-theme="light"] {
   /* Background Utama: Muted Grayish Blue (Kalem & Tidak Silau) */
   --bg-dark: #b8c5d6;
-  
+
   /* Kartu & Container: Off-White Gelap (Tidak Putih Ngejreng) */
   --bg-card: rgba(226, 232, 240, 0.85);
   --glass-backdrop: blur(16px);
   --border-glass: 1px solid rgba(100, 116, 139, 0.25);
-  
+
   /* Tipografi */
-  --text-primary: #1e293b;          /* Dark Charcoal */
-  --text-secondary: #212122;        /* Slate Gray */
-  
+  --text-primary: #1e293b; /* Dark Charcoal */
+  --text-secondary: #212122; /* Slate Gray */
+
   /* Aksen Warna Kemaritiman yang Soft */
-  --accent-blue: #1e40af;           /* Deep Navy (Kalem) */
-  --accent-cyan: #0284c7;           /* Muted Cyan */
-  --accent-gold: #b45309;           /* Muted Amber/Gold */
-  
+  --accent-blue: #1e40af; /* Deep Navy (Kalem) */
+  --accent-cyan: #0284c7; /* Muted Cyan */
+  --accent-gold: #b45309; /* Muted Amber/Gold */
+
   /* Gradasi Tombol & Header (Lebih Gelap & Teduh) */
   --gradient-accent: linear-gradient(135deg, #1e40af 0%, #0369a1 100%);
-  
+
   /* Matikan Pendaran Background yang Menyilaukan */
   --bg-radial-1: rgba(30, 64, 175, 0.05);
   --bg-radial-2: rgba(180, 83, 9, 0.03);
@@ -66,7 +66,6 @@
 /* ==========================================
    PENERAPAN PADA BODY & TAMPILAN
 ========================================== */
-
 
 /* ==========================================
    2. RESET & GLOBAL STYLES
@@ -85,11 +84,13 @@
 }
 body {
   background-color: var(--bg-dark);
-  background-image: 
+  background-image:
     radial-gradient(circle at 10% 10%, var(--bg-radial-1) 0%, transparent 45%),
     radial-gradient(circle at 90% 90%, var(--bg-radial-2) 0%, transparent 45%);
   color: var(--text-primary);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
 
 a {
@@ -247,6 +248,42 @@ a {
   border-color: var(--accent-blue);
 }
 /* ==========================================
+   STYLING TOMBOL TOGGLE THEME (NAVBAR)
+   ========================================== */
+.btn-theme-toggle {
+  background: var(--bg-card);
+  border: var(--border-glass);
+  color: var(--text-primary); /* Menjamin warna ikon selalu kontras */
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-theme-toggle:hover {
+  background: var(--bg-radial-1);
+  color: var(--accent-cyan);
+  border-color: var(--accent-blue);
+  transform: scale(1.08);
+}
+
+.btn-theme-toggle i {
+  font-size: 1rem;
+  pointer-events: none; /* Menjaga klik mouse langsung kena ke tombol */
+}
+
+/* Memastikan item li pembungkus tombol sejajar di navbar */
+.nav-menu li:last-child {
+  display: flex;
+  align-items: center;
+}
+/* ==========================================
    4. HERO SECTION
    ========================================== */
 /* ==========================================
@@ -275,7 +312,11 @@ a {
   line-height: 1.1;
   margin-bottom: 20px;
   /* Menggunakan variabel dinamis agar teks jelas di Light & Dark Mode */
-  background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -328,7 +369,11 @@ a {
   font-weight: 700;
   margin-bottom: 48px;
   /* Menggunakan variabel dinamis untuk gradasi judul */
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -390,7 +435,11 @@ a {
   font-weight: 700;
   margin-bottom: 48px;
   margin-top: 48px;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--text-primary) 0%,
+    var(--text-secondary) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -625,384 +674,396 @@ a {
 }
 
 .news-container {
-        max-width: 1200px;
-        /* 180px margin-top memberi ruang aman dari navbar */
-        margin: 180px auto 80px;
-        padding: 0 20px;
-        flex-grow: 1;
-      }
+  max-width: 1200px;
+  /* 180px margin-top memberi ruang aman dari navbar */
+  margin: 120px auto 80px;
+  padding: 0 20px;
+  flex-grow: 1;
+}
+/* ==========================================
+   FILTER BUTTONS (DYNAMIC LIGHT & DARK)
+   ========================================== */
+/* ==========================================
+   PERBAIKAN BUTTON FILTER (DARK & LIGHT MODE)
+   ========================================== */
+.news-filter-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
 
-      .news-filter-wrapper {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        margin-bottom: 40px;
-        flex-wrap: wrap;
-        margin-top: 20px;
-      }
+.filter-btn {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  color: var(--text-secondary);
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
 
-      .filter-btn {
-        background: var(--bg-card);
-        backdrop-filter: var(--glass-backdrop);
-        -webkit-backdrop-filter: var(--glass-backdrop);
-        border: var(--border-glass);
-        color: var(--text-secondary);
-        padding: 10px 24px;
-        border-radius: 100px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-      }
+/* Hover tombol non-aktif */
+.filter-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
 
-      .filter-btn:hover,
-      .filter-btn.active {
-        background: var(--gradient-accent);
-        color: #ffffff; /* Kontras di atas gradasi */
-        border-color: transparent;
-        box-shadow: 0 8px 20px rgba(2, 132, 199, 0.3);
-      }
+/* Tombol Aktif (Berita/Prestasi yang dipilih) */
+.filter-btn.active {
+  background: var(--accent-blue) !important; /* Latar biru aksen */
+  color: #ffffff !important; /* Teks putih terang agar kontras */
+  border-color: transparent !important;
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+}
 
-      /* ==========================================
+/* ==========================================
    2. NEWS GRID & CARDS
    ========================================== */
-      .news-grid {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 24px;
-        width: 100%;
-        justify-content: center;
-      }
+.news-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+}
 
-      .news-card {
-        background: var(--bg-card);
-        backdrop-filter: var(--glass-backdrop);
-        -webkit-backdrop-filter: var(--glass-backdrop);
-        border: var(--border-glass);
-        border-radius: var(--radius-lg);
-        padding: 0 !important;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transition: var(--transition-smooth);
-        position: relative;
-        flex: 0 0 calc(50% - 12px);
-        max-width: calc(50% - 12px);
-        text-align: left;
-        align-items: flex-start;
-      }
+.news-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+  position: relative;
+  flex: 0 0 calc(50% - 12px);
+  max-width: calc(50% - 12px);
+  text-align: left;
+  align-items: flex-start;
+}
 
-      .news-card:hover {
-        background: var(--bg-card);
-        border-color: var(--accent-cyan);
-        transform: translateY(-6px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      }
+.news-card:hover {
+  background: var(--bg-card);
+  border-color: var(--accent-cyan);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
 
-      .news-badge {
-        align-self: flex-start;
-        font-size: 0.75rem;
-        font-weight: 700;
-        padding: 6px 14px;
-        border-radius: 100px;
-        margin-bottom: 16px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
+.news-badge {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-      .badge-warning {
-        background: rgba(245, 158, 11, 0.15);
-        color: var(--accent-gold);
-        border: 1px solid rgba(245, 158, 11, 0.3);
-      }
+.badge-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--accent-gold);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
 
-      .badge-primary {
-        background: var(--bg-radial-1);
-        color: var(--accent-cyan);
-        border: 1px solid rgba(56, 189, 248, 0.3);
-      }
+.badge-primary {
+  background: var(--bg-radial-1);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
 
-      .badge-success {
-        background: rgba(34, 197, 94, 0.15);
-        color: #4ade80;
-        border: 1px solid rgba(34, 197, 94, 0.3);
-      }
+.badge-success {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
 
-      .news-meta {
-        display: flex;
-        gap: 16px;
-        font-size: 0.82rem;
-        color: var(--text-secondary);
-        margin-bottom: 14px;
-      }
+.news-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
 
-      .news-meta i {
-        margin-right: 4px;
-      }
+.news-meta i {
+  margin-right: 4px;
+}
 
-      .news-title {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        line-height: 1.4;
-        margin-bottom: 12px;
-      }
+.news-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
 
-      .news-excerpt {
-        font-size: 0.92rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-        margin-bottom: 24px;
-        flex-grow: 1;
-      }
+.news-excerpt {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
 
-      .news-link,
-      .news-read-more-btn {
-        background: none;
-        border: none;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--accent-blue);
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 0;
-        margin-top: auto;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-      }
+.news-link,
+.news-read-more-btn {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin-top: auto;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
 
-      .news-link:hover,
-      .news-read-more-btn:hover {
-        color: var(--accent-cyan);
-        transform: translateX(4px);
-      }
+.news-link:hover,
+.news-read-more-btn:hover {
+  color: var(--accent-cyan);
+  transform: translateX(4px);
+}
 
-      .news-thumb-wrapper {
-        position: relative;
-        width: 100%;
-        height: 200px;
-        overflow: hidden;
-      }
+.news-thumb-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
 
-      .news-thumb-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: var(--transition-smooth);
-      }
+.news-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition-smooth);
+}
 
-      .news-card:hover .news-thumb-img {
-        transform: scale(1.05);
-      }
+.news-card:hover .news-thumb-img {
+  transform: scale(1.05);
+}
 
-      .news-thumb-wrapper .news-badge {
-        position: absolute;
-        top: 16px;
-        left: 16px;
-        z-index: 2;
-        margin-bottom: 0;
-      }
+.news-thumb-wrapper .news-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  margin-bottom: 0;
+}
 
-      .news-content {
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        width: 100%;
-        box-sizing: border-radius;
-      }
+.news-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-radius;
+}
 
-      /* ==========================================
+/* ==========================================
    3. MODAL POPUP (DARK & LIGHT DYNAMIC)
    ========================================== */
-      .news-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        /* Latar belakang transparan dinamis */
-        background: rgba(7, 19, 37, 0.75);
-        backdrop-filter: var(--glass-backdrop);
-        -webkit-backdrop-filter: var(--glass-backdrop);
-        z-index: 2000;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        opacity: 0;
-        transition: var(--transition-smooth);
-      }
+.news-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Latar belakang transparan dinamis */
+  background: rgba(7, 19, 37, 0.75);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
 
-      .news-modal.active {
-        display: flex !important;
-        opacity: 1 !important;
-      }
+.news-modal.active {
+  display: flex !important;
+  opacity: 1 !important;
+}
 
-      .news-modal-content {
-        /* Berubah terang di Light Mode, gelap di Dark Mode */
-        background: var(--bg-card);
-        backdrop-filter: var(--glass-backdrop);
-        -webkit-backdrop-filter: var(--glass-backdrop);
-        border: var(--border-glass);
-        border-radius: var(--radius-lg);
-        max-width: 700px;
-        width: 100%;
-        max-height: 85vh;
-        overflow-y: auto;
-        position: relative;
-        padding: 32px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      }
+.news-modal-content {
+  /* Berubah terang di Light Mode, gelap di Dark Mode */
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  border-radius: var(--radius-lg);
+  max-width: 700px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 32px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
 
-      .news-modal-close {
-        position: absolute;
-        top: 20px;
-        right: 24px;
-        background: none;
-        border: none;
-        color: var(--text-secondary);
-        font-size: 2rem;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-      }
+.news-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
 
-      .news-modal-close:hover {
-        color: var(--text-primary);
-        transform: scale(1.1);
-      }
+.news-modal-close:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
 
-      /* ==========================================
+/* ==========================================
    4. EMPTY STATE (OPTIMIZED FOR FLEXBOX)
    ========================================== */
-      .news-empty-state {
-        width: 100%; /* Menyelaraskan Flexbox pengganti grid-column */
-        text-align: center;
-        padding: 60px 20px;
-        background: var(--bg-card);
-        backdrop-filter: var(--glass-backdrop);
-        -webkit-backdrop-filter: var(--glass-backdrop);
-        border: var(--border-glass);
-        border-radius: var(--radius-lg);
-        box-sizing: border-box;
-      }
+/* Empty State Container */
+.news-empty-state {
+  width: 100% !important;
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-sizing: border-box;
+  margin: 20px 0;
+}
 
-      .news-grid:has(.news-card) .news-empty-state {
-        display: none;
-      }
+.empty-icon {
+  font-size: 3.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
 
-      .empty-icon {
-        font-size: 3.5rem;
-        color: var(--text-secondary);
-        margin-bottom: 16px;
-      }
+.news-empty-state h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
 
-      .news-empty-state h3 {
-        font-size: 1.4rem;
-        color: var(--text-primary);
-        margin-bottom: 8px;
-      }
-
-      .news-empty-state p {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-      }
-
+.news-empty-state p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
 
 .login-container {
-      width: 100%;
-      max-width: 400px;
-      background: var(--bg-card);
-      backdrop-filter: var(--glass-backdrop);
-      -webkit-backdrop-filter: var(--glass-backdrop);
-      border: var(--border-glass);
-      border-radius: var(--radius-lg);
-      padding: 40px 32px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      align-item: center;
-      
-    }
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  align-item: center;
+}
 
-    .login-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
 
-    .login-title {
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: var(--gradient-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 8px;
-    }
+.login-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
 
-    .login-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
+.login-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
 
-    .form-group {
-      margin-bottom: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-    .form-label {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
+.form-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
 
-    .form-input {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.04);
-      border: var(--border-glass);
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      color: var(--text-primary);
-      font-size: 0.95rem;
-      outline: none;
-      transition: var(--transition-smooth);
-    }
+.form-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
 
-    .form-input:focus {
-      border: var(--border-active);
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-    }
+.form-input:focus {
+  border: var(--border-active);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
 
-    .btn-login {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      background: var(--gradient-accent);
-      color: #ffffff;
-      border: none;
-      border-radius: 100px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: var(--transition-smooth);
-      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
-    }
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: var(--gradient-accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+}
 
-    .btn-login:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 35px rgba(56, 189, 248, 0.45);
-    }
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(56, 189, 248, 0.45);
+}
 
 /* ==========================================
    9. FOOTER
    ========================================== */
 footer {
-  background: var(--bg-card); /* Menyesuaikan secara otomatis dengan mode aktif */
+  background: var(
+    --bg-card
+  ); /* Menyesuaikan secara otomatis dengan mode aktif */
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
   border-top: var(--border-glass);
-  color: var(--text-secondary); /* Menggunakan variabel teks sekunder agar lebih terbaca */
+  color: var(
+    --text-secondary
+  ); /* Menggunakan variabel teks sekunder agar lebih terbaca */
   text-align: center;
   padding: 30px 20px;
   margin-top: auto;
