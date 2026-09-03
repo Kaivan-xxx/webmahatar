@@ -127,9 +127,6 @@ $result = mysqli_query($conn, $query);
 </button>
     </div>
 
-
-    
-
       <!-- Grid Berita & Pengumuman (Area Kosong) -->
       <div class="news-grid" id="newsGrid">
         <!-- TEMPLATE KARTU BERITA KOSONG (Silakan duplikasi & isi saat menambah berita baru) -->
@@ -220,6 +217,112 @@ $result = mysqli_query($conn, $query);
 
     <!-- JAVASCRIPT SCRIPT -->
     <script>
+      document.addEventListener("DOMContentLoaded", () => {
+  // ==========================================
+  // 1. KONTROL EMPTY STATE (AUTOCHECK)
+  // ==========================================
+  const newsGrid = document.querySelector(".news-grid");
+  const emptyState = document.querySelector(".news-empty-state");
+
+  function checkEmptyState() {
+    if (!newsGrid || !emptyState) return;
+
+    // Ambil semua kartu berita yang sedang KELIHATAN (display != none)
+    const cards = newsGrid.querySelectorAll(".news-card");
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      if (window.getComputedStyle(card).display !== "none") {
+        visibleCount++;
+      }
+    });
+
+    // Jika kartu aktif ada, sembunyikan empty state. Jika 0, tampilkan!
+    if (visibleCount > 0) {
+      emptyState.style.setProperty("display", "none", "important");
+    } else {
+      emptyState.style.setProperty("display", "block", "important");
+    }
+  }
+
+  // Jalankan cek pertama kali saat halaman dimuat
+  checkEmptyState();
+
+  // ==========================================
+  // 2. LOGIKA FILTER CATEGORY (BERITA / PRESTASI)
+  // ==========================================
+  const filterBtns = document.querySelectorAll(".filter-btn");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      // Ubah tombol aktif
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      this.classList.add("active");
+
+      const category = this.getAttribute("data-filter");
+      const cards = document.querySelectorAll(".news-card");
+
+      cards.forEach((card) => {
+        if (category === "all" || card.classList.contains(category)) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      // Panggil pengecekan empty state setiap kali kategori difilter
+      checkEmptyState();
+    });
+  });
+
+  // ==========================================
+  // 3. LOGIKA MODAL POPUP BERITA
+  // ==========================================
+  const newsModal = document.getElementById("newsModal");
+  const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+  document.querySelectorAll(".news-read-more-btn").forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+      const card = this.closest(".news-card");
+      if (!card) return;
+
+      const badge = card.querySelector(".news-badge")?.cloneNode(true);
+      const title = card.querySelector(".news-title")?.innerText || "";
+      const meta = card.querySelector(".news-meta")?.innerHTML || "";
+      const imgSrc = card.querySelector(".news-thumb-img")?.src || "";
+      const bodyContent = card.querySelector(".news-full-body")?.innerHTML || card.querySelector(".news-excerpt")?.innerHTML || "";
+
+      const modalBadge = document.getElementById("modalBadge");
+      if (modalBadge) {
+        modalBadge.innerHTML = "";
+        if (badge) modalBadge.appendChild(badge);
+      }
+
+      if (document.getElementById("modalTitle")) document.getElementById("modalTitle").innerText = title;
+      if (document.getElementById("modalMeta")) document.getElementById("modalMeta").innerHTML = meta;
+      if (document.getElementById("modalImg")) document.getElementById("modalImg").src = imgSrc;
+      if (document.getElementById("modalBodyText")) document.getElementById("modalBodyText").innerHTML = bodyContent;
+
+      if (newsModal) {
+        newsModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+    });
+  });
+
+  const closeModal = () => {
+    if (newsModal) {
+      newsModal.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+  };
+
+  if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeModal);
+  window.addEventListener("click", (e) => {
+    if (e.target === newsModal) closeModal();
+  });
+});
       // 1. Dropdown Navbar
       const dropdownBtn = document.getElementById("dropdownBtn");
       const dropdownMenu = document.getElementById("dropdownMenu");
