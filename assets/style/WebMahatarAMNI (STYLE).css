@@ -5,11 +5,9 @@
   /* Background Utama: Biru Laut Dalam (Ocean Deep Blue) */
   --bg-dark: #071325;
   --bg-card: rgba(13, 30, 56, 0.75);
-  --glass-backdrop: blur(16px);
-  --border-glass: 1px solid rgba(56, 189, 248, 0.2);
 
   /* Tipografi */
-  --text-primary: #f0f6ff;
+  --text-primary: #f0f6ff; /* Catatan: dihapus akhiran '28' agar teks tidak transparan */
   --text-secondary: #94a3b8;
 
   /* Aksen Bahari & Emas Logo UNIMAR AMNI */
@@ -20,9 +18,14 @@
   /* Gradasi Khas */
   --gradient-accent: linear-gradient(135deg, #e7eaf1 0%, #e7eaf1 100%);
 
-  /* Glowing Effect di Background */
+  /* Glowing Effect & Custom Mesh Background (DARK MODE) */
   --bg-radial-1: rgba(2, 132, 199, 0.25);
   --bg-radial-2: rgba(245, 158, 11, 0.12);
+  --custom-mesh-bg: 
+    radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #090d16 0%, #0f172a 100%);
 
   /* UI Tokens */
   --border-glass: 1px solid rgba(255, 255, 255, 0.08);
@@ -58,9 +61,14 @@
   /* Gradasi Tombol & Header (Lebih Gelap & Teduh) */
   --gradient-accent: linear-gradient(135deg, #1e40af 0%, #0369a1 100%);
 
-  /* Matikan Pendaran Background yang Menyilaukan */
+  /* Glowing Effect & Custom Mesh Background (LIGHT MODE) */
   --bg-radial-1: rgba(30, 64, 175, 0.05);
   --bg-radial-2: rgba(180, 83, 9, 0.03);
+  --custom-mesh-bg: 
+    radial-gradient(circle at 50% 35%, rgba(9, 148, 207, 0.57) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245, 159, 11, 0.24) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(14, 164, 233, 0.3) 0%, transparent 40%),
+    linear-gradient(180deg, #f0f4f9 0%, #e2e8f0 100%);
 }
 
 /* ==========================================
@@ -83,14 +91,11 @@
     sans-serif;
 }
 body {
-  background-color: var(--bg-dark);
-  background-image:
-    radial-gradient(circle at 10% 10%, var(--bg-radial-1) 0%, transparent 45%),
-    radial-gradient(circle at 90% 90%, var(--bg-radial-2) 0%, transparent 45%);
+  background: var(--custom-mesh-bg);
+  background-attachment: fixed; /* Supaya gradasi mesh tetap diam saat halaman di-scroll */
   color: var(--text-primary);
-  transition:
-    background-color 0.4s ease,
-    color 0.4s ease;
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 a {
@@ -1080,6 +1085,10 @@ footer {
     width: calc(100% - 24px);
     top: 12px;
     border-radius: 20px;
+    background: var(--bg-card); /* Dinamis mengikuti tema */
+    border: var(--border-glass);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
   }
 
   .navbar-container {
@@ -1093,6 +1102,7 @@ footer {
   /* Tampilkan Tombol Hamburger di HP */
   .menu-toggle {
     display: flex !important;
+    color: var(--text-primary); /* Warna ikon ikut tema */
   }
 
   /* Sembunyikan Nav Menu di HP & Buka saat di-Toggle */
@@ -1101,7 +1111,8 @@ footer {
     top: calc(100% + 12px);
     left: 0;
     width: 100%;
-    background: rgba(9, 13, 22, 0.95);
+    /* Ganti warna statis gelap dengan variabel dynamic card */
+    background: var(--bg-card);
     backdrop-filter: var(--glass-backdrop);
     -webkit-backdrop-filter: var(--glass-backdrop);
     border: var(--border-glass);
@@ -1111,7 +1122,8 @@ footer {
     padding: 16px !important;
     gap: 8px !important;
     display: none !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    /* Shadow lembut untuk mode terang & gelap */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   }
 
   /* Tampilkan menu saat JavaScript memberikan class active */
@@ -1125,13 +1137,22 @@ footer {
     text-align: left;
     padding: 10px 14px;
     border-radius: var(--radius-sm);
+    color: var(--text-primary); /* Teks mengikuti tema */
+    transition: var(--transition-smooth);
+  }
+
+  .nav-link:hover {
+    background: var(--bg-radial-1);
+    color: var(--accent-cyan);
   }
 
   /* Submenu Dropdown dalam Hamburger */
   .dropdown-menu {
     position: static !important;
     transform: none !important;
-    background: rgba(255, 255, 255, 0.04) !important;
+    /* Latar belakang transparan dinamis */
+    background: var(--bg-radial-1) !important;
+    border: var(--border-glass) !important;
     box-shadow: none !important;
     margin-top: 6px;
     padding-left: 12px !important;
@@ -1156,6 +1177,8 @@ footer {
     flex: none !important;
     width: 100% !important;
     max-width: 100% !important;
+    background: var(--bg-card);
+    border: var(--border-glass);
   }
 
   .team-img,
