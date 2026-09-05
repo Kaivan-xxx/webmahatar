@@ -128,276 +128,320 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    1. VARIABLE & RESET DASAR
 ========================================== */
 :root {
-  --bg-dark: #090d16;
-  --bg-card: rgba(15, 23, 42, 0.65);
-  --glass-backdrop: blur(16px);
-  --border-glass: 1px solid rgba(255, 255, 255, 0.1);
-  --accent-blue: #38bdf8;
-  --gradient-accent: linear-gradient(135deg, #38bdf8, #818cf8);
-  --text-primary: #f8fafc;
+  /* Background Utama: Biru Laut Dalam (Ocean Deep Blue) */
+  --bg-dark: #071325;
+  --bg-card: rgba(13, 30, 56, 0.75);
+
+  /* Tipografi */
+  --text-primary: #f0f6ff; /* Catatan: dihapus akhiran '28' agar teks tidak transparan */
   --text-secondary: #94a3b8;
+
+  /* Aksen Bahari & Emas Logo UNIMAR AMNI */
+  --accent-blue: #0284c7; /* Biru Laut */
+  --accent-cyan: #38bdf8; /* Biru Cerah / Cyan Logo */
+  --accent-gold: #f59e0b; /* Kuning Emas Logo */
+
+  /* Gradasi Khas */
+  --gradient-accent: linear-gradient(135deg, #e7eaf1 0%, #e7eaf1 100%);
+
+  /* Glowing Effect & Custom Mesh Background (DARK MODE) */
+  --bg-radial-1: rgba(2, 132, 199, 0.25);
+  --bg-radial-2: rgba(245, 158, 11, 0.12);
+  --custom-mesh-bg: 
+    radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #090d16 0%, #0f172a 100%);
+
+  /* UI Tokens */
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --border-active: 1px solid rgba(56, 189, 248, 0.4);
+  --glass-backdrop: blur(16px) saturate(180%);
   --radius-lg: 24px;
-  --radius-md: 12px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: var(--bg-dark);
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.12) 0%, transparent 40%);
-  background-attachment: fixed;
-  color: var(--text-primary);
-  min-height: 100vh;
-  padding: 40px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================
-   2. CONTAINER FORM
+   TEMA UNIMAR AMNI SEMARANG (LIGHT MODE)
 ========================================== */
+[data-theme="light"] {
+  /* Background Utama: Muted Grayish Blue (Kalem & Tidak Silau) */
+  --bg-dark: #b8c5d6;
+
+  /* Kartu & Container: Off-White Gelap (Tidak Putih Ngejreng) */
+  --bg-card: rgba(226, 232, 240, 0.85);
+  --glass-backdrop: blur(16px);
+  --border-glass: 1px solid rgba(100, 116, 139, 0.25);
+
+  /* Tipografi */
+  --text-primary: #1e293b; /* Dark Charcoal */
+  --text-secondary: #212122; /* Slate Gray */
+
+  /* Aksen Warna Kemaritiman yang Soft */
+  --accent-blue: #1e40af; /* Deep Navy (Kalem) */
+  --accent-cyan: #0284c7; /* Muted Cyan */
+  --accent-gold: #b45309; /* Muted Amber/Gold */
+
+  /* Gradasi Tombol & Header (Lebih Gelap & Teduh) */
+  --gradient-accent: linear-gradient(135deg, #1e40af 0%, #0369a1 100%);
+
+  /* Glowing Effect & Custom Mesh Background (LIGHT MODE) */
+  --bg-radial-1: rgba(30, 64, 175, 0.05);
+  --bg-radial-2: rgba(180, 83, 9, 0.03);
+  --custom-mesh-bg: 
+    radial-gradient(circle at 50% 35%, rgba(9, 148, 207, 0.57) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245, 159, 11, 0.24) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(14, 164, 233, 0.3) 0%, transparent 40%),
+    linear-gradient(180deg, #f0f4f9 0%, #e2e8f0 100%);
+}
+
+/* ==========================================
+   PENERAPAN PADA BODY & TAMPILAN
+========================================== */
+
+/* ==========================================
+   2. RESET & GLOBAL STYLES
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family:
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+body {
+  background: var(--custom-mesh-bg);
+  background-attachment: fixed; /* Supaya gradasi mesh tetap diam saat halaman di-scroll */
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: 0.4s ease, color 0.4s ease;
+  display: flex;
+  justify-content: center; /* Simetris Kanan - Kiri */
+  align-items: center;     /* Simetris Atas - Bawah */
+  min-height: 100vh;
+  margin: 0;
+  padding: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.form-header {
+  display: block;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form-header-content {
+  text-align: left; /* Diubah ke kiri agar rapi bersandingan dengan tombol */
+}
+
 .form-container {
   width: 100%;
-  max-width: 680px;
-  padding: 40px;
+  max-width: 650px;
   background: var(--bg-card);
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
   border: var(--border-glass);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition: var(--transition-smooth);
 }
 
 .form-header {
+  margin-bottom: 2rem;
   text-align: center;
-  margin-bottom: 32px;
 }
 
 .form-title {
-  font-size: 2rem;
-  font-weight: 800;
-  background: var(--gradient-accent);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 8px;
-  line-height: 1.25;
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 /* ==========================================
-   3. ELEMEN FORM & INPUT
+   FORM ELEMENTS
 ========================================== */
 .form-group {
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
-  width: 100%;
+  gap: 0.5rem;
 }
 
 .form-label {
-  font-size: 0.9rem;
-  font-weight: 600;
   color: var(--text-primary);
-  letter-spacing: 0.3px;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .form-input {
   width: 100%;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: var(--border-glass);
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
-  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.95rem;
   outline: none;
-  transition: var(--transition);
+  transition: var(--transition-smooth);
 }
 
-.form-input:focus {
-  border-color: var(--accent-blue);
-  background: rgba(56, 189, 248, 0.05);
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.2);
+[data-theme="light"] .form-input {
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .form-input::placeholder {
-  color: rgba(148, 163, 184, 0.5);
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
-/* Custom Dropdown (Select) */
+.form-input:focus {
+  border: var(--border-active);
+  box-shadow: 0 0 0 4px var(--bg-radial-1);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+textarea.form-input {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Select Styling */
 select.form-input {
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 18px center;
-  background-size: 16px;
   cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+  padding-right: 2.5rem;
 }
 
 select.form-input option {
-  background: #0f172a;
+  background-color: var(--bg-dark);
   color: var(--text-primary);
-  padding: 10px;
 }
 
-/* Textarea */
-textarea.form-input {
-  resize: vertical;
-  min-height: 140px;
-  line-height: 1.6;
-}
-
-/* Custom File Input */
-.file-input-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-input[type="file"].form-input {
-  padding: 10px 14px;
-}
-
-input[type="file"]::file-selector-button {
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: var(--accent-blue);
-  padding: 8px 16px;
-  border-radius: 8px;
+/* File Input Styling */
+.file-input-wrapper input[type="file"] {
+  padding: 0.6rem 0.8rem;
   cursor: pointer;
-  margin-right: 14px;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: var(--transition);
 }
 
-input[type="file"]::file-selector-button:hover {
+.file-input-wrapper input[type="file"]::file-selector-button {
   background: var(--accent-blue);
-  color: #0f172a;
+  color: #ffffff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: calc(var(--radius-sm) - 4px);
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.file-input-wrapper input[type="file"]::file-selector-button:hover {
+  background: var(--accent-cyan);
 }
 
 /* ==========================================
-   4. TOMBOL & AKSI
+   BUTTONS & ACTIONS
 ========================================== */
 .form-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 36px;
-  gap: 16px;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-.btn-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-secondary);
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.btn-back:hover {
-  color: var(--accent-blue);
-  transform: translateX(-4px);
-}
-
+.btn-back,
 .btn-submit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 12px 28px;
-  background: var(--gradient-accent);
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-back {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border: var(--border-glass);
+}
+
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+.btn-submit {
+  background: var(--accent-blue);
   color: #ffffff;
   border: none;
-  border-radius: 100px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+  box-shadow: 0 4px 12px var(--bg-radial-1);
 }
 
 .btn-submit:hover {
+  background: var(--accent-cyan);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.45);
+  box-shadow: 0 6px 20px var(--bg-radial-1);
+}
+.alert-success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* ==========================================
-   5. PENYESUAIAN RESPONSIF
-========================================== */
-
-/* Tablet (<= 768px) */
-@media (max-width: 768px) {
-  body {
-    padding: 24px 12px;
-  }
-  
-  .form-container {
-    padding: 30px 24px;
-  }
-
-  .form-title {
-    font-size: 1.75rem;
-  }
+[data-theme="light"] .alert-success {
+  background: rgba(34, 197, 94, 0.2);
+  color: #15803d;
 }
 
-/* Perangkat Seluler / HP (<= 576px) */
-@media (max-width: 576px) {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Layout */
+@media (max-width: 480px) {
   .form-container {
-    padding: 24px 18px;
-    border-radius: 18px;
+    padding: 1.5rem;
   }
 
-  .form-header {
-    margin-bottom: 24px;
-  }
-
-  .form-title {
-    font-size: 1.45rem;
-  }
-
-  .form-input {
-    padding: 12px 14px;
-    font-size: 0.9rem;
-  }
-
-  /* Mengubah posisi tombol menjadi vertikal bertumpuk pada layar smartphone */
   .form-actions {
     flex-direction: column-reverse;
-    gap: 14px;
-    margin-top: 28px;
   }
 
-  .btn-submit,
-  .btn-back {
-    width: 100%;
-    justify-content: center;
-  }
-
+  .btn-back,
   .btn-submit {
-    padding: 14px;
-  }
-
-  .btn-back {
-    padding: 10px 0;
-  }
-
-  input[type="file"]::file-selector-button {
-    margin-right: 8px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
+    width: 100%;
   }
 }
     </style>
@@ -411,18 +455,12 @@ input[type="file"]::file-selector-button:hover {
         </p>
       </div>
 
-      <form method="POST" enctype="multipart/form-data">
+      <form id="formBerita" method="POST" enctype="multipart/form-data">
+        <div id="alertContainer"></div>
         <div class="form-group">
-          <label for="judul" class="form-label">Judul Berita</label>
-          <input
-            type="text"
-            id="judul"
-            name="judul"
-            class="form-input"
-            placeholder="Masukkan judul berita..."
-            required
-          />
-        </div>
+        <label for="judul" class="form-label">Judul Berita</label>
+        <input type="text" id="judul" name="judul" class="form-input" placeholder="Masukkan judul berita..." required />
+      </div>
 
         <div class="form-group">
           <label for="id_kategori" class="form-label">Kategori</label>
@@ -476,5 +514,53 @@ input[type="file"]::file-selector-button:hover {
         </div>
       </form>
     </main>
+    <script>
+    document.getElementById('formBerita').addEventListener('submit', function (e) {
+      e.preventDefault(); // Mencegah reload halaman langsung
+
+      const alertContainer = document.getElementById('alertContainer');
+      const submitBtn = this.querySelector('.btn-submit');
+
+      // Ubah tampilan tombol saat proses simpan
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+
+      // Simpan data & tampilkan notifikasi sukses
+      setTimeout(() => {
+        alertContainer.innerHTML = `
+          <div class="alert-success">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.2rem;"></i>
+            <span>Berita berhasil diunggah!</span>
+          </div>
+        `;
+
+        this.reset(); // Kosongkan form kembali
+
+        // Kembalikan tombol ke keadaan semula
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Simpan Berita';
+
+        // Hilangkan pesan notifikasi setelah 4 detik
+        setTimeout(() => {
+          alertContainer.innerHTML = '';
+        }, 4000);
+      }, 1000);
+    });
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+const icon = themeToggleBtn.querySelector('i');
+
+themeToggleBtn.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  
+  if (currentTheme === 'light') {
+    document.documentElement.removeAttribute('data-theme');
+    icon.className = 'fa-solid fa-moon'; // Ikon bulan untuk Dark Mode
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    icon.className = 'fa-solid fa-sun'; // Ikon matahari untuk Light Mode
+  }
+});
+  </script>
   </body>
 </html>

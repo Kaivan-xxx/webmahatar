@@ -95,7 +95,7 @@ body {
   background-attachment: fixed; /* Supaya gradasi mesh tetap diam saat halaman di-scroll */
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: 0.4s ease, color 0.4s ease;
 }
 
 a {
