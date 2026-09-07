@@ -756,6 +756,7 @@ a {
   max-width: calc(50% - 12px);
   text-align: left;
   align-items: flex-start;
+  min-width: 0;
 }
 
 .news-card:hover {
@@ -812,6 +813,23 @@ a {
   color: var(--text-primary);
   line-height: 1.4;
   margin-bottom: 12px;
+}
+.news-full-body,
+.news-full-body p {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.news-full-body p {
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+#modalBodyText {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .news-excerpt {
@@ -877,6 +895,7 @@ a {
   flex-grow: 1;
   width: 100%;
   box-sizing: border-radius;
+  min-width: 0;
 }
 
 /* ==========================================

@@ -92,12 +92,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_stmt_execute($stmt)) {
 
-        echo "Berita berhasil ditambahkan!";
+        header("Location: index.php");
+        exit;
 
     } else {
 
-        echo "Berita gagal ditambahkan: "
+        echo "Berita gagal ditambahkan:<br> "
              . mysqli_error($conn);
+        echo "Error: " . mysqli_stmt_error($stmt);
 
     }
 
@@ -514,53 +516,6 @@ select.form-input option {
         </div>
       </form>
     </main>
-    <script>
-    document.getElementById('formBerita').addEventListener('submit', function (e) {
-      e.preventDefault(); // Mencegah reload halaman langsung
-
-      const alertContainer = document.getElementById('alertContainer');
-      const submitBtn = this.querySelector('.btn-submit');
-
-      // Ubah tampilan tombol saat proses simpan
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
-
-      // Simpan data & tampilkan notifikasi sukses
-      setTimeout(() => {
-        alertContainer.innerHTML = `
-          <div class="alert-success">
-            <i class="fa-solid fa-circle-check" style="font-size: 1.2rem;"></i>
-            <span>Berita berhasil diunggah!</span>
-          </div>
-        `;
-
-        this.reset(); // Kosongkan form kembali
-
-        // Kembalikan tombol ke keadaan semula
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Simpan Berita';
-
-        // Hilangkan pesan notifikasi setelah 4 detik
-        setTimeout(() => {
-          alertContainer.innerHTML = '';
-        }, 4000);
-      }, 1000);
-    });
-
-    const themeToggleBtn = document.getElementById('themeToggle');
-const icon = themeToggleBtn.querySelector('i');
-
-themeToggleBtn.addEventListener('click', () => {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  
-  if (currentTheme === 'light') {
-    document.documentElement.removeAttribute('data-theme');
-    icon.className = 'fa-solid fa-moon'; // Ikon bulan untuk Dark Mode
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    icon.className = 'fa-solid fa-sun'; // Ikon matahari untuk Light Mode
-  }
-});
-  </script>
+    
   </body>
 </html>

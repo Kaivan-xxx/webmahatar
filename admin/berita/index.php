@@ -9,7 +9,13 @@ if (!isset($_SESSION['id_user'])) {
 
 include "../../config/koneksi.php";
 
-$query = "SELECT * FROM berita ORDER BY tanggal DESC";
+$query = " SELECT berita.*, kategori_berita.nama_kategori
+    FROM berita
+    JOIN kategori_berita
+    ON berita.id_kategori = kategori_berita.id_kategori
+    ORDER BY berita.tanggal DESC
+";
+
 
 $result = mysqli_query($conn, $query);
 
@@ -512,6 +518,7 @@ $result = mysqli_query($conn, $query);
             <tr>
               <th style="width: 50px">No</th>
               <th>Judul Berita</th>
+              <th>Kategori</th>
               <th>Isi Berita</th>
               <th style="width: 100px; text-align: center">Aksi</th>
             </tr>
@@ -523,6 +530,9 @@ $result = mysqli_query($conn, $query);
               <td><?= $no++; ?></td>
               <td class="news-title-cell">
                 <?= htmlspecialchars($berita['judul']); ?>
+              </td>
+              <td>
+              <?= htmlspecialchars($berita['nama_kategori']); ?>
               </td>
               <td class="news-excerpt-cell">
                 <?= htmlspecialchars(strip_tags($berita['isi'])); ?>
@@ -553,7 +563,7 @@ $result = mysqli_query($conn, $query);
             </tr>
             <?php endwhile; else : ?>
             <tr>
-              <td colspan="4" class="empty-state">
+              <td colspan="5" class="empty-state">
                 <i
                   class="fa-regular fa-folder-open"
                   style="font-size: 2rem; margin-bottom: 8px; display: block"

@@ -2,11 +2,10 @@
 
 include "config/koneksi.php";
 
-$query = "
-    SELECT berita.*, kategori_berita.nama_kategori
+$query = " SELECT berita.*, kategori_berita.nama_kategori
     FROM berita
     JOIN kategori_berita
-        ON berita.id_kategori = kategori_berita.id_kategori
+    ON berita.id_kategori = kategori_berita.id_kategori
     ORDER BY berita.tanggal DESC
 ";
 
@@ -248,32 +247,44 @@ $result = mysqli_query($conn, $query);
   // Jalankan cek pertama kali saat halaman dimuat
   checkEmptyState();
 
-  // ==========================================
-  // 2. LOGIKA FILTER CATEGORY (BERITA / PRESTASI)
-  // ==========================================
-  const filterBtns = document.querySelectorAll(".filter-btn");
+// 2. LOGIKA FILTER CATEGORY
+// ==========================================
 
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      // Ubah tombol aktif
-      filterBtns.forEach((b) => b.classList.remove("active"));
-      this.classList.add("active");
+const filterBtns = document.querySelectorAll(".filter-btn");
 
-      const category = this.getAttribute("data-filter");
-      const cards = document.querySelectorAll(".news-card");
+filterBtns.forEach((btn) => {
 
-      cards.forEach((card) => {
-        if (category === "all" || card.classList.contains(category)) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
-      });
+  btn.addEventListener("click", function () {
 
-      // Panggil pengecekan empty state setiap kali kategori difilter
-      checkEmptyState();
+    // Tombol aktif
+    filterBtns.forEach((b) => b.classList.remove("active"));
+    this.classList.add("active");
+
+    // Ambil kategori dari tombol
+    const category = this.getAttribute("data-filter");
+
+    // Ambil semua kartu
+    const cards = document.querySelectorAll(".news-card");
+
+    // Tampilkan/sembunyikan kartu
+    cards.forEach((card) => {
+
+      const cardCategory = card.getAttribute("data-category");
+
+      if (cardCategory === category) {
+        card.style.display = "flex";
+      } else {
+        card.style.display = "none";
+      }
+
     });
+
+    // Cek apakah kategori tersebut kosong
+    checkEmptyState();
+
   });
+
+});
 
   // ==========================================
   // 3. LOGIKA MODAL POPUP BERITA
@@ -341,31 +352,26 @@ $result = mysqli_query($conn, $query);
         }
       });
 
-      // 2. Filter Kategori
-      const filterBtns = document.querySelectorAll(".filter-btn");
-      const newsCards = document.querySelectorAll(".news-card");
+      
 
-      filterBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          filterBtns.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
+        const defaultFilter = "berita";
 
-          const filterValue = btn.getAttribute("data-filter");
+function filterNews(category) {
+  const cards = document.querySelectorAll(".news-card");
 
-          newsCards.forEach((card) => {
-            if (
-              filterValue === "all" ||
-              card.getAttribute("data-category") === filterValue
-            ) {
-              card.style.display = "flex";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-      });
+  cards.forEach((card) => {
+    const cardCategory = card.getAttribute("data-category");
 
-            const defaultFilter = "berita";
+    if (cardCategory === category) {
+      card.style.display = "flex";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+
+// Jalankan filter Berita saat halaman pertama dibuka
+filterNews(defaultFilter);
 
       newsCards.forEach((card) => {
         if (card.getAttribute("data-category") === defaultFilter) {
@@ -373,35 +379,6 @@ $result = mysqli_query($conn, $query);
         } else {
           card.style.display = "none";
         }
-      });
-
-      // 3. Modal Baca Selengkapnya
-      const newsModal = document.getElementById("newsModal");
-      const modalCloseBtn = document.getElementById("modalCloseBtn");
-
-      document.querySelectorAll(".news-read-more-btn").forEach((button) => {
-        button.addEventListener("click", function () {
-          const card = this.closest(".news-card");
-
-          const badge = card.querySelector(".news-badge").cloneNode(true);
-          const title = card.querySelector(".news-title").innerText;
-          const meta = card.querySelector(".news-meta").innerHTML;
-          const imgSrc = card.querySelector(".news-thumb-img").src;
-          const bodyContent = card.querySelector(".news-full-body").innerHTML;
-
-          document.getElementById("modalBadge").innerHTML = "";
-          document.getElementById("modalBadge").appendChild(badge);
-          document.getElementById("modalTitle").innerText = title;
-          document.getElementById("modalMeta").innerHTML = meta;
-          document.getElementById("modalImg").src = imgSrc;
-          document.getElementById("modalBodyText").innerHTML = bodyContent;
-
-          newsModal.classList.add("active");
-        });
-      });
-
-      modalCloseBtn.addEventListener("click", () => {
-        newsModal.classList.remove("active");
       });
 
       window.addEventListener("click", (e) => {
@@ -480,6 +457,8 @@ $result = mysqli_query($conn, $query);
         themeIcon.classList.replace("fa-moon", "fa-sun");
       }
     });
+
+    
   </script>
   </body>
 </html>
