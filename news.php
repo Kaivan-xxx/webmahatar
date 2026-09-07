@@ -28,16 +28,8 @@ $result = mysqli_query($conn, $query);
 
     <!-- File CSS Utama -->
     <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
-    <style>
-
-
-/* ==========================================
-   2. RESET & GLOBAL STYLES
-   ========================================== */</style>
   </head>
   <body>
-    <!-- Navigation Bar -->
-
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="navbar-container">
@@ -218,7 +210,7 @@ $result = mysqli_query($conn, $query);
     <script>
       document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
-  // 1. KONTROL EMPTY STATE (AUTOCHECK)
+  // 1. KONTROL EMPTY STATE
   // ==========================================
   const newsGrid = document.querySelector(".news-grid");
   const emptyState = document.querySelector(".news-empty-state");
@@ -226,7 +218,6 @@ $result = mysqli_query($conn, $query);
   function checkEmptyState() {
     if (!newsGrid || !emptyState) return;
 
-    // Ambil semua kartu berita yang sedang KELIHATAN (display != none)
     const cards = newsGrid.querySelectorAll(".news-card");
     let visibleCount = 0;
 
@@ -236,7 +227,6 @@ $result = mysqli_query($conn, $query);
       }
     });
 
-    // Jika kartu aktif ada, sembunyikan empty state. Jika 0, tampilkan!
     if (visibleCount > 0) {
       emptyState.style.setProperty("display", "none", "important");
     } else {
@@ -244,47 +234,37 @@ $result = mysqli_query($conn, $query);
     }
   }
 
-  // Jalankan cek pertama kali saat halaman dimuat
-  checkEmptyState();
+  // ==========================================
+  // 2. LOGIKA FILTER CATEGORY
+  // ==========================================
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const newsCards = document.querySelectorAll(".news-card");
 
-// 2. LOGIKA FILTER CATEGORY
-// ==========================================
-
-const filterBtns = document.querySelectorAll(".filter-btn");
-
-filterBtns.forEach((btn) => {
-
-  btn.addEventListener("click", function () {
-
-    // Tombol aktif
-    filterBtns.forEach((b) => b.classList.remove("active"));
-    this.classList.add("active");
-
-    // Ambil kategori dari tombol
-    const category = this.getAttribute("data-filter");
-
-    // Ambil semua kartu
-    const cards = document.querySelectorAll(".news-card");
-
-    // Tampilkan/sembunyikan kartu
-    cards.forEach((card) => {
-
+  function filterNews(category) {
+    newsCards.forEach((card) => {
       const cardCategory = card.getAttribute("data-category");
-
-      if (cardCategory === category) {
+      if (cardCategory === category || category === "all") {
         card.style.display = "flex";
       } else {
         card.style.display = "none";
       }
-
     });
-
-    // Cek apakah kategori tersebut kosong
     checkEmptyState();
+  }
 
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      this.classList.add("active");
+
+      const category = this.getAttribute("data-filter");
+      filterNews(category);
+    });
   });
 
-});
+  // Filter awal (default)
+  const defaultFilter = "berita";
+  filterNews(defaultFilter);
 
   // ==========================================
   // 3. LOGIKA MODAL POPUP BERITA
@@ -302,7 +282,10 @@ filterBtns.forEach((btn) => {
       const title = card.querySelector(".news-title")?.innerText || "";
       const meta = card.querySelector(".news-meta")?.innerHTML || "";
       const imgSrc = card.querySelector(".news-thumb-img")?.src || "";
-      const bodyContent = card.querySelector(".news-full-body")?.innerHTML || card.querySelector(".news-excerpt")?.innerHTML || "";
+      const bodyContent =
+        card.querySelector(".news-full-body")?.innerHTML ||
+        card.querySelector(".news-excerpt")?.innerHTML ||
+        "";
 
       const modalBadge = document.getElementById("modalBadge");
       if (modalBadge) {
@@ -310,10 +293,14 @@ filterBtns.forEach((btn) => {
         if (badge) modalBadge.appendChild(badge);
       }
 
-      if (document.getElementById("modalTitle")) document.getElementById("modalTitle").innerText = title;
-      if (document.getElementById("modalMeta")) document.getElementById("modalMeta").innerHTML = meta;
-      if (document.getElementById("modalImg")) document.getElementById("modalImg").src = imgSrc;
-      if (document.getElementById("modalBodyText")) document.getElementById("modalBodyText").innerHTML = bodyContent;
+      if (document.getElementById("modalTitle"))
+        document.getElementById("modalTitle").innerText = title;
+      if (document.getElementById("modalMeta"))
+        document.getElementById("modalMeta").innerHTML = meta;
+      if (document.getElementById("modalImg"))
+        document.getElementById("modalImg").src = imgSrc;
+      if (document.getElementById("modalBodyText"))
+        document.getElementById("modalBodyText").innerHTML = bodyContent;
 
       if (newsModal) {
         newsModal.classList.add("active");
@@ -330,111 +317,59 @@ filterBtns.forEach((btn) => {
   };
 
   if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeModal);
-  window.addEventListener("click", (e) => {
-    if (e.target === newsModal) closeModal();
-  });
-});
-      // 1. Dropdown Navbar
-      const dropdownBtn = document.getElementById("dropdownBtn");
-      const dropdownMenu = document.getElementById("dropdownMenu");
 
-      dropdownBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        dropdownMenu.classList.toggle("active");
-      });
+  // ==========================================
+  // 4. NAVBAR & DROPDOWN
+  // ==========================================
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+  const dropdowns = document.querySelectorAll(".dropdown");
 
-      window.addEventListener("click", function (e) {
-        if (
-          !dropdownBtn.contains(e.target) &&
-          !dropdownMenu.contains(e.target)
-        ) {
-          dropdownMenu.classList.remove("active");
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle("active");
+    });
+  }
+
+  dropdowns.forEach((dropdown) => {
+    const dropdownLink = dropdown.querySelector(".nav-link");
+    const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+
+    if (dropdownLink && dropdownMenu) {
+      dropdownLink.addEventListener("click", (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdownMenu.classList.toggle("active");
         }
       });
-
-      
-
-        const defaultFilter = "berita";
-
-function filterNews(category) {
-  const cards = document.querySelectorAll(".news-card");
-
-  cards.forEach((card) => {
-    const cardCategory = card.getAttribute("data-category");
-
-    if (cardCategory === category) {
-      card.style.display = "flex";
-    } else {
-      card.style.display = "none";
     }
   });
-}
 
-// Jalankan filter Berita saat halaman pertama dibuka
-filterNews(defaultFilter);
+  // Close modal/navbar when clicking outside
+  window.addEventListener("click", (e) => {
+    if (e.target === newsModal) closeModal();
 
-      newsCards.forEach((card) => {
-        if (card.getAttribute("data-category") === defaultFilter) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
+    if (!e.target.closest(".navbar")) {
+      if (navMenu) navMenu.classList.remove("active");
+      dropdowns.forEach((dropdown) => {
+        const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+        if (dropdownMenu) dropdownMenu.classList.remove("active");
       });
+    }
+  });
 
-      window.addEventListener("click", (e) => {
-        if (e.target === newsModal) {
-          newsModal.classList.remove("active");
-        }
-      });
-      document.addEventListener("DOMContentLoaded", () => {
-        const menuToggle = document.getElementById("menuToggle");
-        const navMenu = document.getElementById("navMenu");
-        const dropdowns = document.querySelectorAll(".dropdown");
+  // ==========================================
+  // 5. TOGGLE LIGHT / DARK MODE
+  // ==========================================
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
 
-        // 1. Toggle Menu Utama (Hamburger)
-        if (menuToggle && navMenu) {
-          menuToggle.addEventListener("click", (e) => {
-            e.stopPropagation();
-            navMenu.classList.toggle("active");
-          });
-        }
-
-        // 2. Toggle Submenu Dropdown saat Di-klik (Khusus Layar HP / Mobile)
-        dropdowns.forEach((dropdown) => {
-          const dropdownLink = dropdown.querySelector(".nav-link");
-          const dropdownMenu = dropdown.querySelector(".dropdown-menu");
-
-          if (dropdownLink && dropdownMenu) {
-            dropdownLink.addEventListener("click", (e) => {
-              // Jalankan click toggle hanya di tampilan mobile (< 768px)
-              if (window.innerWidth <= 768) {
-                e.preventDefault();
-                e.stopPropagation();
-                dropdownMenu.classList.toggle("active");
-              }
-            });
-          }
-        });
-
-        // 3. Otomatis Tutup Menu saat Mengklik Area Luar Navbar
-        document.addEventListener("click", (e) => {
-          if (!e.target.closest(".navbar")) {
-            if (navMenu) navMenu.classList.remove("active");
-            dropdowns.forEach((dropdown) => {
-              const dropdownMenu = dropdown.querySelector(".dropdown-menu");
-              if (dropdownMenu) dropdownMenu.classList.remove("active");
-            });
-          }
-        });
-      });
-
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    const themeIcon = document.getElementById("theme-icon");
-
-    // 1. Cek pilihan tema sebelumnya dari localStorage
+  if (themeToggleBtn && themeIcon) {
     const currentTheme = localStorage.getItem("theme") || "dark";
 
-    // Apply tema saat halaman pertama kali dimuat
+    // Set awal tema
     if (currentTheme === "light") {
       document.documentElement.setAttribute("data-theme", "light");
       themeIcon.classList.replace("fa-moon", "fa-sun");
@@ -443,7 +378,7 @@ filterNews(defaultFilter);
       themeIcon.classList.replace("fa-sun", "fa-moon");
     }
 
-    // 2. Event listener untuk mengubah tema saat tombol diklik
+    // Event Switch Tema
     themeToggleBtn.addEventListener("click", () => {
       let theme = document.documentElement.getAttribute("data-theme");
 
@@ -457,8 +392,9 @@ filterNews(defaultFilter);
         themeIcon.classList.replace("fa-moon", "fa-sun");
       }
     });
-
-    
+  }
+});
   </script>
+
   </body>
 </html>
