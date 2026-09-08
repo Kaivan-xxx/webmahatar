@@ -100,8 +100,13 @@ $result = mysqli_query($conn, $query);
 
     <br>
 
-    <a href="../berita/index.php">
-        Kembali ke Kelola Berita
+    <a href="../dashboard.php">
+        Kembali ke Dashboard Admin
+    </a>
+
+    <br>
+    <a href="../berita/tambah.php">
+        Tambah Berita Baru
     </a>
 
 </body>
