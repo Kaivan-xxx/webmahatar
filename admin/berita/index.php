@@ -538,27 +538,28 @@ $result = mysqli_query($conn, $query);
                 <?= htmlspecialchars(strip_tags($berita['isi'])); ?>
               </td>
               <td>
-                <div class="action-btns" style="justify-content: center">
-                  <a
-                    href="edit.php?id=<?= $berita['id']; ?>"
-                    class="btn-action btn-edit"
-                    title="Edit"
-                  >
-                    <i class="fa-solid fa-pen"></i>
-                  </a>
-                  <a
-                    href="hapus.php?id=<?= $berita['id']; ?>"
-                    class="btn-action btn-delete"
-                    title="Hapus"
-                    onclick="
-                      return confirm(
-                        'Apakah Anda yakin ingin menghapus berita ini?',
-                      );
-                    "
-                  >
-                    <i class="fa-solid fa-trash"></i>
-                  </a>
-                </div>
+                  <div class="action-btns" style="justify-content: center">
+
+                      <!-- EDIT -->
+                      <a
+                          href="edit.php?id=<?= $berita['id_berita']; ?>"
+                          class="btn-action btn-edit"
+                          title="Edit"
+                      >
+                          <i class="fa-solid fa-pen"></i>
+                      </a>
+
+                      <!-- HAPUS -->
+                      <a
+                          href="hapus.php?id=<?= $berita['id_berita']; ?>"
+                          class="btn-action btn-delete"
+                          title="Hapus"
+                          onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?');"
+                      >
+                          <i class="fa-solid fa-trash"></i>
+                      </a>
+
+                  </div>
               </td>
             </tr>
             <?php endwhile; else : ?>
