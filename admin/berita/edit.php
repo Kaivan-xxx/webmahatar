@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // =========================
-    // JIKA ADMIN MENGUPLOAD GAMBAR BARU
+    // CEK APAKAH ADA GAMBAR BARU
     // =========================
 
     if (
@@ -93,15 +93,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $nama_gambar = uniqid() . "." . $ekstensi;
 
-        $tujuan = "../../uploads/" . $nama_gambar;
+        // Lokasi gambar baru
+        $tujuan = __DIR__ . "/../../uploads/" . $nama_gambar;
 
+
+        // =========================
+        // UPLOAD GAMBAR BARU
+        // =========================
 
         if (!move_uploaded_file($tmp_gambar, $tujuan)) {
+
             die("Gambar baru gagal disimpan.");
+
         }
 
 
-        // UPDATE termasuk gambar
+        // =========================
+        // HAPUS GAMBAR LAMA
+        // =========================
+
+        if (!empty($berita['gambar'])) {
+
+            $gambar_lama = __DIR__ . "/../../uploads/" . $berita['gambar'];
+
+            if (file_exists($gambar_lama)) {
+                unlink($gambar_lama);
+            }
+
+        }
+
+
+        // =========================
+        // UPDATE DATA + GAMBAR
+        // =========================
+
         $stmt_update = mysqli_prepare(
             $conn,
             "UPDATE berita
@@ -122,9 +147,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id_berita
         );
 
+
     } else {
 
-        // UPDATE tanpa mengganti gambar
+        // =========================
+        // UPDATE TANPA GANTI GAMBAR
+        // =========================
+
         $stmt_update = mysqli_prepare(
             $conn,
             "UPDATE berita
@@ -142,6 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id_kategori,
             $id_berita
         );
+
     }
 
 
@@ -156,78 +186,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
 
-        echo "Berita gagal diperbarui: "
-             . mysqli_stmt_error($stmt_update);
+        die(
+            "Gagal update database: "
+            . mysqli_stmt_error($stmt_update)
+        );
 
     }
+
 }
 
-if (
-    isset($_FILES['gambar']) &&
-    $_FILES['gambar']['error'] === UPLOAD_ERR_OK
-) {
-
-    $nama_asli = $_FILES['gambar']['name'];
-    $tmp_gambar = $_FILES['gambar']['tmp_name'];
-
-    $ekstensi = strtolower(
-        pathinfo($nama_asli, PATHINFO_EXTENSION)
-    );
-
-    $nama_gambar = uniqid() . "." . $ekstensi;
-
-    $tujuan = "../../uploads/" . $nama_gambar;
-
-
-    // =========================
-    // SIMPAN GAMBAR BARU
-    // =========================
-
-    if (!move_uploaded_file($tmp_gambar, $tujuan)) {
-        die("Gambar baru gagal disimpan.");
-    }
-
-
-    // =========================
-    // HAPUS GAMBAR LAMA
-    // =========================
-
-    if (!empty($berita['gambar'])) {
-
-        $gambar_lama = "../../uploads/" . $berita['gambar'];
-
-        if (file_exists($gambar_lama)) {
-            unlink($gambar_lama);
-        }
-
-    }
-
-
-    // =========================
-    // UPDATE DATABASE
-    // =========================
-
-    $stmt_update = mysqli_prepare(
-        $conn,
-        "UPDATE berita
-         SET judul = ?,
-             isi = ?,
-             id_kategori = ?,
-             gambar = ?
-         WHERE id_berita = ?"
-    );
-
-    mysqli_stmt_bind_param(
-        $stmt_update,
-        "ssisi",
-        $judul,
-        $isi,
-        $id_kategori,
-        $nama_gambar,
-        $id_berita
-    );
-
-}
 
 ?>
 
