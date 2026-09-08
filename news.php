@@ -144,7 +144,7 @@ $result = mysqli_query($conn, $query);
           <h3 class="news-title"> <?php echo $berita['judul']; ?></h3>
 
           <div class="news-full-body" style="display:none;">
-            <p><?php echo $berita['isi']; ?></p>
+            <p><?= nl2br(htmlspecialchars($berita['isi'])); ?></p>
           </div>
 
           <button class="news-read-more-btn">

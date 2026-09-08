@@ -827,9 +827,10 @@ a {
 }
 
 #modalBodyText {
+  white-space: pre-wrap;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  white-space: normal;
+  line-height: 1.8;
 }
 
 .news-excerpt {
