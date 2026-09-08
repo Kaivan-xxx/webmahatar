@@ -109,7 +109,11 @@ $result = mysqli_query($conn, $query);
      
 
     <div class="news-filter-wrapper">
-       <button class="filter-btn active" data-filter="berita">
+
+    <button class="filter-btn active" data-filter="all">
+    Semua
+    </button>
+       <button class="filter-btn" data-filter="berita">
     Berita
 </button>
 
