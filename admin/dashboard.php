@@ -281,9 +281,9 @@
         </li>
 
         <li>
-          <a href="kelola foto/index.php" class="menu-card">
+          <a href="galeri/index.php" class="menu-card">
             <i class="fa-solid fa-images"></i>
-            <span>Kelola Foto</span>
+            <span>Kelola Galeri</span>
           </a>
         </li>
 
