@@ -267,7 +267,7 @@ $result = mysqli_query($conn, $query);
   });
 
   // Filter awal (default)
-  const defaultFilter = "berita";
+  const defaultFilter = "all";
   filterNews(defaultFilter);
 
   // ==========================================
