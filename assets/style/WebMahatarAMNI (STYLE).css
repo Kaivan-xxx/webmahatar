@@ -922,8 +922,8 @@ a {
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
-  position: relative;
-  padding: 32px;
+  position: relative !important;
+  padding: 0 32px 32px 32px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
   overflow-y: auto;
   overflow-x: hidden !important;
@@ -938,30 +938,44 @@ a {
 }
 
 .news-modal-close {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  z-index: 2100 !important; /* Di atas overlay modal (2000) */
+ /* Ganti dari absolute ke sticky */
+  position: sticky;
+  top: 16px;
   
-  background: var(--bg-card);
-  border: var(--border-glass);
+  /* Memaksa posisi bergeser ke kanan atas */
+  margin-left: auto;
+  margin-top: 16px;
+  margin-bottom: -36px; /* Offset margin agar tidak memakan ruang tinggi / mendorong teks */
+  
+  z-index: 9999 !important;
+
+  /* Ukuran Lingkaran */
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  /* KUNCI PRESISI TENGAH (FLEXBOX) */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   
+  /* Reset Alignment Teks/Karakter */
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-size: 1.25rem;
+
+  /* Style Kaca / Glassmorphism */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: var(--text-primary);
-  font-size: 1.5rem;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: var(--transition-smooth);
 }
 
 .news-modal-close:hover {
+ background: #ef4444; /* Merah saat hover */
+  border-color: #ef4444;
   color: #ffffff;
-  background: #ef4444; /* Warna merah saat hover */
   transform: scale(1.1);
 }
 
