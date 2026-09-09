@@ -2,11 +2,28 @@
 
 include "config/koneksi.php";
 
+// ==========================================
+// KONFIGURASI PAGINATION
+// ==========================================
+$limit = 8; // Jumlah berita per halaman
+$page = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
+if ($page < 1) { $page = 1; }
+$start = ($page > 1) ? ($page * $limit) - $limit : 0;
+
+// Query Hitung Total Data Berita
+$query_total = "SELECT COUNT(*) AS total FROM berita";
+$result_total = mysqli_query($conn, $query_total);
+$row_total = mysqli_fetch_assoc($result_total);
+$total_data = $row_total['total'];
+$total_pages = ceil($total_data / $limit);
+
+// Query Utama Ambil Data Berita (Dengan LIMIT dan OFFSET)
 $query = " SELECT berita.*, kategori_berita.nama_kategori
     FROM berita
     JOIN kategori_berita
     ON berita.id_kategori = kategori_berita.id_kategori
     ORDER BY berita.tanggal DESC
+    LIMIT $start, $limit
 ";
 
 $result = mysqli_query($conn, $query);
@@ -28,6 +45,50 @@ $result = mysqli_query($conn, $query);
 
     <!-- File CSS Utama -->
     <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
+
+    <style>
+      /* CSS Tambahan Khusus Pagination (Sesuai Tema Dark/Light) */
+      .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .page-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        height: 40px;
+        padding: 0 12px;
+        border-radius: var(--radius-md, 8px);
+        background-color: var(--bg-card, rgba(255, 255, 255, 0.05));
+        color: var(--text-primary, #fff);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+        transition: all 0.3s ease;
+      }
+      .page-link:hover {
+        background-color: var(--color-primary, #007bff);
+        color: #ffffff;
+        border-color: var(--color-primary, #007bff);
+      }
+      .page-link.active {
+        background-color: var(--color-primary, #007bff);
+        color: #ffffff;
+        border-color: var(--color-primary, #007bff);
+      }
+      .page-link.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
     <!-- NAVBAR -->
@@ -106,7 +167,7 @@ $result = mysqli_query($conn, $query);
           Kemahataran AMNI
         </p>
         <hr class="divider" />
-     
+      
 
     <div class="news-filter-wrapper">
 
@@ -169,6 +230,29 @@ $result = mysqli_query($conn, $query);
           </p>
         </div>
       </div>
+
+      <!-- NAVIGASI PAGINATION -->
+      <?php if ($total_pages > 1) { ?>
+      <div class="pagination-container">
+        <!-- Tombol Previous -->
+        <a href="?halaman=<?php echo $page - 1; ?>" class="page-link <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
+          <i class="fa-solid fa-chevron-left"></i>
+        </a>
+
+        <!-- Nomor Halaman -->
+        <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+          <a href="?halaman=<?php echo $i; ?>" class="page-link <?php echo ($page == $i) ? 'active' : ''; ?>">
+            <?php echo $i; ?>
+          </a>
+        <?php } ?>
+
+        <!-- Tombol Next -->
+        <a href="?halaman=<?php echo $page + 1; ?>" class="page-link <?php echo ($page >= $total_pages) ? 'disabled' : ''; ?>">
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
+      <?php } ?>
+
     </main>
 
     <!-- MODAL DIALOG UNTUK DETAIL BERITA -->
@@ -397,7 +481,7 @@ $result = mysqli_query($conn, $query);
     });
   }
 });
-  </script>
+    </script>
 
   </body>
 </html>
