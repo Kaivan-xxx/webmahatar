@@ -64,27 +64,27 @@ $result = mysqli_stmt_get_result($stmt);
               <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem"></i>
             </a>
             <ul class="dropdown-menu" id="dropdownMenu">
-              <li><a class="dropdown-item" href="bem.html">BEM Mahatar</a></li>
+              <li><a class="dropdown-item" href="bem.php">BEM Mahatar</a></li>
               <li>
-                <a class="dropdown-item" href="drum-corps.html">Drum Corps</a>
+                <a class="dropdown-item" href="drum-corps.php">Drum Corps</a>
               </li>
               <li>
-                <a class="dropdown-item" href="pedang-pora.html">Pedang Pora</a>
+                <a class="dropdown-item" href="pedang-pora.php">Pedang Pora</a>
               </li>
               <li>
-                <a class="dropdown-item" href="zenkyokushin.html"
+                <a class="dropdown-item" href="zenkyokushin.php"
                   >Zenkyokushin</a
                 >
               </li>
-              <li><a class="dropdown-item" href="pkm.html">PKM</a></li>
-              <li><a class="dropdown-item" href="rebana.html">Rebana</a></li>
+              <li><a class="dropdown-item" href="pkm.php">PKM</a></li>
+              <li><a class="dropdown-item" href="rebana.php">Rebana</a></li>
               <li>
-                <a class="dropdown-item" href="pencak-silat.html"
+                <a class="dropdown-item" href="pencak-silat.php"
                   >Pencak Silat</a
                 >
               </li>
               <li>
-                <a class="dropdown-item" href="mangrove.html"
+                <a class="dropdown-item" href="mangrove.php"
                   >Penanaman Mangrove</a
                 >
               </li>
