@@ -1,3 +1,29 @@
+<?php
+
+include "config/koneksi.php";
+
+$id_kategori = 2;
+
+$query = "SELECT *
+    FROM kegiatan
+    WHERE id_kategori_kegiatan = ?
+    ORDER BY tanggal DESC
+";
+
+$stmt = mysqli_prepare($conn, $query);
+
+mysqli_stmt_bind_param(
+    $stmt,
+    "i",
+    $id_kategori
+);
+
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
+
+?>
+
 <!doctype html>
 <html lang="id">
   <head>
@@ -260,41 +286,84 @@
       </div>
 
       <!-- BERITA & AGENDA DRUM CORPS -->
-      <div class="profile-card">
-        <h3 style="font-size: 1.2rem; margin-bottom: 15px">
-          <i
-            class="fa-solid fa-newspaper"
-            style="color: var(--accent-blue)"
-          ></i>
-          Berita & Pertunjukan
-        </h3>
-        <div style="display: flex; flex-direction: column; gap: 12px">
-          <div
-            style="
-              padding: 12px;
-              border-left: 3px solid var(--accent-cyan);
-              background: rgba(255, 255, 255, 0.01);
-            "
-          >
-            <span style="font-size: 0.8rem; color: var(--accent-cyan)"
-              ><i class="fa-solid fa-calendar"></i> 17 Agustus 2026</span
-            >
-            <h4 style="margin: 5px 0; color: var(--text-primary)">
-              Persiapan Penampilan Utama Upacara HUT RI Ke-81
-            </h4>
-            <p
-              style="
-                font-size: 0.85rem;
-                color: var(--text-secondary);
-                margin: 0;
-              "
-            >
-              Gita Swara AMNI menggelar latihan gabungan intensif untuk unjuk
-              formasi pada peringatan kemerdekaan.
-            </p>
+
+<div class="news-grid" id="newsGrid">
+        <!-- TEMPLATE KARTU BERITA KOSONG (Silakan duplikasi & isi saat menambah berita baru) -->
+      <?php while ($kegiatan = mysqli_fetch_assoc($result)) { ?>
+      <article  class="news-card"
+          data-category="<?php echo strtolower($kegiatan['id_kategori_kegiatan']); ?>">
+       <div class="news-thumb-wrapper">
+
+    <img 
+        src="uploads/<?php echo $kegiatan['gambar']; ?>"
+        class="news-thumb-img"
+        alt="<?php echo $kegiatan['judul']; ?>"
+     >
+
+</div>
+        <div class="news-content">
+          <div class="news-meta">
+            <span><i class="fa-regular fa-calendar"></i> <?php echo $kegiatan['tanggal']; ?></span>
           </div>
+          <h3 class="news-title"> <?php echo $kegiatan['judul']; ?></h3>
+
+          <div class="news-full-body" style="display:none;">
+            <p><?= nl2br(htmlspecialchars($kegiatan['isi'])); ?></p>
+          </div>
+
+          <button class="news-read-more-btn">
+            Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </article>
+
+
+      <?php } ?>
+
+        <!-- Tampilan Status Saat Berita Kosong -->
+        <div class="news-empty-state">
+          <i class="fa-regular fa-newspaper empty-icon"></i>
+          <h3>Belum Ada Berita Atau Prestasi</h3>
+          <p>
+            Belum ada Prestasi atau Berita terbaru yang dipublikasikan untuk
+            saat ini.
+          </p>
         </div>
       </div>
+    </main>
+
+    <!-- MODAL DIALOG UNTUK DETAIL BERITA -->
+    <div class="news-modal" id="newsModal">
+      <div class="news-modal-content">
+        <button class="news-modal-close" id="modalCloseBtn">&times;</button>
+        <div class="news-modal-body">
+          <div class="news-badge" id="modalBadge"></div>
+          <h2
+            class="news-title"
+            id="modalTitle"
+            style="margin-top: 10px; font-size: 1.6rem"
+          ></h2>
+          <div class="news-meta" id="modalMeta" style="margin: 15px 0"></div>
+          <div class="modal-img-wrapper" style="margin-bottom: 20px">
+            <img
+              id="modalImg"
+              src=""
+              alt=""
+              style="
+                width: 100%;
+                max-height: 350px;
+                object-fit: cover;
+                border-radius: var(--radius-md);
+              "
+            />
+          </div>
+          <div
+            id="modalBodyText"
+            style="color: var(--text-secondary); line-height: 1.8"
+          ></div>
+        </div>
+      </div>
+    </div>  
     </main>
 
     <footer>
