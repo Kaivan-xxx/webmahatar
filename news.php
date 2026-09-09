@@ -110,16 +110,15 @@ $result = mysqli_query($conn, $query);
 
     <div class="news-filter-wrapper">
 
-    <button class="filter-btn active" data-filter="all">
-    Semua
-    </button>
-       <button class="filter-btn" data-filter="berita">
-    Berita
-</button>
+    <div class="filter-group">
+    <button class="filter-btn active" data-filter="all">Semua</button>
+    <button class="filter-btn" data-filter="berita">Berita</button>
+    <button class="filter-btn" data-filter="prestasi">Prestasi</button>
+  </div>
 
-<button class="filter-btn" data-filter="prestasi">
-    Prestasi
-</button>
+  <a href="login.php" class="btn-add-news">
+    <i class="fa-solid fa-plus"></i> Tambah Berita
+  </a>
     </div>
 
       <!-- Grid Berita & Pengumuman (Area Kosong) -->
