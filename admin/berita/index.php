@@ -409,6 +409,7 @@ body {
               <th>Judul Berita</th>
               <th>Kategori</th>
               <th>Isi Berita</th>
+              <th>Tanggal Berita Di Upload</th>
               <th style="width: 100px; text-align: center">Aksi</th>
             </tr>
           </thead>
@@ -423,8 +424,16 @@ body {
               <td>
               <?= htmlspecialchars($berita['nama_kategori']); ?>
               </td>
-              <td class="news-excerpt-cell">
-                <?= htmlspecialchars(strip_tags($berita['isi'])); ?>
+              <td>
+                <?= htmlspecialchars( mb_strimwidth(strip_tags($berita['isi']),
+                                    0,
+                                    50,
+                                    "..."
+                                    )
+                                    ); ?>
+              </td>
+              <td class="news-date-cell">
+                <?= htmlspecialchars($berita['tanggal']); ?>
               </td>
               <td>
                   <div class="action-btns" style="justify-content: center">
@@ -453,7 +462,7 @@ body {
             </tr>
             <?php endwhile; else : ?>
             <tr>
-              <td colspan="5" class="empty-state">
+              <td colspan="6" class="empty-state">
                 <i
                   class="fa-regular fa-folder-open"
                   style="font-size: 2rem; margin-bottom: 8px; display: block"

@@ -281,6 +281,13 @@
         </li>
 
         <li>
+          <a href="kegiatan/index.php" class="menu-card">
+            <i class="fa-solid fa-newspaper"></i>
+            <span>Kelola Kegiatan Mahasiswa</span>
+          </a>
+        </li>
+
+        <li>
           <a href="kelola foto/index.php" class="menu-card">
             <i class="fa-solid fa-images"></i>
             <span>Kelola Foto</span>

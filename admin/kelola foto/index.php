@@ -344,6 +344,10 @@ body {
       </div>
       <a href="../berita/tambah.php" class="btn-add">
         <i class="fa-solid fa-plus"></i> Tambah Berita Baru
+
+      </a>
+      <a href="../kegiatan/tambah.php" class="btn-add">
+        <i class="fa-solid fa-plus"></i> Tambah Kegiatan Baru
       </a>
     </div>
 
