@@ -250,8 +250,10 @@
     </main>
 
     <footer>
-      <p>&copy; 2026 Kemahataran AMNI Semarang. All rights reserved.</p>
-    </footer>
+      <small
+        >&copy; 2026 Barayudha Arkano, Gilang Dwikananda - SMK Ibu Kartini Semarang.</small
+      >
+    </footer>s
     <script>
       const dropdownBtn = document.getElementById("dropdownBtn");
       const dropdownMenu = document.getElementById("dropdownMenu");
