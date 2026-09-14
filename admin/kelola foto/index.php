@@ -11,18 +11,45 @@ include "../../config/koneksi.php";
 
 
 // =========================
-// AMBIL DATA FOTO
+// AMBIL DATA FOTO BERITA & PRESTASI
 // =========================
 
-$query = "
-    SELECT id_berita, judul, gambar, tanggal
-    FROM berita
-    WHERE gambar IS NOT NULL
-    AND gambar != ''
-    ORDER BY tanggal DESC
+$query_berita = "SELECT 
+        b.id_berita,
+        b.judul,
+        b.gambar,
+        b.tanggal,
+        kb.nama_kategori
+    FROM berita b
+    LEFT JOIN kategori_berita kb
+        ON b.id_kategori = kb.id_kategori
+    WHERE b.gambar IS NOT NULL
+    AND b.gambar != ''
+    ORDER BY b.tanggal DESC
 ";
 
-$result = mysqli_query($conn, $query);
+$result_berita = mysqli_query($conn, $query_berita);
+
+
+// =========================
+// AMBIL DATA FOTO KEGIATAN
+// =========================
+
+$query_kegiatan = "SELECT
+        k.id_kegiatan,
+        k.judul,
+        k.gambar,
+        k.tanggal,
+        kk.nama_kegiatan
+    FROM kegiatan k
+    LEFT JOIN kategori_kegiatan kk
+        ON k.id_kategori_kegiatan = kk.id_kategori_kegiatan
+    WHERE k.gambar IS NOT NULL
+    AND k.gambar != ''
+    ORDER BY kk.nama_kegiatan ASC, k.tanggal DESC
+";
+
+$result_kegiatan = mysqli_query($conn, $query_kegiatan);
 
 ?>
 
@@ -317,6 +344,85 @@ body {
   transform: scale(1.1);
   color: var(--accent-cyan);
 }
+
+/* ========================= */
+/* PHOTO SECTION */
+/* ========================= */
+
+.photo-section {
+  margin-top: 32px;
+}
+
+.section-heading {
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.section-heading p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+
+/* ========================= */
+/* ACTIVITY GROUP */
+/* ========================= */
+
+.activity-group {
+  margin-top: 30px;
+}
+
+.activity-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.activity-group-header h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.activity-group-header span {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+/* ========================= */
+/* CATEGORY LABEL */
+/* ========================= */
+
+.photo-category {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 5px 9px;
+  border-radius: 7px;
+  background: var(--surface-secondary);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
   </style>
 </head>
 
@@ -352,36 +458,147 @@ body {
     </div>
 
     <!-- Photo Gallery Grid -->
-    <?php if (mysqli_num_rows($result) > 0) : ?>
-      <div class="photo-grid">
-        <?php while ($foto = mysqli_fetch_assoc($result)) : ?>
-          <article class="photo-card">
-            <div class="photo-wrapper">
-              <img
-                src="../../uploads/<?= htmlspecialchars($foto['gambar']); ?>"
-                alt="<?= htmlspecialchars($foto['judul']); ?>"
-                loading="lazy"
-              />
+<section class="photo-section">
+
+  <div class="section-heading">
+    <h2>Berita & Prestasi</h2>
+    <p>Foto yang digunakan pada berita dan prestasi Mahatar AMNI.</p>
+  </div>
+
+  <?php if (mysqli_num_rows($result_berita) > 0) : ?>
+
+    <div class="photo-grid">
+
+      <?php while ($foto = mysqli_fetch_assoc($result_berita)) : ?>
+
+        <article class="photo-card">
+
+          <div class="photo-wrapper">
+            <img
+              src="../../uploads/<?= htmlspecialchars($foto['gambar']); ?>"
+              alt="<?= htmlspecialchars($foto['judul']); ?>"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="photo-content">
+
+            <span class="photo-category">
+              <?= htmlspecialchars($foto['nama_kategori'] ?? 'Berita'); ?>
+            </span>
+
+            <h3 class="photo-title">
+              <?= htmlspecialchars($foto['judul']); ?>
+            </h3>
+
+            <div class="photo-meta">
+              <i class="fa-regular fa-calendar-alt"></i>
+              <span><?= htmlspecialchars($foto['tanggal']); ?></span>
             </div>
-            <div class="photo-content">
-              <h3 class="photo-title">
-                <?= htmlspecialchars($foto['judul']); ?>
-              </h3>
-              <div class="photo-meta">
-                <i class="fa-regular fa-calendar-alt"></i>
-                <span><?= htmlspecialchars($foto['tanggal']); ?></span>
+
+          </div>
+
+        </article>
+
+      <?php endwhile; ?>
+
+    </div>
+
+  <?php else : ?>
+
+    <div class="empty-state">
+      <i class="fa-regular fa-images empty-icon"></i>
+      <p>Belum ada foto berita atau prestasi.</p>
+    </div>
+
+  <?php endif; ?>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- GALERI KEGIATAN MAHASISWA -->
+<!-- ========================= -->
+
+<section class="photo-section">
+
+  <div class="section-heading">
+    <h2>Kegiatan Mahasiswa</h2>
+    <p>Foto kegiatan Mahatar AMNI yang dikelompokkan berdasarkan jenis kegiatan.</p>
+  </div>
+
+  <?php
+  // Kelompokkan foto berdasarkan nama kegiatan
+  $kelompok_kegiatan = [];
+
+  while ($foto = mysqli_fetch_assoc($result_kegiatan)) {
+
+      $nama_kegiatan = !empty($foto['nama_kegiatan'])
+          ? $foto['nama_kegiatan']
+          : 'Kegiatan Lainnya';
+
+      $kelompok_kegiatan[$nama_kegiatan][] = $foto;
+  }
+  ?>
+
+  <?php if (!empty($kelompok_kegiatan)) : ?>
+
+    <?php foreach ($kelompok_kegiatan as $nama_kegiatan => $foto_kegiatan) : ?>
+
+      <div class="activity-group">
+
+        <div class="activity-group-header">
+          <h3><?= htmlspecialchars($nama_kegiatan); ?></h3>
+          <span><?= count($foto_kegiatan); ?> foto</span>
+        </div>
+
+        <div class="photo-grid">
+
+          <?php foreach ($foto_kegiatan as $foto) : ?>
+
+            <article class="photo-card">
+
+              <div class="photo-wrapper">
+                <img
+                  src="../../uploads/<?= htmlspecialchars($foto['gambar']); ?>"
+                  alt="<?= htmlspecialchars($foto['judul']); ?>"
+                  loading="lazy"
+                />
               </div>
-            </div>
-          </article>
-        <?php endwhile; ?>
+
+              <div class="photo-content">
+
+                <h3 class="photo-title">
+                  <?= htmlspecialchars($foto['judul']); ?>
+                </h3>
+
+                <div class="photo-meta">
+                  <i class="fa-regular fa-calendar-alt"></i>
+                  <span><?= htmlspecialchars($foto['tanggal']); ?></span>
+                </div>
+
+              </div>
+
+            </article>
+
+          <?php endforeach; ?>
+
+        </div>
+
       </div>
-    <?php else : ?>
-      <!-- Empty State -->
-      <div class="empty-state">
-        <i class="fa-regular fa-images empty-icon"></i>
-        <p>Belum ada foto yang digunakan.</p>
-      </div>
-    <?php endif; ?>
+
+    <?php endforeach; ?>
+
+  <?php else : ?>
+
+    <div class="empty-state">
+      <i class="fa-regular fa-images empty-icon"></i>
+      <p>Belum ada foto kegiatan mahasiswa.</p>
+    </div>
+
+  <?php endif; ?>
+
+</section>
   </main>
 
   <script>
