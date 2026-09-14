@@ -5,7 +5,7 @@ include "config/koneksi.php";
 // ==========================================
 // KONFIGURASI PAGINATION
 // ==========================================
-$limit = 8; // Jumlah berita per halaman
+$limit = 6; // Jumlah berita per halaman
 $page = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
 if ($page < 1) { $page = 1; }
 $start = ($page > 1) ? ($page * $limit) - $limit : 0;
@@ -47,46 +47,138 @@ $result = mysqli_query($conn, $query);
     <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
 
     <style>
-      /* CSS Tambahan Khusus Pagination (Sesuai Tema Dark/Light) */
-      .pagination-container {
+      /* ==========================================
+         VARIABEL TEMA UNIMAR AMNI
+      ========================================== */
+      :root {
+        /* Background Utama: Biru Laut Dalam (Ocean Deep Blue) */
+        --bg-dark: #071325;
+        --bg-card: rgba(13, 30, 56, 0.75);
+
+        /* Tipografi */ 
+        --text-primary: #f0f6ff;
+        --text-secondary: #94a3b8;
+
+        /* Aksen Bahari & Emas Logo UNIMAR AMNI */
+        --accent-blue: #0284c7; /* Biru Laut */
+        --accent-cyan: #38bdf8; /* Biru Cerah / Cyan Logo */
+        --accent-gold: #f59e0b; /* Kuning Emas Logo */
+
+        /* Gradasi Khas */
+        --gradient-accent: linear-gradient(135deg, #e7eaf1 0%, #e7eaf1 100%);
+
+        /* Glowing Effect & Custom Mesh Background (DARK MODE) */
+        --bg-radial-1: rgba(2, 132, 199, 0.25);
+        --bg-radial-2: rgba(245, 158, 11, 0.12);
+        --custom-mesh-bg: 
+          radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
+          radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
+          linear-gradient(180deg, #090d16 0%, #0f172a 100%);
+
+        /* UI Tokens */
+        --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+        --border-active: 1px solid rgba(56, 189, 248, 0.4);
+        --glass-backdrop: blur(16px) saturate(180%);
+        --radius-lg: 24px;
+        --radius-md: 16px;
+        --radius-sm: 12px;
+        --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* TEMA UNIMAR AMNI SEMARANG (LIGHT MODE) */
+      [data-theme="light"] {
+        --bg-dark: #b8c5d6;
+        --bg-card: rgba(226, 232, 240, 0.85);
+        --glass-backdrop: blur(16px);
+        --border-glass: 1px solid rgba(100, 116, 139, 0.25);
+        --text-primary: #1e293b;
+        --text-secondary: #212122;
+        --accent-blue: #1e40af;
+        --accent-cyan: #0284c7;
+        --accent-gold: #b45309;
+        --gradient-accent: linear-gradient(135deg, #1e40af 0%, #0369a1 100%);
+        --bg-radial-1: rgba(30, 64, 175, 0.05);
+        --bg-radial-2: rgba(180, 83, 9, 0.03);
+        --custom-mesh-bg: 
+          radial-gradient(circle at 50% 35%, rgba(9, 148, 207, 0.57) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(245, 159, 11, 0.24) 0%, transparent 40%),
+          radial-gradient(circle at 20% 20%, rgba(14, 164, 233, 0.3) 0%, transparent 40%),
+          linear-gradient(180deg, #f0f4f9 0%, #e2e8f0 100%);
+      }
+
+      /* ==========================================
+         CSS PAGINATION MENGGUNAKAN VARIABEL
+      ========================================== */
+      .pagination-wrapper {
         display: flex;
         justify-content: center;
-        align-items: center;
-        gap: 8px;
         margin-top: 40px;
         margin-bottom: 20px;
-        flex-wrap: wrap;
+      }
+      .pagination-container {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--bg-card);
+        backdrop-filter: var(--glass-backdrop);
+        -webkit-backdrop-filter: var(--glass-backdrop);
+        padding: 8px 18px;
+        border-radius: var(--radius-lg);
+        border: var(--border-glass);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        transition: var(--transition-smooth);
+      }
+      .page-link-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--accent-cyan);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 4px 8px;
+        transition: var(--transition-smooth);
+      }
+      .page-link-text:hover {
+        opacity: 0.75;
+      }
+      .page-link-text.disabled {
+        opacity: 0.35;
+        pointer-events: none;
+        cursor: not-allowed;
       }
       .page-link {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 40px;
-        height: 40px;
-        padding: 0 12px;
-        border-radius: var(--radius-md, 8px);
-        background-color: var(--bg-card, rgba(255, 255, 255, 0.05));
-        color: var(--text-primary, #fff);
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        border-radius: var(--radius-sm);
+        background: var(--bg-radial-1);
+        color: var(--text-primary);
         text-decoration: none;
         font-weight: 600;
         font-size: 0.9rem;
-        border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-        transition: all 0.3s ease;
+        border: 1px solid transparent;
+        transition: var(--transition-smooth);
       }
       .page-link:hover {
-        background-color: var(--color-primary, #007bff);
-        color: #ffffff;
-        border-color: var(--color-primary, #007bff);
+        border: var(--border-active);
+        color: var(--accent-cyan);
       }
       .page-link.active {
-        background-color: var(--color-primary, #007bff);
+        background: var(--accent-blue);
         color: #ffffff;
-        border-color: var(--color-primary, #007bff);
+        border-color: var(--accent-blue);
       }
-      .page-link.disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-        pointer-events: none;
+      .page-dots {
+        color: var(--text-secondary);
+        font-weight: 700;
+        padding: 0 4px;
+        letter-spacing: 2px;
+        user-select: none;
       }
     </style>
   </head>
@@ -233,23 +325,38 @@ $result = mysqli_query($conn, $query);
 
       <!-- NAVIGASI PAGINATION -->
       <?php if ($total_pages > 1) { ?>
-      <div class="pagination-container">
-        <!-- Tombol Previous -->
-        <a href="?halaman=<?php echo $page - 1; ?>" class="page-link <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
-          <i class="fa-solid fa-chevron-left"></i>
-        </a>
-
-        <!-- Nomor Halaman -->
-        <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
-          <a href="?halaman=<?php echo $i; ?>" class="page-link <?php echo ($page == $i) ? 'active' : ''; ?>">
-            <?php echo $i; ?>
+      <div class="pagination-wrapper">
+        <div class="pagination-container">
+          <!-- Tombol Back -->
+          <a href="?halaman=<?php echo $page - 1; ?>" class="page-link-text <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
+            <i class="fa-solid fa-chevron-left"></i> Back
           </a>
-        <?php } ?>
 
-        <!-- Tombol Next -->
-        <a href="?halaman=<?php echo $page + 1; ?>" class="page-link <?php echo ($page >= $total_pages) ? 'disabled' : ''; ?>">
-          <i class="fa-solid fa-chevron-right"></i>
-        </a>
+          <!-- Nomor Halaman & Dots (...) -->
+          <?php
+          $range = 1;
+          $show_dots_left = true;
+          $show_dots_right = true;
+
+          for ($i = 1; $i <= $total_pages; $i++) {
+            if ($i == 1 || $i == $total_pages || ($i >= $page - $range && $i <= $page + $range)) {
+              $activeClass = ($page == $i) ? 'active' : '';
+              echo '<a href="?halaman=' . $i . '" class="page-link ' . $activeClass . '">' . $i . '</a>';
+            } elseif ($i < $page - $range && $show_dots_left) {
+              echo '<span class="page-dots">...</span>';
+              $show_dots_left = false;
+            } elseif ($i > $page + $range && $show_dots_right) {
+              echo '<span class="page-dots">...</span>';
+              $show_dots_right = false;
+            }
+          }
+          ?>
+
+          <!-- Tombol Next -->
+          <a href="?halaman=<?php echo $page + 1; ?>" class="page-link-text <?php echo ($page >= $total_pages) ? 'disabled' : ''; ?>">
+            Next <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
       </div>
       <?php } ?>
 
