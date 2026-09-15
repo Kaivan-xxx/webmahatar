@@ -203,7 +203,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Berita - UNIMAR AMNI</title>
+  <title>Edit Berita - WebMahatar</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* ==========================================
@@ -548,7 +548,7 @@ body {
   <main class="form-container">
     <div class="form-header">
       <h2>Edit Berita & Pengumuman</h2>
-      <p>Perbarui informasi publikasi mahasiswa UNIMAR AMNI Semarang</p>
+      <p>Perbarui Informasi Berita & Pengumuman</p>
     </div>
 
     <form method="POST" enctype="multipart/form-data" class="edit-form">
@@ -588,14 +588,14 @@ body {
           id="isi" 
           name="isi" 
           rows="8" 
-          placeholder="Tuliskan detail berita di sini..." 
+          placeholder="Masukkan detail berita..." 
           required
         ><?= htmlspecialchars($berita['isi']); ?></textarea>
       </div>
 
       <!-- PREVIEW GAMBAR LAMA -->
       <div class="form-group">
-        <label>Gambar Saat Ini</label>
+        <label>Foto Saat Ini</label>
         <div class="image-preview-wrapper">
           <?php if (!empty($berita['gambar'])) { ?>
             <img 
@@ -614,7 +614,7 @@ body {
 
       <!-- UPLOAD GAMBAR BARU -->
       <div class="form-group">
-        <label for="gambar">Ganti Gambar (Opsional)</label>
+        <label for="gambar">Ganti Foto Jika Diperlukan (Opsional)</label>
         <input 
           type="file" 
           id="gambar" 
