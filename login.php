@@ -308,7 +308,7 @@ $_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"
         </div>
 
         <button type="submit" class="btn-login">Login</button>
-        <a href="../" class="btn-back">Kembali</a>
+        <a href="news.php" class="btn-back">Kembali</a>
       </form>
     </main>
     <script>
