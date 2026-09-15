@@ -61,83 +61,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     />
     <style>
       :root {
-        /* Dynamic Palette */
-        --bg-main: #090d16;
-        --bg-surface: rgba(255, 255, 255, 0.03);
-        --bg-card: rgba(255, 255, 255, 0.04);
-        --bg-card-hover: rgba(255, 255, 255, 0.08);
+  --bg-dark: #071325;
+  --bg-card: rgba(13, 30, 56, 0.75);
 
-        --text-primary: #f8fafc;
-        --text-secondary: #94a3b8;
-        --text-muted: #64748b;
+  --text-primary: #f0f6ff;
+  --text-secondary: #94a3b8;
 
-        /* Accent Gradients */
-        --accent-blue: #38bdf8;
-        --accent-cyan: #22d3ee;
-        --gradient-accent: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  --accent-blue: #0284c7;
+  --accent-cyan: #38bdf8;
+  --accent-gold: #f59e0b;
 
-        /* Background Gradient Utama */
-        --custom-mesh-bg:
-          radial-gradient(
-            circle at 50% 35%,
-            rgba(56, 189, 248, 0.25) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 80% 80%,
-            rgba(129, 140, 248, 0.15) 0%,
-            transparent 40%
-          ),
-          radial-gradient(
-            circle at 20% 20%,
-            rgba(34, 211, 238, 0.15) 0%,
-            transparent 40%
-          ),
-          linear-gradient(180deg, #090d16 0%, #0f172a 100%);
+  --gradient-accent: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
 
-        /* UI Tokens */
-        --border-glass: 1px solid rgba(255, 255, 255, 0.08);
-        --border-active: 1px solid rgba(56, 189, 248, 0.4);
-        --glass-backdrop: blur(16px) saturate(180%);
-        --radius-lg: 24px;
-        --radius-md: 16px;
-        --radius-sm: 12px;
-        --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      }
+  --custom-mesh-bg: 
+    radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #090d16 0%, #0f172a 100%);
 
-      /* ==========================================
-   2. RESET & GLOBAL STYLES
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --border-active: 1px solid rgba(56, 189, 248, 0.4);
+  --glass-backdrop: blur(16px) saturate(180%);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg-dark: #b8c5d6;
+  --bg-card: rgba(226, 232, 240, 0.85);
+  --glass-backdrop: blur(16px);
+  --border-glass: 1px solid rgba(100, 116, 139, 0.25);
+
+  --text-primary: #1e293b;
+  --text-secondary: #212122;
+
+  --accent-blue: #1e40af;
+  --accent-cyan: #0284c7;
+  --accent-gold: #b45309;
+
+  --gradient-accent: linear-gradient(135deg, #1e40af 0%, #0369a1 100%);
+
+  --custom-mesh-bg: 
+    radial-gradient(circle at 50% 35%, rgba(9, 148, 207, 0.57) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245, 159, 11, 0.24) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(14, 164, 233, 0.3) 0%, transparent 40%),
+    linear-gradient(180deg, #f0f4f9 0%, #e2e8f0 100%);
+}
+
+/* ==========================================
+   RESET & LAYOUT BASE
    ========================================== */
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family:
-          "Plus Jakarta Sans",
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          Roboto,
-          sans-serif;
-      }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
 
-      body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        background: var(--custom-mesh-bg);
-        background-attachment: fixed;
-        color: var(--text-primary);
-        line-height: 1.6;
-        overflow-x: hidden;
-        justify-content: center;
-        align-items: center;
-      }
-
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
+body {
+  background: var(--custom-mesh-bg);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  transition: var(--transition-smooth);
+}
       .login-container {
         width: 100%;
         max-width: 400px;
@@ -220,9 +213,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         transform: translateY(-2px);
         box-shadow: 0 15px 35px rgba(56, 189, 248, 0.45);
       }
+      .btn-theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: var(--transition-smooth);
+  z-index: 100;
+}
+
+.btn-theme-toggle:hover {
+  transform: scale(1.1);
+  color: var(--accent-cyan);
+}
     </style>
   </head>
   <body>
+    <button id="themeToggle" class="btn-theme-toggle" type="button" aria-label="Toggle Theme">
+      <i id="themeIcon" class="fa-solid fa-moon"></i>
+    </button>
     <main class="login-container">
       <div class="login-header">
         <h1 class="login-title">Admin Mahatar</h1>
@@ -259,5 +280,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit" class="btn-login">Login</button>
       </form>
     </main>
+    <script>
+      // Theme Switcher Logic
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeIcon.className = 'fa-solid fa-moon';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeIcon.className = 'fa-solid fa-sun';
+      }
+    });
+
+    // Load Saved Theme
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeIcon.className = 'fa-solid fa-sun';
+    }
+    </script>
   </body>
 </html>
