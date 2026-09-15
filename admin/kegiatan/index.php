@@ -392,6 +392,11 @@ body {
     <i id="themeIcon" class="fa-solid fa-moon"></i>
   </button>
 
+  <button id="themeToggle" class="btn-theme-toggle" type="button" aria-label="Toggle Theme">
+    <i id="themeIcon" class="fa-solid fa-moon"></i>
+  </button>
+
+
  <main class="dashboard-card">
       <!-- Top Nav & Header -->
       <div style="margin-bottom: 24px">
@@ -526,6 +531,32 @@ body {
       themeIcon.className = 'fa-solid fa-sun';
     }
     </script>
+
+    <script>
+    // Theme Switcher Logic
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeIcon.className = 'fa-solid fa-moon';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        themeIcon.className = 'fa-solid fa-sun';
+      }
+    });
+
+    // Load Saved Theme
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeIcon.className = 'fa-solid fa-sun';
+    }
+  </script>
+
 
 </body>
 
