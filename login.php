@@ -23,9 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_num_rows($result) >
 0) { $user = mysqli_fetch_assoc($result); if (password_verify($password,
 $user['password'])) { $_SESSION['id_user'] = $user['id_user'];
-$_SESSION['username'] = $user['username']; header("Location:
-admin/dashboard.php"); exit; } else { echo "Password salah!"; } } else { echo
-"Username tidak ditemukan!"; } } ?>
+$_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"); exit; } else { echo "Password salah!"; } } else { echo"Username tidak ditemukan!"; } } ?>
 
 <!doctype html>
 <html lang="id">
@@ -217,6 +215,29 @@ admin/dashboard.php"); exit; } else { echo "Password salah!"; } } else { echo
         transform: translateY(-2px);
         box-shadow: 0 15px 35px rgba(56, 189, 248, 0.45);
       }
+
+      .btn-back {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        margin-top: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary);
+        border: var(--border-glass);
+        border-radius: 100px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+      }
+
+      .btn-back:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+      }
+
       .btn-theme-toggle {
         position: fixed;
         top: 20px;
@@ -287,6 +308,7 @@ admin/dashboard.php"); exit; } else { echo "Password salah!"; } } else { echo
         </div>
 
         <button type="submit" class="btn-login">Login</button>
+        <a href="../" class="btn-back">Kembali</a>
       </form>
     </main>
     <script>
