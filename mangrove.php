@@ -2,20 +2,41 @@
 
 include "config/koneksi.php";
 
+$limit = 2; // Jumlah data per halaman
+$page = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
+if ($page < 1) { $page = 1; }
+$start = ($page - 1) * $limit;
+
 $id_kategori = 8;
 
+// 1. Hitung total data sesuai tabel dan kategori yang difilter
+$query_total = "SELECT COUNT(*) AS total FROM kegiatan WHERE id_kategori_kegiatan = ?";
+$stmt_total = mysqli_prepare($conn, $query_total);
+mysqli_stmt_bind_param($stmt_total, "i", $id_kategori);
+mysqli_stmt_execute($stmt_total);
+$result_total = mysqli_stmt_get_result($stmt_total);
+$row_total = mysqli_fetch_assoc($result_total);
+
+$total_data = $row_total['total'];
+$total_pages = ceil($total_data / $limit);
+
+// 2. Tambahkan LIMIT dan OFFSET pada query utama
 $query = "SELECT *
     FROM kegiatan
     WHERE id_kategori_kegiatan = ?
     ORDER BY tanggal DESC
+    LIMIT ?, ?
 ";
 
 $stmt = mysqli_prepare($conn, $query);
 
+// Bind parameter: "iii" (id_kategori, start, limit)
 mysqli_stmt_bind_param(
     $stmt,
-    "i",
-    $id_kategori
+    "iii",
+    $id_kategori,
+    $start,
+    $limit
 );
 
 mysqli_stmt_execute($stmt);
@@ -23,6 +44,8 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 ?>
+
+
 <!doctype html>
 <html lang="id">
   <head>
@@ -34,6 +57,78 @@ $result = mysqli_stmt_get_result($stmt);
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
     <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
+    <style>
+      .pagination-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+      .pagination-container {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--bg-card);
+        backdrop-filter: var(--glass-backdrop);
+        -webkit-backdrop-filter: var(--glass-backdrop);
+        padding: 8px 18px;
+        border-radius: var(--radius-lg);
+        border: var(--border-glass);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        transition: var(--transition-smooth);
+      }
+      .page-link-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--accent-cyan);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 4px 8px;
+        transition: var(--transition-smooth);
+      }
+      .page-link-text:hover {
+        opacity: 0.75;
+      }
+      .page-link-text.disabled {
+        opacity: 0.35;
+        pointer-events: none;
+        cursor: not-allowed;
+      }
+      .page-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        border-radius: var(--radius-sm);
+        background: var(--bg-radial-1);
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border: 1px solid transparent;
+        transition: var(--transition-smooth);
+      }
+      .page-link:hover {
+        border: var(--border-active);
+        color: var(--accent-cyan);
+      }
+      .page-link.active {
+        background: var(--accent-blue);
+        color: #ffffff;
+        border-color: var(--accent-blue);
+      }
+      .page-dots {
+        color: var(--text-secondary);
+        font-weight: 700;
+        padding: 0 4px;
+        letter-spacing: 2px;
+        user-select: none;
+      }
+    </style>
   </head>
   <body>
     <!-- NAVBAR -->
@@ -340,6 +435,44 @@ $result = mysqli_stmt_get_result($stmt);
         </div>
       </div>
     </div>  
+    <!-- NAVIGASI PAGINATION -->
+      <?php if ($total_pages > 1) { ?>
+      <div class="pagination-wrapper">
+        <div class="pagination-container">
+          <!-- Tombol Back -->
+          <a href="?halaman=<?php echo $page - 1; ?>" class="page-link-text <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
+            <i class="fa-solid fa-chevron-left"></i> Back
+          </a>
+
+          <!-- Nomor Halaman & Dots (...) -->
+          <?php
+          $range = 1;
+          $show_dots_left = true;
+          $show_dots_right = true;
+
+          for ($i = 1; $i <= $total_pages; $i++) {
+            if ($i == 1 || $i == $total_pages || ($i >= $page - $range && $i <= $page + $range)) {
+              $activeClass = ($page == $i) ? 'active' : '';
+              echo '<a href="?halaman=' . $i . '" class="page-link ' . $activeClass . '">' . $i . '</a>';
+            } elseif ($i < $page - $range && $show_dots_left) {
+              echo '<span class="page-dots">...</span>';
+              $show_dots_left = false;
+            } elseif ($i > $page + $range && $show_dots_right) {
+              echo '<span class="page-dots">...</span>';
+              $show_dots_right = false;
+            }
+          }
+          ?>
+
+          <!-- Tombol Next -->
+          <a href="?halaman=<?php echo $page + 1; ?>" class="page-link-text <?php echo ($page >= $total_pages) ? 'disabled' : ''; ?>">
+            Next <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+      <?php } ?>
+
+
     </main>
 
     <footer>
