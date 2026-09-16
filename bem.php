@@ -2,32 +2,41 @@
 
 include "config/koneksi.php";
 
-$limit = 6; // Jumlah berita per halaman
+$limit = 2; // Jumlah data per halaman
 $page = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
 if ($page < 1) { $page = 1; }
-$start = ($page > 1) ? ($page * $limit) - $limit : 0;
-
-// Query Hitung Total Data Berita
-$query_total = "SELECT COUNT(*) AS total FROM berita";
-$result_total = mysqli_query($conn, $query_total);
-$row_total = mysqli_fetch_assoc($result_total);
-$total_data = $row_total['total'];
-$total_pages = ceil($total_data / $limit);
+$start = ($page - 1) * $limit;
 
 $id_kategori = 1;
 
+// 1. Hitung total data sesuai tabel dan kategori yang difilter
+$query_total = "SELECT COUNT(*) AS total FROM kegiatan WHERE id_kategori_kegiatan = ?";
+$stmt_total = mysqli_prepare($conn, $query_total);
+mysqli_stmt_bind_param($stmt_total, "i", $id_kategori);
+mysqli_stmt_execute($stmt_total);
+$result_total = mysqli_stmt_get_result($stmt_total);
+$row_total = mysqli_fetch_assoc($result_total);
+
+$total_data = $row_total['total'];
+$total_pages = ceil($total_data / $limit);
+
+// 2. Tambahkan LIMIT dan OFFSET pada query utama
 $query = "SELECT *
     FROM kegiatan
     WHERE id_kategori_kegiatan = ?
     ORDER BY tanggal DESC
+    LIMIT ?, ?
 ";
 
 $stmt = mysqli_prepare($conn, $query);
 
+// Bind parameter: "iii" (id_kategori, start, limit)
 mysqli_stmt_bind_param(
     $stmt,
-    "i",
-    $id_kategori
+    "iii",
+    $id_kategori,
+    $start,
+    $limit
 );
 
 mysqli_stmt_execute($stmt);
