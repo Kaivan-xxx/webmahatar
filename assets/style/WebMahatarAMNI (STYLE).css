@@ -6,7 +6,7 @@
   --bg-dark: #071325;
   --bg-card: rgba(13, 30, 56, 0.75);
 
-  /* Tipografi */ 
+  /* Tipografi */
   --text-primary: #f0f6ff; /* Catatan: dihapus akhiran '28' agar teks tidak transparan */
   --text-secondary: #94a3b8;
 
@@ -21,10 +21,22 @@
   /* Glowing Effect & Custom Mesh Background (DARK MODE) */
   --bg-radial-1: rgba(2, 132, 199, 0.25);
   --bg-radial-2: rgba(245, 158, 11, 0.12);
-  --custom-mesh-bg: 
-    radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
+  --custom-mesh-bg:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(56, 189, 248, 0.25) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(129, 140, 248, 0.15) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(34, 211, 238, 0.15) 0%,
+      transparent 40%
+    ),
     linear-gradient(180deg, #090d16 0%, #0f172a 100%);
 
   /* UI Tokens */
@@ -64,10 +76,22 @@
   /* Glowing Effect & Custom Mesh Background (LIGHT MODE) */
   --bg-radial-1: rgba(30, 64, 175, 0.05);
   --bg-radial-2: rgba(180, 83, 9, 0.03);
-  --custom-mesh-bg: 
-    radial-gradient(circle at 50% 35%, rgba(9, 148, 207, 0.57) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(245, 159, 11, 0.24) 0%, transparent 40%),
-    radial-gradient(circle at 20% 20%, rgba(14, 164, 233, 0.3) 0%, transparent 40%),
+  --custom-mesh-bg:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(9, 148, 207, 0.57) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(245, 159, 11, 0.24) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(14, 164, 233, 0.3) 0%,
+      transparent 40%
+    ),
     linear-gradient(180deg, #f0f4f9 0%, #e2e8f0 100%);
 }
 
@@ -95,7 +119,9 @@ body {
   background-attachment: fixed; /* Supaya gradasi mesh tetap diam saat halaman di-scroll */
   color: var(--text-primary);
   min-height: 100vh;
-  transition: 0.4s ease, color 0.4s ease;
+  transition:
+    0.4s ease,
+    color 0.4s ease;
 }
 
 a {
@@ -613,7 +639,7 @@ a {
   font-weight: 800;
   margin-bottom: 8px; /* Dikurangi dari 40px agar dekat dengan subtitle */
   text-align: center;
-  
+
   /* Gradien Teks */
   background: var(--gradient-accent);
   -webkit-background-clip: text;
@@ -646,7 +672,7 @@ a {
 .team-grid {
   display: grid;
   /* Membuat kolom mengisi ruang secara otomatis dengan lebar minimal 300px */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px; /* Jarak antar kartu */
   justify-content: center;
   align-items: stretch;
@@ -676,7 +702,7 @@ a {
 
 .team-img,
 .team-card img {
- width: 100%;
+  width: 100%;
   height: 320px; /* Tinggi gambar proporsional agar kartu terlihat pas */
   object-fit: cover; /* Mencegah gambar terdistorsi/gepeng */
   border-radius: var(--radius-md);
@@ -832,13 +858,13 @@ a {
 
 .badge-primary {
   background: #0284c7 !important; /* Solid Biru/Cyan */
-  color: #ffffff !important;      /* Teks Putih */
+  color: #ffffff !important; /* Teks Putih */
   border: 1px solid #0369a1 !important;
 }
 
 .badge-success {
   background: #16a34a !important; /* Solid Hijau */
-  color: #ffffff !important;      /* Teks Putih */
+  color: #ffffff !important; /* Teks Putih */
   border: 1px solid #15803d !important;
 }
 
@@ -856,13 +882,6 @@ a {
 .news-full-body p {
   overflow-wrap: break-word;
   white-space: normal;
-}
-
-#modalBodyText {
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  line-height: 1.8;
 }
 
 .news-excerpt {
@@ -953,6 +972,22 @@ a {
   transition: var(--transition-smooth);
 }
 
+#modalBodyText {
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-size: 1rem; /* Ukuran teks standar (16px) */
+  line-height: 1; /* Spasi antar baris ideal (1.5 - 1.6 di Word) */
+  text-align: left; /* Rata kiri-kanan (Justify) khas naskah/berita */
+  text-left: inter-word; /* Merapikan jarak antar kata saat rata kiri-kanan */
+  margin-top: 16px;
+}
+
+#modalBodyText p {
+  margin-top: 0;
+  margin-bottom: 3px; /* Menentukan jarak pasti antar paragraf */
+}
+
 .news-modal.active {
   display: flex !important;
   opacity: 1 !important;
@@ -978,6 +1013,13 @@ a {
   -ms-overflow-style: none; /* IE 10+ */
 }
 
+.news-modal-content img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 0; /* Menghilangkan margin bawaan gambar */
+}
+
 .news-modal-content::-webkit-scrollbar {
   display: none !important;
   width: 0;
@@ -985,15 +1027,13 @@ a {
 }
 
 .news-modal-close {
- /* Ganti dari absolute ke sticky */
+  /* Ganti dari absolute ke sticky */
   position: sticky;
   top: 16px;
-  
-  /* Memaksa posisi bergeser ke kanan atas */
   margin-left: auto;
   margin-top: 16px;
   margin-bottom: -36px; /* Offset margin agar tidak memakan ruang tinggi / mendorong teks */
-  
+
   z-index: 9999 !important;
 
   /* Ukuran Lingkaran */
@@ -1005,7 +1045,7 @@ a {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  
+
   /* Reset Alignment Teks/Karakter */
   padding: 0 !important;
   line-height: 1 !important;
@@ -1020,7 +1060,7 @@ a {
 }
 
 .news-modal-close:hover {
- background: #ef4444; /* Merah saat hover */
+  background: #ef4444; /* Merah saat hover */
   border-color: #ef4444;
   color: #ffffff;
   transform: scale(1.1);
