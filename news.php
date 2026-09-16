@@ -3,25 +3,38 @@
 include "config/koneksi.php";
 
 // ==========================================
-// KONFIGURASI PAGINATION
+// KONFIGURASI PAGINATION & FILTER
 // ==========================================
 $limit = 6; // Jumlah berita per halaman
 $page = isset($_GET['halaman']) ? (int)$_GET['halaman'] : 1;
 if ($page < 1) { $page = 1; }
 $start = ($page > 1) ? ($page * $limit) - $limit : 0;
 
-// Query Hitung Total Data Berita
-$query_total = "SELECT COUNT(*) AS total FROM berita";
+// Menambahkan Filter Kategori
+$kategori = isset($_GET['kategori']) ? $_GET['kategori'] : 'all';
+$where_kategori = "";
+if ($kategori != 'all' && !empty($kategori)) {
+    $kat_clean = mysqli_real_escape_string($conn, strtolower($kategori));
+    $where_kategori = " WHERE LOWER(kategori_berita.nama_kategori) = '$kat_clean' ";
+}
+
+// Query Hitung Total Data Berita (Berdasarkan Kategori)
+$query_total = "SELECT COUNT(*) AS total 
+                FROM berita 
+                JOIN kategori_berita 
+                ON berita.id_kategori = kategori_berita.id_kategori 
+                $where_kategori";
 $result_total = mysqli_query($conn, $query_total);
 $row_total = mysqli_fetch_assoc($result_total);
 $total_data = $row_total['total'];
 $total_pages = ceil($total_data / $limit);
 
-// Query Utama Ambil Data Berita (Dengan LIMIT dan OFFSET)
+// Query Utama Ambil Data Berita (Dengan Filter, LIMIT, dan OFFSET)
 $query = " SELECT berita.*, kategori_berita.nama_kategori
     FROM berita
     JOIN kategori_berita
     ON berita.id_kategori = kategori_berita.id_kategori
+    $where_kategori
     ORDER BY berita.tanggal DESC
     LIMIT $start, $limit
 ";
@@ -180,6 +193,33 @@ $result = mysqli_query($conn, $query);
         letter-spacing: 2px;
         user-select: none;
       }
+
+      /* ==========================================
+         PERBAIKAN JARAK GAMBAR DAN TEKS MODAL
+      ========================================== */
+      #modalMeta {
+        margin: 8px 0 !important;
+      }
+      .modal-img-wrapper {
+        margin-bottom: 8px !important;
+      }
+      #modalBodyText {
+        color: var(--text-secondary);
+        line-height: 1.5 !important;
+        margin-top: 0 !important;
+      }
+      #modalBodyText p {
+        margin-top: 0 !important;
+        margin-bottom: 8px !important;
+      }
+      #modalBodyText br {
+        content: "";
+        display: block;
+        margin-bottom: 6px !important;
+      }
+      #modalBodyText br + br {
+        display: none !important;
+      }
     </style>
   </head>
   <body>
@@ -264,10 +304,10 @@ $result = mysqli_query($conn, $query);
     <div class="news-filter-wrapper">
 
     <div class="filter-group">
-    <button class="filter-btn active" data-filter="all">Semua</button>
-    <button class="filter-btn" data-filter="berita">Berita</button>
-    <button class="filter-btn" data-filter="prestasi">Prestasi</button>
-  </div>
+      <button class="filter-btn <?php echo ($kategori == 'all' || empty($kategori)) ? 'active' : ''; ?>" data-filter="all">Semua</button>
+      <button class="filter-btn <?php echo (strtolower($kategori) == 'berita') ? 'active' : ''; ?>" data-filter="berita">Berita</button>
+      <button class="filter-btn <?php echo (strtolower($kategori) == 'prestasi') ? 'active' : ''; ?>" data-filter="prestasi">Prestasi</button>
+    </div>
 
   <a href="login.php" class="btn-add-news">
     <i class="fa-solid fa-plus"></i> Tambah Berita
@@ -328,7 +368,7 @@ $result = mysqli_query($conn, $query);
       <div class="pagination-wrapper">
         <div class="pagination-container">
           <!-- Tombol Back -->
-          <a href="?halaman=<?php echo $page - 1; ?>" class="page-link-text <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
+          <a href="?halaman=<?php echo $page - 1; ?>&kategori=<?php echo urlencode($kategori); ?>" class="page-link-text <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
             <i class="fa-solid fa-chevron-left"></i> Back
           </a>
 
@@ -341,7 +381,7 @@ $result = mysqli_query($conn, $query);
           for ($i = 1; $i <= $total_pages; $i++) {
             if ($i == 1 || $i == $total_pages || ($i >= $page - $range && $i <= $page + $range)) {
               $activeClass = ($page == $i) ? 'active' : '';
-              echo '<a href="?halaman=' . $i . '" class="page-link ' . $activeClass . '">' . $i . '</a>';
+              echo '<a href="?halaman=' . $i . '&kategori=' . urlencode($kategori) . '" class="page-link ' . $activeClass . '">' . $i . '</a>';
             } elseif ($i < $page - $range && $show_dots_left) {
               echo '<span class="page-dots">...</span>';
               $show_dots_left = false;
@@ -353,7 +393,7 @@ $result = mysqli_query($conn, $query);
           ?>
 
           <!-- Tombol Next -->
-          <a href="?halaman=<?php echo $page + 1; ?>" class="page-link-text <?php echo ($page >= $total_pages) ? 'disabled' : ''; ?>">
+          <a href="?halaman=<?php echo $page + 1; ?>&kategori=<?php echo urlencode($kategori); ?>" class="page-link-text <?php echo ($page >= $total_pages) ? 'disabled' : ''; ?>">
             Next <i class="fa-solid fa-chevron-right"></i>
           </a>
         </div>
@@ -455,11 +495,14 @@ $result = mysqli_query($conn, $query);
 
       const category = this.getAttribute("data-filter");
       filterNews(category);
+      // Redirect ke halaman 1 dengan kategori yang dipilih
+      window.location.href = "?halaman=1&kategori=" + category;
     });
   });
 
   // Filter awal (default)
-  const defaultFilter = "all";
+  const urlParams = new URLSearchParams(window.location.search);
+  const defaultFilter = urlParams.get('kategori') || "all";
   filterNews(defaultFilter);
 
   // ==========================================
