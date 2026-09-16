@@ -1,3 +1,28 @@
+<?php
+
+include "config/koneksi.php";
+
+$id_kategori = 6;
+
+$query = "SELECT *
+    FROM kegiatan
+    WHERE id_kategori_kegiatan = ?
+    ORDER BY tanggal DESC
+";
+
+$stmt = mysqli_prepare($conn, $query);
+
+mysqli_stmt_bind_param(
+    $stmt,
+    "i",
+    $id_kategori
+);
+
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
+
+?>
 <!doctype html>
 <html lang="id">
   <head>
@@ -209,42 +234,109 @@
         </div>
       </div>
 
-      <!-- BERITA & AGENDA REBANA -->
-      <div class="profile-card">
-        <h3 style="font-size: 1.2rem; margin-bottom: 15px">
-          <i
-            class="fa-solid fa-newspaper"
-            style="color: var(--accent-blue)"
-          ></i>
-          Berita & Kegiatan Spiritual
-        </h3>
-        <div style="display: flex; flex-direction: column; gap: 12px">
-          <div
-            style="
-              padding: 12px;
-              border-left: 3px solid var(--accent-cyan);
-              background: rgba(255, 255, 255, 0.01);
-            "
-          >
-            <span style="font-size: 0.8rem; color: var(--accent-cyan)"
-              ><i class="fa-solid fa-calendar"></i> 18 April 2026</span
+ <!-- BERITA & AGENDA REBANA -->
+
+<div class="news-grid" id="newsGrid">
+
+  <?php if (mysqli_num_rows($result) > 0) : ?>
+
+    <?php while ($kegiatan = mysqli_fetch_assoc($result)) { ?>
+
+      <article class="news-card">
+
+        <div class="news-thumb-wrapper">
+
+          <?php if (!empty($kegiatan['gambar'])) : ?>
+
+            <img
+              src="uploads/<?= htmlspecialchars($kegiatan['gambar']); ?>"
+              class="news-thumb-img"
+              alt="<?= htmlspecialchars($kegiatan['judul']); ?>"
             >
-            <h4 style="margin: 5px 0; color: var(--text-primary)">
-              Peringatan Isra Miraj & Gebyar Sholawat Kampus AMNI
-            </h4>
-            <p
-              style="
-                font-size: 0.85rem;
-                color: var(--text-secondary);
-                margin: 0;
-              "
-            >
-              Tim Rebana Kemahataran sukses memimpin lantunan sholawat dalam
-              acara peringatan hari besar Islam.
-            </p>
+
+          <?php endif; ?>
+
+        </div>
+
+        <div class="news-content">
+
+          <div class="news-meta">
+            <span>
+              <i class="fa-regular fa-calendar"></i>
+              <?= htmlspecialchars($kegiatan['tanggal']); ?>
+            </span>
           </div>
+
+          <h3 class="news-title">
+            <?= htmlspecialchars($kegiatan['judul']); ?>
+          </h3>
+
+          <!-- Isi lengkap untuk modal -->
+          <div class="news-full-body" style="display: none;">
+            <?= htmlspecialchars($kegiatan['isi']); ?>
+          </div>
+
+          <button
+            type="button"
+            class="news-read-more-btn"
+          >
+            Baca Selengkapnya
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+        </div>
+
+      </article>
+
+    <?php } ?>
+
+  <?php else : ?>
+
+    <div class="news-empty-state">
+      <i class="fa-regular fa-newspaper empty-icon"></i>
+      <h3>Belum Ada Kegiatan Yang Di Tambahkan</h3>
+      <p>
+        Belum ada Kegiatan terbaru yang dipublikasikan
+        untuk saat ini.
+      </p>
+    </div>
+
+  <?php endif; ?>
+
+</div>
+
+    <!-- MODAL DIALOG UNTUK DETAIL BERITA -->
+    <div class="news-modal" id="newsModal">
+      <div class="news-modal-content">
+        <button class="news-modal-close" id="modalCloseBtn">&times;</button>
+        <div class="news-modal-body">
+          <div class="news-badge" id="modalBadge"></div>
+          <h2
+            class="news-title"
+            id="modalTitle"
+            style="margin-top: 10px; font-size: 1.6rem"
+          ></h2>
+          <div class="news-meta" id="modalMeta" style="margin: 15px 0"></div>
+          <div class="modal-img-wrapper" style="margin-bottom: 20px">
+            <img
+              id="modalImg"
+              src=""
+              alt=""
+              style="
+                width: 100%;
+                max-height: 350px;
+                object-fit: cover;
+                border-radius: var(--radius-md);
+              "
+            />
+          </div>
+          <div
+            id="modalBodyText"
+            style="color: var(--text-secondary); line-height: 1.8"
+          ></div>
         </div>
       </div>
+    </div>  
     </main>
 
     <footer>
@@ -329,6 +421,87 @@
           themeIcon.classList.replace("fa-moon", "fa-sun");
         }
       });
+
+// =========================
+// MODAL BERITA / KEGIATAN
+// =========================
+
+const newsModal = document.getElementById("newsModal");
+const modalCloseBtn = document.getElementById("modalCloseBtn");
+const modalBadge = document.getElementById("modalBadge");
+const modalTitle = document.getElementById("modalTitle");
+const modalMeta = document.getElementById("modalMeta");
+const modalImg = document.getElementById("modalImg");
+const modalBodyText = document.getElementById("modalBodyText");
+
+const readMoreButtons = document.querySelectorAll(".news-read-more-btn");
+
+readMoreButtons.forEach((button) => {
+  button.addEventListener("click", function () {
+    const card = this.closest(".news-card");
+
+    if (!card) return;
+
+    const titleElement = card.querySelector(".news-title");
+    const metaElement = card.querySelector(".news-meta");
+    const bodyElement = card.querySelector(".news-full-body");
+    const imageElement = card.querySelector(".news-thumb-img");
+
+    const title = titleElement
+      ? titleElement.textContent.trim()
+      : "";
+
+    const meta = metaElement
+      ? metaElement.innerHTML
+      : "";
+
+    const body = bodyElement
+      ? bodyElement.textContent.trim()
+      : "";
+
+    modalTitle.textContent = title;
+    modalMeta.innerHTML = meta;
+    modalBodyText.textContent = body;
+
+    if (imageElement) {
+      modalImg.src = imageElement.src;
+      modalImg.alt = title;
+      modalImg.style.display = "block";
+    } else {
+      modalImg.src = "";
+      modalImg.alt = "";
+      modalImg.style.display = "none";
+    }
+
+    newsModal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  });
+});
+
+
+// Tombol tutup modal
+modalCloseBtn.addEventListener("click", function () {
+  newsModal.classList.remove("active");
+  document.body.style.overflow = "";
+});
+
+
+// Klik area luar modal untuk menutup
+newsModal.addEventListener("click", function (event) {
+  if (event.target === newsModal) {
+    newsModal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+});
+
+
+// Tombol Escape untuk menutup
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    newsModal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+});
     </script>
   </body>
 </html>

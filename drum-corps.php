@@ -285,7 +285,6 @@ $result = mysqli_stmt_get_result($stmt);
         </div>
       </div>
 
-      <!-- BERITA & AGENDA DRUM CORPS -->
 <!-- BERITA & AGENDA DRUM CORPS -->
 
 <div class="news-grid" id="newsGrid">
@@ -346,9 +345,9 @@ $result = mysqli_stmt_get_result($stmt);
 
     <div class="news-empty-state">
       <i class="fa-regular fa-newspaper empty-icon"></i>
-      <h3>Belum Ada Berita Atau Prestasi</h3>
+      <h3>Belum Ada Kegiatan Yang Di Tambahkan</h3>
       <p>
-        Belum ada Berita atau Agenda Drum Corps terbaru yang dipublikasikan
+        Belum ada Kegiatan terbaru yang dipublikasikan
         untuk saat ini.
       </p>
     </div>
@@ -475,7 +474,7 @@ $result = mysqli_stmt_get_result($stmt);
         }
       });
 
-      // =========================
+// =========================
 // MODAL BERITA / KEGIATAN
 // =========================
 
@@ -512,7 +511,6 @@ readMoreButtons.forEach((button) => {
       ? bodyElement.textContent.trim()
       : "";
 
-    modalBadge.textContent = "Drum Corps";
     modalTitle.textContent = title;
     modalMeta.innerHTML = meta;
     modalBodyText.textContent = body;
