@@ -13,7 +13,7 @@ $query = " SELECT berita.*, kategori_berita.nama_kategori
     FROM berita
     JOIN kategori_berita
     ON berita.id_kategori = kategori_berita.id_kategori
-    ORDER BY berita.tanggal ASC 
+    ORDER BY berita.id_berita ASC 
 ";
 
 

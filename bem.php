@@ -704,6 +704,18 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  // Jika URL punya parameter 'halaman', scroll otomatis ke section berita
+  if (urlParams.has('halaman')) {
+    const newsGrid = document.getElementById("newsGrid");
+    if (newsGrid) {
+      newsGrid.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+});
+
     </script>
   </body>
 </html>

@@ -27,7 +27,7 @@ $query = " SELECT
         ON kegiatan.id_kategori_kegiatan =
            kategori_kegiatan.id_kategori_kegiatan
 
-    ORDER BY kegiatan.tanggal ASC
+    ORDER BY kegiatan.id_kegiatan ASC
 ";
 
 $result = mysqli_query($conn, $query);
