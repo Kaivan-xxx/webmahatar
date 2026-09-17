@@ -202,7 +202,7 @@ $result = mysqli_stmt_get_result($stmt);
     <!-- MAIN CONTENT -->
     <main class="news-container">
       <div class="header-section">
-        <h1 class="header-title">Drum Corps Gita Swara AMNI</h1>
+        <h1 class="header-title"> Drum Corps Bahana Bahari UNIMAR AMNI Semarang.</h1>
         <p class="header-subtitle">
           Korps musik kebanggaan Kemahataran AMNI Semarang pembentuk kekompakan
           & musikalitas
@@ -242,7 +242,7 @@ $result = mysqli_stmt_get_result($stmt);
                 margin-bottom: 15px;
               "
             >
-              Drum Corps Gita Swara AMNI adalah lambang kebanggaan dan presisi
+              Drum Corps Bahana Bahari UNIMAR AMNI Semarang. adalah lambang kebanggaan dan presisi
               kedisiplinan taruna. Memadukan keahlian instrumen tiup,
               perkusional, serta aksi <em>color guard</em> dalam pertunjukkan
               publik dan kompetisi nasional.
@@ -353,7 +353,7 @@ $result = mysqli_stmt_get_result($stmt);
               Penanggung Jawab
             </h4>
             <p style="color: var(--text-primary); font-weight: bold; margin: 0">
-              Setyo Nugroho, M.T.
+              Supriyanto, S.Sos., M.M.
             </p>
             <span style="font-size: 0.8rem; color: var(--text-secondary)"
               >Pembina Utama</span
