@@ -4,12 +4,14 @@ include "config/koneksi.php";
 
 session_start();
 
+$error = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-      $stmt = mysqli_prepare(
+    $stmt = mysqli_prepare(
         $conn,
         "SELECT * FROM users WHERE username = ?"
     );
@@ -20,11 +22,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $result = mysqli_stmt_get_result($stmt);
 
-    if (mysqli_num_rows($result) >
-0) { $user = mysqli_fetch_assoc($result); if (password_verify($password,
-$user['password'])) { $_SESSION['id_user'] = $user['id_user'];
-$_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"); exit; } else { echo "Password salah!"; } } else { echo"Username tidak ditemukan!"; } } ?>
-
+    if (mysqli_num_rows($result) > 0) { 
+        $user = mysqli_fetch_assoc($result); 
+        if (password_verify($password, $user['password'])) { 
+            $_SESSION['id_user'] = $user['id_user'];
+            $_SESSION['username'] = $user['username']; 
+            header("Location:admin/dashboard.php"); 
+            exit; 
+        } else { 
+            $error = "Password salah!"; 
+        } 
+    } else { 
+        $error = "Username tidak ditemukan!"; 
+    } 
+} 
+?>
 <!doctype html>
 <html lang="id">
   <head>
@@ -85,7 +97,7 @@ $_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"
         --border-glass: 1px solid rgba(100, 116, 139, 0.25);
 
         --text-primary: #1e293b;
-        --text-secondary: #212122;
+        --text-secondary: #475569;
 
         --accent-blue: #1e40af;
         --accent-cyan: #0284c7;
@@ -111,8 +123,7 @@ $_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"
           ),
           linear-gradient(180deg, #f0f4f9 0%, #e2e8f0 100%);
       }
-
-      /* ==========================================
+   /* ==========================================
    RESET & LAYOUT BASE
    ========================================== */
       * {
@@ -263,6 +274,45 @@ $_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"
         transform: scale(1.1);
         color: var(--accent-cyan);
       }
+
+      /* Style Password Input Wrapper & Toggle Eye */
+      .password-input-wrapper {
+        position: relative;
+        width: 100%;
+      }
+
+      .password-input-wrapper .form-input {
+        padding-right: 44px;
+      }
+
+      .toggle-password-btn {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-size: 1rem;
+        transition: var(--transition-smooth);
+      }
+
+      .toggle-password-btn:hover {
+        color: var(--accent-cyan);
+      }
+
+      /* Style Pesan Error Sesuai Theme */
+      .error-message {
+        color: #f87171; /* Merah terang untuk Dark Mode */
+        text-align: center;
+        margin-bottom: 16px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        transition: var(--transition-smooth);
+      }
+
+      [data-theme="light"] .error-message {
+        color: #dc2626; /* Merah kontras untuk Light Mode */
+      }
     </style>
   </head>
   <body>
@@ -280,6 +330,12 @@ $_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"
         <p class="login-subtitle">Silakan masuk untuk mengelola portal</p>
       </div>
 
+      <?php if (!empty($error)): ?>
+        <p class="error-message">
+          <?php echo $error; ?>
+        </p>
+      <?php endif; ?>
+
       <form method="POST" action="">
         <div class="form-group">
           <label for="username" class="form-label">Username</label>
@@ -296,15 +352,18 @@ $_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"
 
         <div class="form-group">
           <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            class="form-input"
-            placeholder="••••••••"
-            required
-            autocomplete="current-password"
-          />
+          <div class="password-input-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="••••••••"
+              required
+              autocomplete="current-password"
+            />
+            <i id="togglePassword" class="fa-solid fa-eye toggle-password-btn"></i>
+          </div>
         </div>
 
         <button type="submit" class="btn-login">Login</button>
@@ -335,6 +394,17 @@ $_SESSION['username'] = $user['username']; header("Location:admin/dashboard.php"
         document.documentElement.setAttribute("data-theme", "light");
         themeIcon.className = "fa-solid fa-sun";
       }
+
+      // Logic Toggle Password
+      const togglePassword = document.getElementById("togglePassword");
+      const passwordInput = document.getElementById("password");
+
+      togglePassword.addEventListener("click", () => {
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+        togglePassword.classList.toggle("fa-eye");
+        togglePassword.classList.toggle("fa-eye-slash");
+      });
     </script>
   </body>
 </html>
