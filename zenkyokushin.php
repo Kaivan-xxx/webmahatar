@@ -641,8 +641,11 @@ document.addEventListener("keydown", function (event) {
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   
-  // Jika URL punya parameter 'halaman', scroll otomatis ke section berita
-  if (urlParams.has('halaman')) {
+  // Cek apakah halaman dimuat karena di-REFRESH (F5 / Reload)
+  const isReload = performance.getEntriesByType("navigation")[0]?.type === "reload";
+
+  // Hanya scroll jika ada parameter 'halaman' DAN BUKAN hasil refresh
+  if (urlParams.has('halaman') && !isReload) {
     const newsGrid = document.getElementById("newsGrid");
     if (newsGrid) {
       newsGrid.scrollIntoView({ behavior: "smooth" });
