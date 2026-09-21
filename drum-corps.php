@@ -216,7 +216,7 @@ $result = mysqli_stmt_get_result($stmt);
           style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap"
         >
           <img
-            src="assets/image/profile.jpg"
+            src="assets/image/DSC08797.JPG"
             alt="Drum Corps AMNI"
             style="
               width: 100%;

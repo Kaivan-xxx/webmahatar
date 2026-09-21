@@ -214,7 +214,7 @@ $result = mysqli_stmt_get_result($stmt);
           style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap"
         >
           <img
-            src="assets/image/profile.jpg"
+            src="assets/image/DSC02271.jpg.jpeg"
             alt="Pedang Pora AMNI"
             style="
               width: 100%;
