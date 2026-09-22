@@ -9,6 +9,9 @@ if (!isset($_SESSION['id_user'])) {
 
 include "../../config/koneksi.php";
 
+$role = $_SESSION['role'];
+$id_kategori_login = $_SESSION['id_kategori_kegiatan'];
+
 
 // =========================
 // AMBIL ID
@@ -22,12 +25,12 @@ if (!$id_kegiatan) {
 
 
 // =========================
-// AMBIL NAMA GAMBAR
+// AMBIL NAMA GAMBAR + KATEGORI
 // =========================
 
 $stmt = mysqli_prepare(
     $conn,
-    "SELECT gambar
+    "SELECT gambar, id_kategori_kegiatan
      FROM kegiatan
      WHERE id_kegiatan = ?"
 );
@@ -47,6 +50,15 @@ $kegiatan = mysqli_fetch_assoc($result);
 
 if (!$kegiatan) {
     die("Kegiatan tidak ditemukan.");
+}
+
+
+// =========================
+// CEK KEPEMILIKAN (khusus Admin_Kegiatan)
+// =========================
+
+if ($role === 'Admin_Kegiatan' && $kegiatan['id_kategori_kegiatan'] != $id_kategori_login) {
+    die("Kamu tidak berhak menghapus kegiatan ini.");
 }
 
 

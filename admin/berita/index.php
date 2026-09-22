@@ -2,10 +2,8 @@
 
 session_start();
 
-if (!isset($_SESSION['id_user'])) {
-    header("Location: ../../login.php");
-    exit;
-}
+require '../middleware/cek_akses.php';
+cekRole(['Super_Admin', 'Admin']);
 
 include "../../config/koneksi.php";
 

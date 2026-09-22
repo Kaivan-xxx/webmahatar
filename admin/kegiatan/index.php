@@ -14,6 +14,9 @@ include "../../config/koneksi.php";
 // AMBIL DATA KEGIATAN
 // =========================
 
+$role = $_SESSION['role'];
+$id_kategori_login = $_SESSION['id_kategori_kegiatan'];
+
 $query = " SELECT
         kegiatan.id_kegiatan,
         kegiatan.judul,
@@ -26,9 +29,14 @@ $query = " SELECT
     JOIN kategori_kegiatan
         ON kegiatan.id_kategori_kegiatan =
            kategori_kegiatan.id_kategori_kegiatan
-
-    ORDER BY kegiatan.id_kegiatan ASC
 ";
+
+// Kalau yang login Admin_Kegiatan, batasi cuma kegiatan miliknya
+if ($role === 'Admin_Kegiatan') {
+    $query .= " WHERE kegiatan.id_kategori_kegiatan = " . intval($id_kategori_login);
+}
+
+$query .= " ORDER BY kegiatan.id_kegiatan ASC";
 
 $result = mysqli_query($conn, $query);
 

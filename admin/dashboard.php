@@ -1,10 +1,7 @@
 <?php
-    session_start();
+    require 'middleware/cek_akses.php';
 
-    if (!isset($_SESSION['id_user'])) {
-        header("Location: ../login.php");
-        exit;
-    }
+    $role = $_SESSION['role'];
 ?>
 
 <!doctype html>
@@ -326,28 +323,43 @@
 
       <h2 class="section-title">Menu Utama</h2>
 
-      <ul class="admin-menu-grid">
-        <li>
-          <a href="berita/index.php" class="menu-card">
-            <i class="fa-solid fa-newspaper"></i>
-            <span>Kelola Berita Dan Prestasi</span>
-          </a>
-        </li>
+<ul class="admin-menu-grid">
 
-        <li>
-          <a href="kegiatan/index.php" class="menu-card">
-            <i class="fa-solid fa-newspaper"></i>
-            <span>Kelola Kegiatan Mahasiswa</span>
-          </a>
-        </li>
+  <?php if ($role === 'Super_Admin'): ?>
+  <li>
+    <a href="kelola_akun/index.php" class="menu-card">
+      <i class="fa-solid fa-users-gear"></i>
+      <span>Kelola Akun Admin</span>
+    </a>
+  </li>
+  <?php endif; ?>
 
-        <li>
-          <a href="kelola foto/index.php" class="menu-card">
-            <i class="fa-solid fa-images"></i>
-            <span>Kelola Foto</span>
-          </a>
-        </li>
-      </ul>
+  <?php if ($role === 'Super_Admin' || $role === 'Admin'): ?>
+  <li>
+    <a href="berita/index.php" class="menu-card">
+      <i class="fa-solid fa-newspaper"></i>
+      <span>Kelola Berita Dan Prestasi</span>
+    </a>
+  </li>
+  <?php endif; ?>
+
+  <!-- Muncul buat SEMUA role -->
+  <li>
+    <a href="kegiatan/index.php" class="menu-card">
+      <i class="fa-solid fa-newspaper"></i>
+      <span>Kelola Kegiatan Mahasiswa</span>
+    </a>
+  </li>
+
+  <!-- Muncul buat SEMUA role juga -->
+  <li>
+    <a href="kelola foto/index.php" class="menu-card">
+      <i class="fa-solid fa-images"></i>
+      <span>Kelola Foto</span>
+    </a>
+  </li>
+
+</ul>
 
       <div class="dashboard-footer">
         <a href="logout.php" class="btn-logout">

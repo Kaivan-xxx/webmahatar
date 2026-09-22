@@ -27,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) { 
             $_SESSION['id_user'] = $user['id_user'];
             $_SESSION['username'] = $user['username']; 
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['id_kategori_kegiatan'] = $user['id_kategori_kegiatan'];
             header("Location:admin/dashboard.php"); 
             exit; 
         } else { 

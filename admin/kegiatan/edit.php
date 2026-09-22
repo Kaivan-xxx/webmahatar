@@ -1,14 +1,12 @@
 <?php
 
-session_start();
+require '../middleware/cek_akses.php';
+cekRole(['Super_Admin', 'Admin', 'Admin_Kegiatan']); // semua role boleh, tapi difilter kepemilikannya di bawah
 
-if (!isset($_SESSION['id_user'])) {
-    header("Location: ../../login.php");
-    exit;
-}
+$role = $_SESSION['role'];
+$id_kategori_login = $_SESSION['id_kategori_kegiatan'];
 
 include "../../config/koneksi.php";
-
 
 // =========================
 // AMBIL ID KEGIATAN
@@ -49,16 +47,38 @@ if (!$kegiatan) {
     die("Kegiatan tidak ditemukan.");
 }
 
+// =========================
+// CEK KEPEMILIKAN (khusus Admin_Kegiatan)
+// =========================
+
+if ($role === 'Admin_Kegiatan' && $kegiatan['id_kategori_kegiatan'] != $id_kategori_login) {
+    die("Kamu tidak berhak mengedit kegiatan ini.");
+}
+
 
 // =========================
 // AMBIL KATEGORI
 // =========================
 
-$query_kategori = "
-    SELECT *
-    FROM kategori_kegiatan
-    ORDER BY nama_kegiatan ASC
-";
+// =========================
+// AMBIL KATEGORI
+// =========================
+
+if ($role === 'Admin_Kegiatan') {
+    // Admin kegiatan cuma boleh lihat kategorinya sendiri
+    $query_kategori = "
+        SELECT *
+        FROM kategori_kegiatan
+        WHERE id_kategori_kegiatan = " . intval($id_kategori_login) . "
+    ";
+} else {
+    // Super_Admin & Admin lihat semua kategori
+    $query_kategori = "
+        SELECT *
+        FROM kategori_kegiatan
+        ORDER BY nama_kegiatan ASC
+    ";
+}
 
 $result_kategori = mysqli_query(
     $conn,
@@ -74,9 +94,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $judul = $_POST['judul'];
     $isi = $_POST['isi'];
-    $id_kategori_kegiatan =
-        $_POST['id_kategori_kegiatan'];
 
+    // Kalau Admin_Kegiatan, paksa kategori tetap punya dia sendiri (jangan percaya form)
+    if ($role === 'Admin_Kegiatan') {
+        $id_kategori_kegiatan = $id_kategori_login;
+    } else {
+        $id_kategori_kegiatan = $_POST['id_kategori_kegiatan'];
+    }
 
     // =========================
     // CEK APAKAH ADA FOTO BARU

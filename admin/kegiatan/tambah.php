@@ -9,16 +9,29 @@ if (!isset($_SESSION['id_user'])) {
 
 include "../../config/koneksi.php";
 
+$role = $_SESSION['role'];
+$id_kategori_login = $_SESSION['id_kategori_kegiatan'];
+
 
 // =========================
 // AMBIL KATEGORI KEGIATAN
 // =========================
 
-$query_kategori = "
-    SELECT *
-    FROM kategori_kegiatan
-    ORDER BY nama_kegiatan ASC
-";
+if ($role === 'Admin_Kegiatan') {
+    // Admin kegiatan cuma boleh lihat kategorinya sendiri
+    $query_kategori = "
+        SELECT *
+        FROM kategori_kegiatan
+        WHERE id_kategori_kegiatan = " . intval($id_kategori_login) . "
+    ";
+} else {
+    // Super_Admin & Admin lihat semua kategori
+    $query_kategori = "
+        SELECT *
+        FROM kategori_kegiatan
+        ORDER BY nama_kegiatan ASC
+    ";
+}
 
 $result_kategori = mysqli_query(
     $conn,
@@ -38,8 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $judul = $_POST['judul'];
     $isi = $_POST['isi'];
-    $id_kategori_kegiatan = $_POST['id_kategori_kegiatan'];
 
+    // Kalau Admin_Kegiatan, paksa pakai kategori miliknya sendiri (jangan percaya form)
+    if ($role === 'Admin_Kegiatan') {
+        $id_kategori_kegiatan = $id_kategori_login;
+    } else {
+        $id_kategori_kegiatan = $_POST['id_kategori_kegiatan'];
+    }
 
     // =========================
     // AMBIL DATA GAMBAR
