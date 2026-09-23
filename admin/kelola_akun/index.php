@@ -24,12 +24,41 @@ $total_data = mysqli_num_rows($result);
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* ==========================================================================
    VARIABEL & SETUP TEMA
    ========================================================================== */
-:root {
+:root { /* Mode Dark */
+  --card-bg: rgba(13, 30, 56, 0.85);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --table-head-bg: rgba(255, 255, 255, 0.05);
+  --table-border: rgba(255, 255, 255, 0.08);
+
+  --text-title: #f0f6ff;
+  --text-muted: #94a3b8;
+  --text-body: #cbd5e1;
+
+  --btn-primary-bg: #0284c7;
+  --btn-primary-hover: #0369a1;
+  --btn-primary-text: #ffffff;
+
+  --badge-bg: rgba(56, 189, 248, 0.15);
+  --badge-text: #38bdf8;
+
+  --toggle-bg: #1e293b;
+  --toggle-color: #f8fafc;
+
+  --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+  --custom-mesh-bg:
+    radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #090d16 0%, #0f172a 100%);
+}
+
+[data-theme="light"] {
   /* Mode Light (Bawaan Tampilan Referensi Gambar) */
   --bg-main: var(--custom-mesh-bg);
   --card-bg: rgba(235, 242, 250, 0.85);
@@ -58,36 +87,6 @@ $total_data = mysqli_num_rows($result);
     radial-gradient(circle at 80% 80%, rgba(245, 159, 11, 0.15) 0%, transparent 40%),
     radial-gradient(circle at 20% 20%, rgba(14, 164, 233, 0.2) 0%, transparent 40%),
     linear-gradient(180deg, #eef4fb 0%, #e2e8f0 100%);
-}
-
-[data-theme="dark"] {
-  /* Mode Dark */
-  --card-bg: rgba(13, 30, 56, 0.85);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --table-head-bg: rgba(255, 255, 255, 0.05);
-  --table-border: rgba(255, 255, 255, 0.08);
-
-  --text-title: #f0f6ff;
-  --text-muted: #94a3b8;
-  --text-body: #cbd5e1;
-
-  --btn-primary-bg: #0284c7;
-  --btn-primary-hover: #0369a1;
-  --btn-primary-text: #ffffff;
-
-  --badge-bg: rgba(56, 189, 248, 0.15);
-  --badge-text: #38bdf8;
-
-  --toggle-bg: #1e293b;
-  --toggle-color: #f8fafc;
-
-  --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.3);
-
-  --custom-mesh-bg:
-    radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
-    linear-gradient(180deg, #090d16 0%, #0f172a 100%);
 }
 
 /* ==========================================================================
@@ -320,20 +319,22 @@ body {
     id="themeToggle"
     class="btn-theme-toggle"
     type="button"
-    aria-label="Toggle Theme"
-  >
+    aria-label="Toggle Theme">
     <i id="themeIcon" class="fa-solid fa-moon"></i>
   </button>
 
   <!-- Kartu Utama Layout -->
   <div class="main-card">
     
-   <div class="card-header">
-        <a href="../dashboard.php" class="btn-back">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-          Kembali ke Daftar Akun
-        </a>
-      </div>
+    <div class="card-header">
+      <a href="../dashboard.php" class="btn-back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Kembali ke Daftar Akun
+      </a>
+    </div>
 
     <!-- Header Judul & Tombol Aksi -->
     <div class="header-section">
@@ -342,8 +343,8 @@ body {
         <p class="subtitle">Selamat datang di halaman pengelolaan akun admin Mahatar AMNI.</p>
       </div> 
       <a href="tambah.php" class="btn-add">
-          <i class="fa-solid fa-plus"></i> Tambah Akun Baru
-        </a>
+        <i class="fa-solid fa-plus"></i> Tambah Akun Baru
+      </a>
     </div>
 
     <!-- Container Tabel / State Kosong -->
@@ -365,20 +366,20 @@ body {
             $no = 1;
             while ($user = mysqli_fetch_assoc($result)): 
             ?>
-            <tr>
-              <td><?= $no++ ?></td>
-              <td><strong><?= htmlspecialchars($user['nama']) ?></strong></td>
-              <td><?= htmlspecialchars($user['username']) ?></td>
-              <td><span class="badge badge-role"><?= htmlspecialchars($user['role']) ?></span></td>
-              <td><?= htmlspecialchars($user['nama_kegiatan'] ?? '-') ?></td>
-              <td style="text-align: center;">
-                <a href="hapus.php?id=<?= $user['id_user'] ?>" 
-                   class="btn-delete"
-                   onclick="return confirm('Yakin mau hapus akun <?= htmlspecialchars($user['nama']) ?>?');">
-                  <i class="ri-delete-bin-line"></i> Hapus
-                </a>
-              </td>
-            </tr>
+              <tr>
+                <td><?= $no++ ?></td>
+                <td><strong><?= htmlspecialchars($user['nama']) ?></strong></td>
+                <td><?= htmlspecialchars($user['username']) ?></td>
+                <td><span class="badge badge-role"><?= htmlspecialchars($user['role']) ?></span></td>
+                <td><?= htmlspecialchars($user['nama_kegiatan'] ?? '-') ?></td>
+                <td style="text-align: center;">
+                  <a href="hapus.php?id=<?= $user['id_user'] ?>" 
+                     class="btn-delete"
+                     onclick="return confirm('Yakin mau hapus akun <?= htmlspecialchars($user['nama']) ?>?');">
+                    <i class="ri-delete-bin-line"></i> Hapus
+                  </a>
+                </td>
+              </tr>
             <?php endwhile; ?>
           </tbody>
         </table>
@@ -418,6 +419,10 @@ body {
         document.documentElement.setAttribute("data-theme", "light");
         themeIcon.className = "fa-solid fa-sun";
       }
+      const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
   </script>
 </body>
 </html>

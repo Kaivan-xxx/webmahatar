@@ -52,8 +52,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* --- Variable Theme Definition --- */
-:root {
-  /* Mode Light */
+:root { /* Mode Dark */
+  --card-bg: rgba(13, 30, 56, 0.85);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --table-head-bg: rgba(255, 255, 255, 0.05);
+  --table-border: rgba(255, 255, 255, 0.08);
+
+  --text-title: #f0f6ff;
+  --text-muted: #94a3b8;
+  --text-body: #cbd5e1;
+
+  --btn-primary-bg: #0284c7;
+  --btn-primary-hover: #0369a1;
+  --btn-primary-text: #ffffff;
+
+  --badge-bg: rgba(56, 189, 248, 0.15);
+  --badge-text: #38bdf8;
+
+  --toggle-bg: #1e293b;
+  --toggle-color: #f8fafc;
+
+  --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+  --custom-mesh-bg:
+    radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, #090d16 0%, #0f172a 100%);
+}
+
+[data-theme="light"] {
+  /* Mode Light (Bawaan Tampilan Referensi Gambar) */
   --bg-main: var(--custom-mesh-bg);
   --card-bg: rgba(235, 242, 250, 0.85);
   --card-border: rgba(255, 255, 255, 0.6);
@@ -71,6 +100,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   --badge-bg: #e2e8f0;
   --badge-text: #1e293b;
 
+  --toggle-bg: #ffffff;
+  --toggle-color: #0f172a;
+
   --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.06);
 
   --custom-mesh-bg:
@@ -78,62 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     radial-gradient(circle at 80% 80%, rgba(245, 159, 11, 0.15) 0%, transparent 40%),
     radial-gradient(circle at 20% 20%, rgba(14, 164, 233, 0.2) 0%, transparent 40%),
     linear-gradient(180deg, #eef4fb 0%, #e2e8f0 100%);
-
-  --input-bg: rgba(255, 255, 255, 0.7);
-  --input-border: #cbd5e1;
-  --input-focus: #0052cc;
-  --danger-bg: rgba(239, 68, 68, 0.1);
-  --danger-text: #dc2626;
-  --danger-border: rgba(239, 68, 68, 0.2);
-
-  /* Variabel Tambahan untuk Button Toggle */
-  --bg-card: rgba(235, 242, 250, 0.85);
-  --glass-backdrop: blur(16px);
-  --border-glass: 1px solid rgba(255, 255, 255, 0.6);
-  --text-primary: #0f172a;
-  --accent-cyan: #0994cf;
-  --transition-smooth: all 0.3s ease;
-}
-
-[data-theme="dark"] {
-  /* Mode Dark */
-  --card-bg: rgba(13, 30, 56, 0.85);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --table-head-bg: rgba(255, 255, 255, 0.05);
-  --table-border: rgba(255, 255, 255, 0.08);
-
-  --text-title: #f0f6ff;
-  --text-muted: #94a3b8;
-  --text-body: #cbd5e1;
-
-  --btn-primary-bg: #0284c7;
-  --btn-primary-hover: #0369a1;
-  --btn-primary-text: #ffffff;
-
-  --badge-bg: rgba(56, 189, 248, 0.15);
-  --badge-text: #38bdf8;
-
-  --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.3);
-
-  --custom-mesh-bg:
-    radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.25) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15) 0%, transparent 40%),
-    linear-gradient(180deg, #090d16 0%, #0f172a 100%);
-
-  --input-bg: rgba(15, 23, 42, 0.5);
-  --input-border: rgba(255, 255, 255, 0.12);
-  --input-focus: #38bdf8;
-  --danger-bg: rgba(239, 68, 68, 0.2);
-  --danger-text: #fca5a5;
-  --danger-border: rgba(239, 68, 68, 0.3);
-
-  /* Variabel Tambahan untuk Button Toggle (Mode Dark) */
-  --bg-card: rgba(13, 30, 56, 0.85);
-  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
-  --text-primary: #f0f6ff;
-  --accent-cyan: #38bdf8;
-}
+} 
 
 /* --- Base & Reset Styles --- */
 *, *::before, *::after {
@@ -144,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 body {
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  background: var(--bg-main);
+  background: var(--custom-mesh-bg);
   background-attachment: fixed;
   color: var(--text-body);
   min-height: 100vh;
@@ -433,36 +410,32 @@ body {
   </main>
 
   <script>
-    // Toggle dropdown Kegiatan
-    const roleSelect = document.getElementById('roleSelect');
-    const kegiatanWrapper = document.getElementById('kegiatanWrapper');
-
-    roleSelect.addEventListener('change', () => {
-      kegiatanWrapper.style.display = (roleSelect.value === 'Admin_Kegiatan') ? 'block' : 'none';
-    });
-
     // Theme Switcher Logic
-    const themeToggleBtn = document.getElementById("themeToggle");
-    const themeIcon = document.getElementById("themeIcon");
+      const themeToggleBtn = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
 
-    themeToggleBtn.addEventListener("click", () => {
-      const currentTheme =
-        document.documentElement.getAttribute("data-theme");
-      if (currentTheme === "light") {
-        document.documentElement.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-        themeIcon.className = "fa-solid fa-moon";
-      } else {
+      themeToggleBtn.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        if (currentTheme === "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+          themeIcon.className = "fa-solid fa-moon";
+        } else {
+          document.documentElement.setAttribute("data-theme", "light");
+          localStorage.setItem("theme", "light");
+          themeIcon.className = "fa-solid fa-sun";
+        }
+      });
+
+      // Load Saved Theme
+      if (localStorage.getItem("theme") === "light") {
         document.documentElement.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
         themeIcon.className = "fa-solid fa-sun";
       }
-    });
-
-    // Load Saved Theme
-    if (localStorage.getItem("theme") === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
-      themeIcon.className = "fa-solid fa-sun";
+      const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
     }
   </script>
 </body>
