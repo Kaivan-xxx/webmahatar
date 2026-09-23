@@ -44,13 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambah Akun Admin — Webmahatar</title>
+  
+  <!-- Font Google & FontAwesome CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* --- Variable Theme Definition --- */
 :root {
-  /* Mode Light (Bawaan Tampilan Referensi Gambar) */
+  /* Mode Light */
   --bg-main: var(--custom-mesh-bg);
   --card-bg: rgba(235, 242, 250, 0.85);
   --card-border: rgba(255, 255, 255, 0.6);
@@ -68,11 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   --badge-bg: #e2e8f0;
   --badge-text: #1e293b;
 
-  /* Tombol Toggle Bulat Melayang */
-  --toggle-bg: #0d1b2e;
-  --toggle-border: rgba(255, 255, 255, 0.15);
-  --toggle-color: #ffffff;
-
   --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.06);
 
   --custom-mesh-bg:
@@ -87,6 +85,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   --danger-bg: rgba(239, 68, 68, 0.1);
   --danger-text: #dc2626;
   --danger-border: rgba(239, 68, 68, 0.2);
+
+  /* Variabel Tambahan untuk Button Toggle */
+  --bg-card: rgba(235, 242, 250, 0.85);
+  --glass-backdrop: blur(16px);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.6);
+  --text-primary: #0f172a;
+  --accent-cyan: #0994cf;
+  --transition-smooth: all 0.3s ease;
 }
 
 [data-theme="dark"] {
@@ -107,11 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   --badge-bg: rgba(56, 189, 248, 0.15);
   --badge-text: #38bdf8;
 
-  /* Tombol Toggle Bulat Melayang pada Mode Dark */
-  --toggle-bg: #0d1e38;
-  --toggle-border: rgba(255, 255, 255, 0.2);
-  --toggle-color: #f8fafc;
-
   --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.3);
 
   --custom-mesh-bg:
@@ -126,6 +127,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   --danger-bg: rgba(239, 68, 68, 0.2);
   --danger-text: #fca5a5;
   --danger-border: rgba(239, 68, 68, 0.3);
+
+  /* Variabel Tambahan untuk Button Toggle (Mode Dark) */
+  --bg-card: rgba(13, 30, 56, 0.85);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+  --text-primary: #f0f6ff;
+  --accent-cyan: #38bdf8;
 }
 
 /* --- Base & Reset Styles --- */
@@ -149,54 +156,40 @@ body {
   position: relative;
 }
 
-/* --- Floating Circular Theme Toggle Button (Pojok Kanan Atas Sesuai Gambar) --- */
-.btn-theme {
+/* --- Theme Toggle Button --- */
+.btn-theme-toggle {
   position: fixed;
-  top: 1.75rem;
-  right: 2rem;
-  z-index: 1000;
-  background: var(--toggle-bg);
-  color: var(--toggle-color);
-  border: 1px solid var(--toggle-border);
+  top: 20px;
+  right: 20px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-              background 0.3s ease, 
-              box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: var(--transition-smooth);
+  z-index: 100;
 }
 
-.btn-theme:hover {
+.btn-theme-toggle:hover {
   transform: scale(1.1);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  color: var(--accent-cyan);
 }
 
-.btn-theme:active {
-  transform: scale(0.95);
-}
-
-.btn-theme svg {
-  transition: transform 0.3s ease;
-}
-
-.btn-theme:hover svg {
-  transform: rotate(12deg);
-}
-
-/* --- Main Layout --- */
+/* --- Layout Containers --- */
 .page-container {
   width: 100%;
   max-width: 520px;
 }
 
-/* --- Glassmorphism Card --- */
 .card {
   background: var(--card-bg);
   backdrop-filter: blur(16px);
@@ -228,7 +221,7 @@ body {
   transform: translateX(-3px);
 }
 
-/* --- Titles --- */
+/* --- Typography --- */
 .card-title-group {
   margin-bottom: 1.75rem;
 }
@@ -246,7 +239,7 @@ body {
   color: var(--text-muted);
 }
 
-/* --- Alert Style --- */
+/* --- Alerts --- */
 .alert-error {
   display: flex;
   align-items: center;
@@ -261,7 +254,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* --- Form Elements --- */
+/* --- Form Fields --- */
 .admin-form {
   display: flex;
   flex-direction: column;
@@ -314,11 +307,11 @@ body {
 }
 
 .form-group select option {
-  background-color: var(--toggle-bg);
-  color: #ffffff;
+  background-color: var(--card-bg);
+  color: var(--text-title);
 }
 
-/* --- Buttons --- */
+/* --- Primary Button --- */
 .btn-submit {
   width: 100%;
   padding: 0.85rem;
@@ -344,11 +337,11 @@ body {
   transform: scale(0.98);
 }
 
-/* --- Mobile Responsiveness --- */
+/* --- Responsiveness --- */
 @media (max-width: 480px) {
-  .btn-theme {
-    top: 1rem;
-    right: 1rem;
+  .btn-theme-toggle {
+    top: 12px;
+    right: 12px;
     width: 40px;
     height: 40px;
   }
@@ -362,24 +355,14 @@ body {
 </head>
 <body>
 
-  <!-- Toggle Light/Dark Mode dengan Ikon SVG (Fixed Top Right) -->
-  <button id="themeToggle" class="btn-theme" type="button" aria-label="Toggle Theme">
-    <!-- Ikon Bulan (Dark Mode Target) -->
-    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-    <!-- Ikon Matahari (Light Mode Target) -->
-    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
+  <!-- Theme Switcher Button -->
+  <button
+    id="themeToggle"
+    class="btn-theme-toggle"
+    type="button"
+    aria-label="Toggle Theme"
+  >
+    <i id="themeIcon" class="fa-solid fa-moon"></i>
   </button>
 
   <main class="page-container">
@@ -458,34 +441,29 @@ body {
       kegiatanWrapper.style.display = (roleSelect.value === 'Admin_Kegiatan') ? 'block' : 'none';
     });
 
-    // Dark/Light Theme Toggle Script dengan SVG Icon Switcher
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const iconMoon = themeToggleBtn.querySelector('.icon-moon');
-    const iconSun = themeToggleBtn.querySelector('.icon-sun');
+    // Theme Switcher Logic
+    const themeToggleBtn = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
 
-    function applyTheme(theme) {
-      if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        iconMoon.style.display = 'none';
-        iconSun.style.display = 'block';
+    themeToggleBtn.addEventListener("click", () => {
+      const currentTheme =
+        document.documentElement.getAttribute("data-theme");
+      if (currentTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+        themeIcon.className = "fa-solid fa-moon";
       } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        iconMoon.style.display = 'block';
-        iconSun.style.display = 'none';
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+        themeIcon.className = "fa-solid fa-sun";
       }
-    }
-
-    // Inisialisasi Tema
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    applyTheme(savedTheme);
-
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
-      localStorage.setItem('theme', newTheme);
-      applyTheme(newTheme);
     });
+
+    // Load Saved Theme
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+      themeIcon.className = "fa-solid fa-sun";
+    }
   </script>
 </body>
 </html>

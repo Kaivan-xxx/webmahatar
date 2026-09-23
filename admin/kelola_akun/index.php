@@ -24,7 +24,7 @@ $total_data = mysqli_num_rows($result);
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">>
   <style>
     /* ==========================================================================
    VARIABEL & SETUP TEMA
@@ -112,24 +112,32 @@ body {
   color: var(--text-body);
 }
 
-/* Tombol Mode (Gigi Roda/Bulan/Matahari di Kanan Atas) */
-.theme-toggle-btn {
+/* --- Theme Toggle Button --- */
+.btn-theme-toggle {
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 42px;
-  height: 42px;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 1px solid var(--card-border);
-  background: var(--toggle-bg);
-  color: var(--toggle-color);
-  font-size: 1.2rem;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--border-glass);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: var(--transition-smooth);
   z-index: 100;
+}
+
+.btn-theme-toggle:hover {
+  transform: scale(1.1);
+  color: var(--accent-cyan);
 }
 
 /* Kartu Utama Container */
@@ -145,20 +153,24 @@ body {
   box-shadow: var(--shadow-card);
 }
 
-/* Kembali ke Dashboard */
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
+.card-header {
   margin-bottom: 1.25rem;
 }
 
-.back-link:hover {
-  color: var(--text-title);
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-back:hover {
+  color: var(--btn-primary-bg);
+  transform: translateX(-3px);
 }
 
 /* Header Section */
@@ -304,28 +316,34 @@ body {
 </head>
 <body>
 
-  <!-- Tombol Toggle Dark / Light Mode (Pojok Kanan Atas) -->
-  <button id="theme-toggle" class="theme-toggle-btn" title="Ganti Tema">
-    <i id="theme-icon" class="ri-moon-line"></i>
+  <button
+    id="themeToggle"
+    class="btn-theme-toggle"
+    type="button"
+    aria-label="Toggle Theme"
+  >
+    <i id="themeIcon" class="fa-solid fa-moon"></i>
   </button>
 
   <!-- Kartu Utama Layout -->
   <div class="main-card">
     
-    <!-- Header Navigasi -->
-    <a href="../dashboard.php" class="back-link">
-      <i class="ri-arrow-left-line"></i> Kembali ke Dashboard
-    </a>
+   <div class="card-header">
+        <a href="../dashboard.php" class="btn-back">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Kembali ke Daftar Akun
+        </a>
+      </div>
 
     <!-- Header Judul & Tombol Aksi -->
     <div class="header-section">
       <div class="title-container">
         <h1>Kelola Akun Admin</h1>
         <p class="subtitle">Selamat datang di halaman pengelolaan akun admin Mahatar AMNI.</p>
-      </div>
+      </div> 
       <a href="tambah.php" class="btn-add">
-        <i class="ri-add-line"></i> Tambah Akun Baru
-      </a>
+          <i class="fa-solid fa-plus"></i> Tambah Akun Baru
+        </a>
     </div>
 
     <!-- Container Tabel / State Kosong -->
@@ -377,30 +395,29 @@ body {
 
   <!-- Script Penanganan Dark / Light Mode -->
   <script>
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    
-    // Cek preferensi tema sebelumnya
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateIcon(savedTheme);
+   // Theme Switcher Logic
+      const themeToggleBtn = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
 
-    themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateIcon(newTheme);
-    });
+      themeToggleBtn.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        if (currentTheme === "light") {
+          document.documentElement.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+          themeIcon.className = "fa-solid fa-moon";
+        } else {
+          document.documentElement.setAttribute("data-theme", "light");
+          localStorage.setItem("theme", "light");
+          themeIcon.className = "fa-solid fa-sun";
+        }
+      });
 
-    function updateIcon(theme) {
-      if (theme === 'dark') {
-        themeIcon.className = 'ri-sun-line';
-      } else {
-        themeIcon.className = 'ri-moon-line';
+      // Load Saved Theme
+      if (localStorage.getItem("theme") === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+        themeIcon.className = "fa-solid fa-sun";
       }
-    }
   </script>
 </body>
 </html>
