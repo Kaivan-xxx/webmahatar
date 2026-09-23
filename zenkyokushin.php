@@ -216,7 +216,7 @@ $result = mysqli_stmt_get_result($stmt);
           style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap"
         >
           <img
-            src="assets/image/profile.jpg"
+            src="assets/image/zen-kyokushin.jpeg"
             alt="Karate AMNI"
             style="
               width: 100%;
