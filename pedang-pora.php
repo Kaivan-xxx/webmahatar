@@ -201,7 +201,7 @@ $result = mysqli_stmt_get_result($stmt);
     <!-- MAIN CONTENT -->
     <main class="news-container">
       <div class="header-section">
-        <h1 class="header-title">Tim Protokoler & Pedang Pora</h1>
+        <h1 class="header-title"> Pasukan Pedang Pora (PASPORA) UNIMAR AMNI Semarang.</h1>
         <p class="header-subtitle">
           Pasukan jajar kehormatan pengawal tradisi sakral Kemahataran AMNI
         </p>
