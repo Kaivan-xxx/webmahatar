@@ -373,12 +373,12 @@ body {
                 <td><span class="badge badge-role"><?= htmlspecialchars($user['role']) ?></span></td>
                 <td><?= htmlspecialchars($user['nama_kegiatan'] ?? '-') ?></td>
                 <td style="text-align: center;">
-                  <a href="hapus.php?id=<?= $user['id_user'] ?>" 
-                     class="btn-delete"
-                     onclick="return confirm('Yakin mau hapus akun <?= htmlspecialchars($user['nama']) ?>?');">
-                    <i class="ri-delete-bin-line"></i> Hapus
-                  </a>
-                </td>
+                <a href="javascript:void(0);" 
+                  class="btn-delete"
+                  onclick="hapusUser(<?= $user['id_user'] ?>, <?= $_SESSION['id_user'] ?>, '<?= htmlspecialchars($user['nama'], ENT_QUOTES) ?>')">
+                  <i class="ri-delete-bin-line"></i> Hapus
+                </a>
+              </td>
               </tr>
             <?php endwhile; ?>
           </tbody>
@@ -423,6 +423,42 @@ body {
     if (savedTheme) {
       document.documentElement.setAttribute("data-theme", savedTheme);
     }
+   /**
+ * Memproses penghapusan user berdasarkan ID.
+ * @param {number|string} idUser - ID user yang ingin dihapus.
+ * @param {number|string} currentUserId - ID user yang sedang login saat ini.
+ * @param {string} namaUser - Nama user untuk pesan konfirmasi.
+ */
+async function hapusUser(idUser, currentUserId, namaUser) {
+  // Proteksi: cegah hapus akun sendiri di level frontend
+  if (idUser === currentUserId) {
+    alert("Kamu tidak bisa menghapus akunmu sendiri yang sedang login.");
+    return;
+  }
+
+  // Konfirmasi sebelum menghapus
+  if (!confirm(`Yakin mau hapus akun ${namaUser}?`)) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`hapus.php?id=${idUser}`, {
+      method: "GET",
+      headers: {
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    });
+
+    if (response.ok) {
+      window.location.href = "index.php";
+    } else {
+      alert("Gagal menghapus data.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Terjadi kesalahan jaringan.");
+  }
+}
   </script>
 </body>
 </html>
