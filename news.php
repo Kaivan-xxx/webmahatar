@@ -226,7 +226,7 @@ $result = mysqli_query($conn, $query);
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="navbar-container">
-        <a href="home.html" class="navbar-brand">
+        <a href="index.html" class="navbar-brand">
           <img src="assets/image/LogoMahatarAMNI2.png" alt="Logo AMNI" />
         </a>
         <!-- TAMBAHKAN TOMBOL INI -->
@@ -241,7 +241,7 @@ $result = mysqli_query($conn, $query);
           <span></span>
         </button>
         <ul class="nav-menu" id="navMenu">
-          <li><a class="nav-link" href="home.html">Home</a></li>
+          <li><a class="nav-link" href="index.html">Home</a></li>
           <li><a class="nav-link" href="profile.html">Profil</a></li>
           <li><a class="nav-link" href="team.html">Team</a></li>
           <li class="dropdown">
