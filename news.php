@@ -308,10 +308,6 @@ $result = mysqli_query($conn, $query);
       <button class="filter-btn <?php echo (strtolower($kategori) == 'berita') ? 'active' : ''; ?>" data-filter="berita">Berita</button>
       <button class="filter-btn <?php echo (strtolower($kategori) == 'prestasi') ? 'active' : ''; ?>" data-filter="prestasi">Prestasi</button>
     </div>
-
-  <a href="login.php" class="btn-add-news">
-    <i class="fa-solid fa-plus"></i> Tambah Berita
-  </a>
     </div>
 
       <!-- Grid Berita & Pengumuman (Area Kosong) -->
