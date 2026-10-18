@@ -332,6 +332,12 @@
       <span>Kelola Akun Admin</span>
     </a>
   </li>
+    <li>
+    <a href="kelola_ukm/index.php" class="menu-card">
+      <i class="fa-solid fa-building-columns"></i>
+      <span>Kelola UKM</span>
+    </a>
+  </li>
   <?php endif; ?>
 
   <?php if ($role === 'Super_Admin' || $role === 'Admin'): ?>

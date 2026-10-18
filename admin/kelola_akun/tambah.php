@@ -437,6 +437,15 @@ body {
     if (savedTheme) {
       document.documentElement.setAttribute("data-theme", savedTheme);
     }
+
+    // Dropdown "Kegiatan yang Dipegang" cuma muncul kalau role = Admin_Kegiatan
+    const roleSelect = document.getElementById("roleSelect");
+    const kegiatanWrapper = document.getElementById("kegiatanWrapper");
+
+    roleSelect.addEventListener("change", () => {
+      kegiatanWrapper.style.display =
+        roleSelect.value === "Admin_Kegiatan" ? "flex" : "none";
+    });
   </script>
 </body>
 </html>

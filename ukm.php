@@ -20,6 +20,18 @@ if (!$ukm) {
     die("UKM tidak ditemukan.");
 }
 
+// Ambil program kerja UKM ini
+$stmt_pk = mysqli_prepare($conn, "SELECT * FROM program_kerja WHERE id_kategori_kegiatan = ? ORDER BY id_program ASC");
+mysqli_stmt_bind_param($stmt_pk, "i", $id_kategori);
+mysqli_stmt_execute($stmt_pk);
+$result_pk = mysqli_stmt_get_result($stmt_pk);
+
+// Ambil pengurus UKM ini
+$stmt_pg = mysqli_prepare($conn, "SELECT * FROM pengurus WHERE id_kategori_kegiatan = ? ORDER BY id_pengurus ASC");
+mysqli_stmt_bind_param($stmt_pg, "i", $id_kategori);
+mysqli_stmt_execute($stmt_pg);
+$result_pg = mysqli_stmt_get_result($stmt_pg);
+
 // 1. Hitung total data sesuai tabel dan kategori yang difilter
 $query_total = "SELECT COUNT(*) AS total FROM kegiatan WHERE id_kategori_kegiatan = ?";
 $stmt_total = mysqli_prepare($conn, $query_total);
@@ -232,6 +244,8 @@ $result = mysqli_stmt_get_result($stmt);
             style="
               width: 100%;
               max-width: 350px;
+              aspect-ratio: 16 / 9;
+              align-self: flex-start;
               border-radius: var(--radius-md);
               object-fit: cover;
             "
@@ -283,7 +297,7 @@ $result = mysqli_stmt_get_result($stmt);
                   class="fa-solid fa-location-dot"
                   style="color: var(--accent-cyan); width: 25px"
                 ></i>
-                <strong>Lokasi Sekretariat:</strong> <?= htmlspecialchars($ukm['lokasi']); ?>
+                <strong>Lokasi Pelaksanaan:</strong> <?= htmlspecialchars($ukm['lokasi']); ?>
               </li>
               <?php endif; ?>
             </ul>
@@ -291,7 +305,89 @@ $result = mysqli_stmt_get_result($stmt);
         </div>
       </div>
 
-      <!-- PROGRAM KERJA & PENGURUS: dibuat dinamis di step berikutnya -->
+      <!-- PROGRAM KERJA (tampil hanya kalau ada datanya) -->
+      <?php if (mysqli_num_rows($result_pk) > 0) : ?>
+      <div class="profile-card" style="margin-bottom: 30px">
+        <h3 style="font-size: 1.2rem; margin-bottom: 15px">
+          <i
+            class="fa-solid fa-list-check"
+            style="color: var(--accent-blue)"
+          ></i>
+          Program Kerja Utama
+        </h3>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+          "
+        >
+          <?php $no = 1; while ($pk = mysqli_fetch_assoc($result_pk)) : ?>
+          <div
+            style="
+              padding: 15px;
+              border: var(--border-glass);
+              border-radius: var(--radius-sm);
+              background: rgba(255, 255, 255, 0.02);
+            "
+          >
+            <h4 style="color: var(--accent-cyan); margin-bottom: 8px">
+              <?= $no++; ?>. <?= htmlspecialchars($pk['judul']); ?>
+            </h4>
+            <?php if (!empty($pk['deskripsi'])) : ?>
+            <p style="font-size: 0.88rem; color: var(--text-secondary)">
+              <?= htmlspecialchars($pk['deskripsi']); ?>
+            </p>
+            <?php endif; ?>
+          </div>
+          <?php endwhile; ?>
+        </div>
+      </div>
+      <?php endif; ?>
+
+      <!-- PENGURUS (tampil hanya kalau ada datanya) -->
+      <?php if (mysqli_num_rows($result_pg) > 0) : ?>
+      <div class="profile-card" style="margin-bottom: 30px">
+        <h3 style="font-size: 1.2rem; margin-bottom: 15px">
+          <i
+            class="fa-solid fa-users-gear"
+            style="color: var(--accent-blue)"
+          ></i>
+          Pengurus <?= htmlspecialchars($ukm['nama_kegiatan']); ?>
+        </h3>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            text-align: center;
+          "
+        >
+          <?php while ($pg = mysqli_fetch_assoc($result_pg)) : ?>
+          <div
+            style="
+              padding: 15px;
+              border: var(--border-glass);
+              border-radius: var(--radius-sm);
+              background: rgba(255, 255, 255, 0.02);
+            "
+          >
+            <h4 style="color: var(--accent-cyan); margin-bottom: 5px">
+              <?= htmlspecialchars($pg['jabatan']); ?>
+            </h4>
+            <p style="color: var(--text-primary); font-weight: bold; margin: 0">
+              <?= htmlspecialchars($pg['nama']); ?>
+            </p>
+            <?php if (!empty($pg['npt'])) : ?>
+            <span style="font-size: 0.8rem; color: var(--text-secondary)"
+              >NPT. <?= htmlspecialchars($pg['npt']); ?></span
+            >
+            <?php endif; ?>
+          </div>
+          <?php endwhile; ?>
+        </div>
+      </div>
+      <?php endif; ?>
 
  <!-- BERITA & AGENDA BEM -->
 
