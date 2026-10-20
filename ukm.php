@@ -156,7 +156,7 @@ $result = mysqli_stmt_get_result($stmt);
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="navbar-container">
-        <a href="index.html" class="navbar-brand">
+        <a href="index.php" class="navbar-brand">
           <img src="assets/image/LogoMahatarAMNI2.png" alt="Logo AMNI" />
         </a>
         <!-- TAMBAHKAN TOMBOL INI -->
@@ -171,39 +171,16 @@ $result = mysqli_stmt_get_result($stmt);
           <span></span>
         </button>
         <ul class="nav-menu" id="navMenu">
-          <li><a class="nav-link" href="index.html">Home</a></li>
-          <li><a class="nav-link" href="profile.html">Profil</a></li>
-          <li><a class="nav-link" href="team.html">Team</a></li>
+          <li><a class="nav-link" href="index.php">Home</a></li>
+          <li><a class="nav-link" href="profile.php">Profil</a></li>
+          <li><a class="nav-link" href="team.php">Team</a></li>
           <li class="dropdown">
             <a class="nav-link" href="#" id="dropdownBtn">
               Kegiatan Mahasiswa
               <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem"></i>
             </a>
             <ul class="dropdown-menu" id="dropdownMenu">
-              <li><a class="dropdown-item" href="bem.php">BEM Mahatar</a></li>
-              <li>
-                <a class="dropdown-item" href="drum-corps.php">Drum Corps</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="pedang-pora.php">Pedang Pora</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="zenkyokushin.php"
-                  >Zenkyokushin</a
-                >
-              </li>
-              <li><a class="dropdown-item" href="pkm.php">PKM</a></li>
-              <li><a class="dropdown-item" href="rebana.php">Rebana</a></li>
-              <li>
-                <a class="dropdown-item" href="pencak-silat.php"
-                  >Pencak Silat</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="mangrove.php"
-                  >Penanaman Mangrove</a
-                >
-              </li>
+              <?php include __DIR__ . '/includes/dropdown_ukm.php'; ?>
             </ul>
           </li>
           <li><a class="nav-link" href="news.php">Pengumuman & Berita</a></li>

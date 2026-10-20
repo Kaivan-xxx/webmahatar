@@ -53,6 +53,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
+    // ---- 1b. Panjang isian tidak boleh melebihi kolom di database ----
+
+    if (
+        $error === "" &&
+        (
+            mb_strlen($nama_kegiatan) > 100 ||
+            mb_strlen($judul_halaman ?? '') > 150 ||
+            mb_strlen($pembina ?? '') > 150 ||
+            mb_strlen($jadwal_rutin ?? '') > 150 ||
+            mb_strlen($lokasi ?? '') > 150
+        )
+    ) {
+        $error = "Nama UKM maksimal 100 karakter, isian lainnya maksimal 150 karakter.";
+    }
+
+
     // ---- 2. Foto (opsional) ----
 
     if (

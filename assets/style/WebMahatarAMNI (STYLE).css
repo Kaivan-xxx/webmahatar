@@ -278,6 +278,7 @@ a {
   transform: scale(1.05);
   border-color: var(--accent-blue);
 }
+
 /* ==========================================
    STYLING TOMBOL TOGGLE THEME (NAVBAR)
    ========================================== */
@@ -310,7 +311,7 @@ a {
 }
 
 /* Memastikan item li pembungkus tombol sejajar di navbar */
-.nav-menu li:last-child {
+.nav-menu > li:last-child {
   display: flex;
   align-items: center;
 }

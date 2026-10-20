@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profil - Kemahataran AMNI</title>
+    <title>Team Mako - Kemahataran AMNI</title>
 
     <!-- Font Awesome -->
     <link
@@ -11,12 +11,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
     <link rel="stylesheet" href="assets/style/WebMahatarAMNI (STYLE).css" />
+    <style></style>
   </head>
   <body>
     <!-- NAVBAR -->
-   <nav class="navbar">
+    <nav class="navbar">
       <div class="navbar-container">
-        <a href="index.html" class="navbar-brand">
+        <a href="index.php" class="navbar-brand">
           <img src="assets/image/LogoMahatarAMNI2.png" alt="Logo AMNI" />
         </a>
         <!-- TAMBAHKAN TOMBOL INI -->
@@ -31,39 +32,16 @@
           <span></span>
         </button>
         <ul class="nav-menu" id="navMenu">
-          <li><a class="nav-link" href="index.html">Home</a></li>
-          <li><a class="nav-link" href="profile.html">Profil</a></li>
-          <li><a class="nav-link" href="team.html">Team</a></li>
+          <li><a class="nav-link" href="index.php">Home</a></li>
+          <li><a class="nav-link" href="profile.php">Profil</a></li>
+          <li><a class="nav-link" href="team.php">Team</a></li>
           <li class="dropdown">
             <a class="nav-link" href="#" id="dropdownBtn">
               Kegiatan Mahasiswa
               <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem"></i>
             </a>
             <ul class="dropdown-menu" id="dropdownMenu">
-              <li><a class="dropdown-item" href="bem.php">BEM Mahatar</a></li>
-              <li>
-                <a class="dropdown-item" href="drum-corps.php">Drum Corps</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="pedang-pora.php">Pedang Pora</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="zenkyokushin.php"
-                  >Zenkyokushin</a
-                >
-              </li>
-              <li><a class="dropdown-item" href="pkm.php">PKM</a></li>
-              <li><a class="dropdown-item" href="rebana.php">Rebana</a></li>
-              <li>
-                <a class="dropdown-item" href="pencak-silat.php"
-                  >Pencak Silat</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="mangrove.php"
-                  >Penanaman Mangrove</a
-                >
-              </li>
+              <?php include __DIR__ . '/includes/dropdown_ukm.php'; ?>
             </ul>
           </li>
           <li><a class="nav-link" href="news.php">Pengumuman & Berita</a></li>
@@ -80,102 +58,61 @@
       </div>
     </nav>
 
-    <!-- Main Content Container -->
+    <!-- Main Content -->
     <main class="main-container">
-      <!-- Title Section -->
+
       <div class="header-section">
-        <h1 class="header-title">Profil Publik</h1>
+        <h1 class="header-title">Team Mako</h1>
         <p class="header-subtitle">
-          Kemahataran AMNI Universitas Maritim AMNI Semarang.
+          Struktur kepemimpinan, pengawas kedisiplinan, dan jajaran staf Markas
+          Komando Kemahataran AMNI Semarang
         </p>
         <hr class="divider" />
       </div>
 
-      <!-- Hero Image -->
-      <div class="hero-image-wrapper">
-        <img
-          src="assets/image/profile.jpg"
-          alt="Profil Kegiatan AMNI"
-          class="profile-header-img"
-        />
-      </div>
-
-      <!-- Article Content Section -->
-      <article class="profile-card">
-        <p class="lead-text">
-          Di lingkungan Universitas Maritim AMNI Semarang, mahasiswa dan kaum
-          muda aktif terlibat dalam berbagai kegiatan yang menarik dan beragam.
-          Dari berbagai program yang tersedia, beberapa organisasi dan kegiatan
-          mahasiswa telah berhasil menarik perhatian dan mendapatkan apresiasi
-          di tingkat universitas maupun di luar kampus.
-        </p>
-
-        <h2 class="section-heading">Organisasi & Seni Pertunjukan</h2>
-        <p>
-          Salah satu organisasi yang menjadi sorotan adalah
-          <strong>BEM Mahatar</strong> (Badan Eksekutif Mahasiswa Transportasi).
-          BEM Mahatar berperan sebagai wadah untuk mengeksplorasi potensi
-          kepemimpinan, memperkuat hubungan antar mahasiswa, dan memperjuangkan
-          kepentingan mahasiswa dalam program studi Transportasi. Organisasi ini
-          aktif dalam menyelenggarakan seminar, diskusi, dan kegiatan sosial
-          yang berkaitan dengan transportasi.
-        </p>
-        <p>
-          Selain itu,
-          <strong>Korps Drum Universitas Maritim AMNI Semarang</strong> juga
-          merupakan daya tarik tersendiri. Dengan kegigihan dan kekompakan para
-          anggotanya, Korps Drum AMNI mampu menghibur dan memukau penonton
-          dengan atraksi dan penampilan musik mereka di berbagai acara di dalam
-          maupun di luar kampus.
-        </p>
-
-        <h2 class="section-heading">Olahraga & Bela Diri</h2>
-        <p>
-          Di bidang olahraga, terdapat beberapa klub dan kegiatan yang menarik
-          minat siswa. <strong>Zen Kyokushin</strong>, sebuah klub bela diri
-          Jepang yang mengajarkan disiplin dan teknik bertarung, telah berhasil
-          menarik banyak anggota. Selain itu, <strong>Pencak Silat</strong> juga
-          merupakan kegiatan yang diminati oleh siswa yang tertarik pada bela
-          diri dan membela warisan budaya Indonesia.
-        </p>
-
-        <h2 class="section-heading">Lingkungan & Akademik</h2>
-        <p>
-          Universitas Maritim AMNI juga memperhatikan lingkungan dan konservasi
-          melalui kegiatan <strong>penanaman mangrove</strong>. Melalui program
-          ini, mahasiswa AMNI diajak untuk aktif terlibat dalam menjaga
-          keberlanjutan lingkungan dan mempelajari pentingnya ekosistem mangrove
-          dalam konservasi pesisir.
-        </p>
-        <p>
-          <strong>PKM (Program Kreativitas Mahasiswa)</strong> juga merupakan
-          bagian penting dalam mengembangkan potensi mahasiswa di Universitas
-          Maritim AMNI. Melalui PKM, mahasiswa didorong untuk mengembangkan
-          proyek penelitian, inovasi, atau karya kreatif di berbagai bidang,
-          seperti teknologi, kewirausahaan, dan sosial.
-        </p>
-
-        <h2 class="section-heading">Seni Budaya</h2>
-        <p>
-          Tak ketinggalan, <strong>Rebana AMNI</strong> juga merupakan kegiatan
-          yang diminati beberapa mahasiswa. Dengan suara musik tradisional yang
-          menghentak dan semangat yang bergejolak, grup Rebana AMNI sering
-          tampil di berbagai acara keagamaan dan budaya di dalam maupun di luar
-          kampus.
-        </p>
-
-        <div class="custom-alert">
-          <p>
-            Melalui berbagai kegiatan ini, mahasiswa dan peserta pelatihan di
-            Universitas Maritim AMNI Semarang memiliki kesempatan untuk
-            mengembangkan keterampilan, memperluas jaringan sosial, dan
-            menerapkan pengetahuan yang diperoleh di kelas.
-          </p>
+      <div class="team-grid">
+        <!-- Anggota 1 -->
+        <div class="team-card">
+          <img
+            src="assets/image/kholis.jpeg"
+            class="team-img"
+            alt="Norkholis Majid, S.Tr, MM"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Norkholis Majid, S.Tr, MM</h5>
+            <p class="card-text">Kabag. Mako</p>
+          </div>
         </div>
-      </article>
+
+        <!-- Anggota 2 -->
+        <div class="team-card">
+          <img
+            src="assets/image/siti2.jpg"
+            class="team-img"
+            alt="Siti Khoriyatun, S.E"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Siti Khoriyatun, S.E</h5>
+            <p class="card-text">Ka. Sub. Pusat Karir</p>
+          </div>
+        </div>
+
+        <!-- Anggota 3 -->
+        <div class="team-card">
+          <img
+            src="assets/image/iwan.jpeg"
+            class="team-img"
+            alt="Iwan Samsul, S.Tr"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Iwan Samsul, S.Tr</h5>
+            <p class="card-text">Staff</p>
+          </div>
+        </div>
+      </div>
     </main>
 
-    <!-- Footer Sederhana -->
+    <!-- Footer -->
     <footer>
       <small
         >&copy; 2026 Barayudha Arkano, Gilang Dwikananda - SMK Ibu Kartini Semarang.</small
@@ -201,7 +138,6 @@
         dropdownMenu.classList.remove("active");
       }
     });
-
     document.addEventListener("DOMContentLoaded", () => {
       const menuToggle = document.getElementById("menuToggle");
       const navMenu = document.getElementById("navMenu");
@@ -243,7 +179,7 @@
         }
       });
     });
-    
+
     const themeToggleBtn = document.getElementById("theme-toggle");
     const themeIcon = document.getElementById("theme-icon");
 
@@ -273,6 +209,5 @@
         themeIcon.classList.replace("fa-moon", "fa-sun");
       }
     });
-    
   </script>
 </html>
