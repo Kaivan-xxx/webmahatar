@@ -307,7 +307,7 @@ a {
 
 .btn-theme-toggle i {
   font-size: 1rem;
-  pointer-events: none; /* Menjaga klik mouse langsung kena ke tombol */
+  pointer-events: none; /* Menjaga klik mouse langsung kena ke tomboll */
 }
 
 /* Memastikan item li pembungkus tombol sejajar di navbar */
